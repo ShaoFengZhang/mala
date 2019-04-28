@@ -1,0 +1,36 @@
+.top-swiperView {
+    width: 100%;
+    height: 96rpx;
+    line-height: 96rpx;
+    font-size: 32rpx;
+}
+
+#swiper-ID {
+    width: 100%;
+    height: 96rpx;
+}
+
+swiper-item {
+    position: relative;
+}
+
+.select-swiper-css{
+    color:#282828;
+    font-weight: bold;
+}
+
+.swiper-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: inline-block;
+    width: 72rpx;
+    height: 6rpx;
+    background: rgba(39, 188, 173, 1);
+}
+
+.viewLine {
+    width: 100%;
+    height: 2rpx;
+    background-color: #f3f5f9;
+}

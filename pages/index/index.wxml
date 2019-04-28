@@ -1,0 +1,29 @@
+<view class="bg">
+
+    <view class='top-swiperView normalView'>
+
+        <swiper id='swiper-ID' display-multiple-items="{{6}}">
+
+            <block wx:for="{{classArr}}" wx:key="index">
+
+                <swiper-item data-id="{{item.classId}}" class="{{swiperCurrentIndex==item.classId?'select-swiper-css':''}}" bindtap='swiperBindtap'>
+                    <text>{{item.txt}}</text>
+                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.classId}}"></text>
+                </swiper-item>
+
+            </block>
+
+        </swiper>
+
+    </view>
+
+    <view class='viewLine'></view>
+
+    <view class='scrollView normalView' style='height:{{classScrollHeight}}rpx'>
+        <scroll-view class="scroll-view_y" scroll-y style="height:100%">
+
+        </scroll-view>
+
+    </view>
+
+</view>
