@@ -22,7 +22,7 @@
 
                 </view>
 
-                <view class='contentDetails'>
+                <view class='contentDetails' bindlongpress="copytxt">
                     <text decode='1'>{{content.title}}</text>
                 </view>
 

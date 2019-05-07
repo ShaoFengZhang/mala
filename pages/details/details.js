@@ -13,7 +13,6 @@ Page({
 
     onLoad: function(options) {
         if (options && options.content){
-            console.log(JSON.parse(unescape(options.content)))
             this.setData({
                 content: JSON.parse(unescape(options.content)),
                 praiseIndex: options.praiseIndex,
@@ -101,6 +100,14 @@ Page({
         });
         this.setData({
             pointAni: pointAni.export(),
+        })
+    },
+
+    copytxt:function(){
+        wx.setClipboardData({
+            data: this.data.content.title,
+            success(res) {
+            }
         })
     },
 })
