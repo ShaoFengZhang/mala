@@ -2,5 +2,8 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "一周精选",
     "backgroundColor": "#000000",
+    "usingComponents": {
+        "contentTxt": "/components/conentView"
+    },
     "disableScroll": true
 }

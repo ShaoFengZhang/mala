@@ -3,5 +3,8 @@
     "navigationBarTitleText": "麻辣短句",
     "backgroundColor": "#000000",
     "disableScroll": true,
+    "usingComponents": {
+        "contentTxt": "/components/conentView"
+    },
     "disableSwipeBack":true
 }

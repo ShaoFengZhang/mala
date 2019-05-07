@@ -1,12 +1,10 @@
 import loginApi from '../../utils/login.js'
-
+import util from '../../utils/util.js'
 const app = getApp();
 
 Page({
 
     data: {
-        copyWriterArr:[1,2,3],
-        contentImgArr:[1,2,3],
         txtValue:"发表你的观点",
         srcDomin: loginApi.srcDomin,
     },
@@ -103,6 +101,7 @@ Page({
         })
     },
 
+    // 复制文本
     copytxt:function(){
         wx.setClipboardData({
             data: this.data.content.title,

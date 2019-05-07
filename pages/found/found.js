@@ -68,15 +68,6 @@ Page({
         this.cantemp=true;
     },
 
-    // 获取用户信息
-    getUserInfo: function (e) {
-        app.globalData.userInfo = e.detail.userInfo
-        this.setData({
-            userInfo: e.detail.userInfo,
-            hasUserInfo: true
-        })
-    },
-
     //swiperBindtap
     swiperBindtap: function (e) {
         let classId = e.currentTarget.dataset.id;
@@ -93,52 +84,6 @@ Page({
         this.rows = 10;
         this.cangetData = true;
         this.getContent();
-    },
-
-    praiseEvent: function (e) {
-        this.setData({
-            praiseId: '',
-            pointAni: null,
-        })
-        let id = e.currentTarget.dataset.id;
-        let index = e.currentTarget.dataset.index;
-        if (this.data.contentArr[index].dianji) {
-            this.crearteAnimation();
-            this.setData({
-                praiseId: id,
-            })
-            return;
-        }
-        this.addpriseNum(id, index); 
-    },
-
-    // 跳转详情
-    goToDetails: function (e) {
-        let index = parseInt(e.currentTarget.dataset.index);
-        wx.navigateTo({
-            url: `/pages/details/details?content=${escape(JSON.stringify(this.data.contentArr[index]))}&praiseIndex=${index}`,
-        })
-    },
-
-    // 点赞请求
-    addpriseNum: function (cid,index) {
-        let _this = this;
-        let addpriseNumUrl = loginApi.domin + '/home/index/support';
-        loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
-            "id": cid,
-            "openid": wx.getStorageSync("user_openID"),
-            "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
-            console.log(res)
-            let arr = _this.data.contentArr;
-            arr[index].support = parseInt(arr[index].support) + 1;
-            arr[index].dianji = 1;
-            _this.setData({
-                contentArr: arr,
-                praiseId: cid,
-            });
-            _this.crearteAnimation();
-        })
     },
 
     // 获取内容
@@ -196,21 +141,5 @@ Page({
         }
     },
 
-    // 动画
-    crearteAnimation: function () {
-        let pointAni = wx.createAnimation({
-            duration: 500,
-            timingFunction: "ease",
-        });
-        pointAni.scale(1.5, 1.5).step({
-            duration: 250,
-        });
-        pointAni.scale(1, 1).step({
-            duration: 250,
-        });
-        this.setData({
-            pointAni: pointAni.export(),
-        })
-    },
     catchtap: function () { },
 })
