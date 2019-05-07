@@ -1,0 +1,61 @@
+<view class='bg'>
+
+    <view class='scrollView' style='height:100vh'>
+        <scroll-view class="scroll-view_y" scroll-y style="height:100%">
+
+            <view class='normalView contentView '>
+
+                <view class='contentUserInfo wrapflex'>
+
+                    <view class='userImg' bindtap='postcontext'>
+                        <image mode='aspectFill' src='{{srcDomin}}{{content.avatarurl}}' />
+                    </view>
+
+                    <view class='userNameBox columnflex'>
+                        <view class='userNameView' style='color:#000;'>{{content.nickname}}</view>
+                        <view style='color:#666;font-size:24rpx;'>{{content.time}}</view>
+                    </view>
+
+                    <!-- <view class='pointMenu'>
+                        <text>...</text>
+                    </view> -->
+
+                </view>
+
+                <view class='contentDetails'>
+                    <text decode='1'>{{content.title}}</text>
+                </view>
+
+                <view class='contentImg' wx:for="{{content.imgurl}}" wx:key="index">
+                    <image mode='aspectFill' src='{{srcDomin}}{{item}}' />
+                </view>
+
+            </view>
+
+        </scroll-view>
+
+    </view>
+
+    <view class='botHandleView wrapflex'>
+
+        <!-- <view class='discussView wrapflex'>
+            <textarea value="{{txtValue}}" auto-height fixed="{{true}}" cursor-spacing="20" bindconfirm="bindconfirm" bindinput="bindconfirm"  />
+        </view>
+
+        <view class='shareImg'>
+            <image src='/assets/details/star.png' />
+        </view> -->
+
+        <view class='shareImg' catchtap='praiseEvent'>
+            <image wx:if="{{!content.dianji}}" animation="{{pointAni}}" src='/assets/index/praise.png' />
+            <image wx:if="{{content.dianji}}" animation="{{pointAni}}" src='/assets/index/selectPrase.png' />
+        </view>
+
+        <view class='shareImg'>
+            <image src='/assets/index/shareImg.png' />
+            <button id='shareBtn' open-type='share'></button>
+        </view>
+
+    </view>
+
+</view>

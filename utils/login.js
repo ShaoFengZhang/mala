@@ -1,4 +1,4 @@
-const domin = "https://dj.58100.com"; //线上域名
+const domin = "https://duanju.58100.com"; //线上域名
 const srcDomin = domin; //资源域名
 const checkUserUrl = `${domin}/home/index/updateUser`;
 
@@ -109,10 +109,10 @@ const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
 
 // requestURL封装
 const requestUrl = (app, url, method, data, cb) => {
-    wx.showLoading({
-        title: 'Loading',
-        mask: true,
-    })
+    // wx.showLoading({
+    //     title: 'Loading',
+    //     mask: true,
+    // });
     wx.request({
         url: url,
         header: {
@@ -134,7 +134,11 @@ const requestUrl = (app, url, method, data, cb) => {
                 title: '提示',
                 content: '请求失败,请稍后再试',
                 showCancel: false,
-                success: function (res) { }
+                success: function (res) { 
+                    wx.switchTab({
+                        url: '/pages/index/index'
+                    })
+                }
             })
         },
         complete: function (res) {
@@ -181,4 +185,5 @@ module.exports = {
     getSettingfnc: getSettingfnc,
     requestUrl: requestUrl,
     checkUserInfo: checkUserInfo,
+    srcDomin: srcDomin,
 };

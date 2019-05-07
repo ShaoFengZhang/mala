@@ -1,10 +1,9 @@
 //app.js
-import loginApi from './utils/login.js'
+import loginApi from './utils/login.js';
+const ald = require('./utils/ald-stat.js');
 App({
     onLaunch: function() {
         let _this=this;
-        console.log("onLaunch")
-
         wx.getSystemInfo({
             success(res) {
                 // console.log(res);
@@ -16,11 +15,10 @@ App({
             }
         });
 
-
+ 
 
         // 登录服务器
         // loginApi.wxlogin(this).then(function(value){
-        //     console.log(123);
         //     loginApi.getSettingfnc(_this);
         // });
 

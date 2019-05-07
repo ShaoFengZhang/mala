@@ -1,7 +1,8 @@
 {
     "pages": [
         "pages/index/index",
-        "pages/found/found"
+        "pages/found/found",
+        "pages/details/details"
     ],
     "window": {
         "backgroundTextStyle": "light",
@@ -28,5 +29,10 @@
                 "selectedIconPath": "/assets/app/found-select.png"
             }
         ]
-    }
+    },
+    "networkTimeout": {
+        "request": 10000
+    },
+    "debug": false,
+    "sitemapLocation": "sitemap.json"
 }

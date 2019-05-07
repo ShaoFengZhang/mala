@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "一周精选",
+    "backgroundColor": "#000000",
+    "disableScroll": true
 }

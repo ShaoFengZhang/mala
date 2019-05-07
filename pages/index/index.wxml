@@ -1,14 +1,14 @@
-<view class="bg">
+<view class="bg"  bindtouchstart="{{drawStart}}" bindtouchmove="{{drawMove}}" bindtouchend='drawEnd'>
 
     <view class='top-swiperView normalView'>
 
-        <swiper id='swiper-ID' display-multiple-items="{{6}}">
+        <swiper id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}" current="{{current}}">
 
             <block wx:for="{{classArr}}" wx:key="index">
 
-                <swiper-item data-id="{{item.classId}}" class="{{swiperCurrentIndex==item.classId?'select-swiper-css':''}}" bindtap='swiperBindtap'>
-                    <text>{{item.txt}}</text>
-                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.classId}}"></text>
+                <swiper-item data-id="{{item.id}}" data-index="{{index}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
+                    <text>{{item.title}}</text>
+                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
                 </swiper-item>
 
             </block>
@@ -19,8 +19,59 @@
 
     <view class='viewLine'></view>
 
-    <view class='scrollView normalView' style='height:{{classScrollHeight}}rpx'>
-        <scroll-view class="scroll-view_y" scroll-y style="height:100%">
+    <view class='scrollView' style='height:{{classScrollHeight}}rpx'>
+        <scroll-view class="scroll-view_y" scroll-y style="height:100%" bindscrolltoupper="bindscrolltoupper" bindscrolltolower="bindscrolltolower">
+
+            <view data-index="{{index}}" catchtap='goToDetails' class='contentView normalView' wx:for="{{contentArr}}" wx:key="index">
+
+                <view class='contentUserInfo wrapflex'>
+
+                    <view class='userImg'>
+                        <image mode='aspectFill' src='{{srcDomin}}{{item.avatarurl}}' />
+                    </view>
+
+                    <view class='userNameBox columnflex'>
+                        <view class='userNameView'>{{item.nickname}}</view>
+                        <view style='color:#666;font-size:24rpx;'>{{item.time}}</view>
+                    </view>
+
+                    <!-- <view class='pointMenu'>
+                        <text>...</text>
+                    </view> -->
+
+                </view>
+
+                <view class='contentDetails'>
+                    <text decode='1'>{{item.title}}</text> 
+                </view>
+
+                <view class='contentImg'>
+                    <image mode='aspectFill' src="{{srcDomin}}{{item.imgurl[0]}}" />
+                </view>
+
+                <view class='contentshare wrapflex'>
+
+                    <!-- <view class='opinionBox'>
+                        <image src='/assets/index/opinion.png' />
+                        <text style='margin-left:14rpx;'>9999+</text>
+                    </view> -->
+
+                    <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='praiseEvent'>
+                        <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
+                <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
+                        <text style='margin-left:14rpx;'>{{item.support}}</text>
+                    </view>
+
+                    <view class='shareImg' catchtap='catchtap'>
+                        <image src='/assets/index/shareImg.png' />
+                        <button data-index='{{index}}' id='shareBtn' open-type='share'></button>
+                    </view>
+                </view>
+            </view>
+
+            <view class='botTxt' wx:if="{{showBotTxt}}">
+                <text>已经到底了亲~</text>
+            </view>
 
         </scroll-view>
 

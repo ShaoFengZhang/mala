@@ -15,7 +15,26 @@ const formatNumber = n => {
     return n[1] ? n : '0' + n
 };
 
+const loding = function(args) {
+    wx.showLoading({
+        title: args?`${args}`:"加载中",
+        mask: true,
+    })
+}
+
+const toast = function (ags, time) {
+    wx.showToast({
+        title: `${ags}`,
+        icon: "none",
+        duration: time ? time : 1600,
+        mask: true,
+    });
+};
+
+
 module.exports = {
     formatTime: formatTime,
-    formatNumber: formatNumber
+    formatNumber: formatNumber,
+    loding: loding,
+    toast: toast,
 }
