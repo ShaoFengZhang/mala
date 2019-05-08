@@ -7,7 +7,7 @@
 
                 <view class='contentUserInfo wrapflex'>
 
-                    <view class='userImg' bindtap='postcontext'>
+                    <view class='userImg'>
                         <image mode='aspectFill' src='{{srcDomin}}{{content.avatarurl}}' />
                     </view>
 
@@ -26,8 +26,8 @@
                     <text decode='1'>{{content.title}}</text>
                 </view>
 
-                <view class='contentImg' wx:for="{{content.imgurl}}" wx:key="index">
-                    <image mode='aspectFill' src='{{srcDomin}}{{item}}' />
+                <view class='contentImg' wx:if="{{content.imgurl[0]}}" wx:for="{{content.imgurl}}" wx:key="index">
+                    <image bindlongpress="showImg"  data-src="{{srcDomin}}{{item}}" mode='widthFix' src='{{srcDomin}}{{item}}' />
                 </view>
 
             </view>
@@ -46,7 +46,7 @@
             <image src='/assets/details/star.png' />
         </view> -->
 
-        <view class='shareImg' catchtap='praiseEvent'>
+        <view class='shareImg' catchtap='{{praiseEvent}}'>
             <image wx:if="{{!content.dianji}}" animation="{{pointAni}}" src='/assets/index/praise.png' />
             <image wx:if="{{content.dianji}}" animation="{{pointAni}}" src='/assets/index/selectPrase.png' />
         </view>

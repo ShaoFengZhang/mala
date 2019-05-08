@@ -87,12 +87,13 @@ Page({
         if (this.data.swiperCurrentIndex == classId) {
             return;
         };
+        console.log(index);
         this.setData({
             swiperCurrentIndex: classId,
             contentArr: [],
             praiseId:'',
             showBotTxt: 0,
-            current: index > 2 ? (this.data.classArr.length - index > 3 ? index - 2 : this.data.current):0,
+            current: index > 2 ? (this.data.classArr.length - index > 3 ? index - 2 : index - 5):0,
         });
         this.page = 1;
         this.rows = 10;
@@ -105,6 +106,10 @@ Page({
         util.loding('加载中');
         let _this = this;
         let getContentUrl = loginApi.domin + '/home/index/doindex';
+        wx.reportAnalytics('classclickevent', {
+            uid: wx.getStorageSync("u_id"),
+            classid: type ? type : "default",
+        });
         loginApi.requestUrl(_this, getContentUrl, "POST", {
             "page": this.page,
             "len": this.rows,

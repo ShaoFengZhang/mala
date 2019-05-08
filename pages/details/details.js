@@ -7,6 +7,7 @@ Page({
     data: {
         txtValue:"发表你的观点",
         srcDomin: loginApi.srcDomin,
+        praiseEvent:'praiseEvent'
     },
 
     onLoad: function(options) {
@@ -86,6 +87,10 @@ Page({
 
     // 动画
     crearteAnimation: function () {
+        this.setData({
+            pointAni: null,
+            praiseEvent: '',
+        })
         let pointAni = wx.createAnimation({
             duration: 500,
             timingFunction: "ease",
@@ -98,7 +103,12 @@ Page({
         });
         this.setData({
             pointAni: pointAni.export(),
-        })
+        });
+        setTimeout(() => {
+            this.setData({
+                praiseEvent: 'praiseEvent',
+            })
+        }, 600)
     },
 
     // 复制文本
@@ -107,6 +117,14 @@ Page({
             data: this.data.content.title,
             success(res) {
             }
+        })
+    },
+
+    showImg:function(e){
+        console.log(e);
+        let src = e.currentTarget.dataset.src;
+        wx.previewImage({
+            urls: [src] // 需要预览的图片http链接列表
         })
     },
 })

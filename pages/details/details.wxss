@@ -7,6 +7,7 @@
     overflow: hidden;
     background-color: white;
     margin-bottom: 110rpx;
+    padding-bottom: 14rpx;
 }
 
 /* 内容顶部信息 */
@@ -25,7 +26,7 @@
 
 .userNameBox {
     width: 526rpx;
-    height: 76rpx;
+    /* height: 76rpx; */
     margin-left: 16rpx;
 }
 
@@ -53,17 +54,16 @@
     margin-top: 24rpx;
     width: 100%;
     min-height: 39rpx;
-    font-size: 28rpx;
+    font-size: 32rpx;
     color: #282828;
 }
 
 .contentImg, .contentImg image {
     width: 100%;
-    height: 400rpx;
 }
 
-.contentImg {
-    margin-top: 24rpx;
+.contentImg{
+   margin-top: 24rpx;
 }
 
 .botHandleView {
@@ -71,13 +71,14 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    min-height: 110rpx;
+    min-height: 88rpx;
     background: white;
     box-sizing: border-box;
     /* padding: 10rpx 10rpx 10rpx 40rpx;
     justify-content: space-between; */
     padding: 10rpx 40rpx;
     justify-content: space-around;
+    border-top: 2rpx solid rgba(231,231,231,1);
 }
 
 .discussView{
@@ -99,14 +100,18 @@ textarea{
 
 .shareImg {
     width: 100rpx;
-    height: 90rpx;
+    height: 66rpx;
     text-align: center;
-    line-height: 90rpx;
+    line-height: 66rpx;
     position: relative;
 }
 
 .botHandleView image {
     width: 32rpx;
     height: 32rpx;
+}
+
+.scroll-view_y{
+    background-color: white;
 }
 

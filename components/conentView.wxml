@@ -22,7 +22,7 @@
             <text decode='1'>{{item.title}}</text>
         </view>
 
-        <view class='contentImg'>
+        <view class='contentImg' wx:if="{{item.imgurl[0]}}">
             <image mode='aspectFill' src="{{srcDomin}}{{item.imgurl[0]}}" />
         </view>
 
@@ -47,6 +47,6 @@
     </view>
 
     <view class='botTxt' wx:if="{{showBotTxt}}">
-        <text>已经到底了亲~</text>
+        <text>没有数据了亲~</text>
     </view>
 </view>
