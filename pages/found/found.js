@@ -38,7 +38,7 @@ Page({
         if (!this.cantemp){
             return;
         }
-        // console.log("onTabItemTap")
+        console.log("onTabItemTap")
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
@@ -62,10 +62,13 @@ Page({
             })
         };
         app.praiseIndex = null;
+        this.canshareHide=false;
     },
 
     onHide:function(){
-        this.cantemp=true;
+        if (!this.canshareHide){
+            this.cantemp = true;
+        }          
     },
 
     //swiperBindtap
@@ -125,7 +128,7 @@ Page({
     },
 
     onShareAppMessage: function (e) {
-        console.log(e);
+        this.canshareHide=true;
         if (e.from == "menu") {
             return {
                 title: "点击查看",

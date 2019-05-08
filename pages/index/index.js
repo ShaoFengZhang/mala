@@ -53,6 +53,7 @@ Page({
         app.praiseIndex = null;
     },
 
+
     onShareAppMessage:function(e){
         if(e.from=="menu"){
             return {

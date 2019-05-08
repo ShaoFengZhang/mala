@@ -23,6 +23,7 @@ Component({
         showBotTxt:0,
         praiseId:"",
         pointAni: null,
+        praiseEvent:'praiseEvent',
     },
 
     methods: {
@@ -37,26 +38,40 @@ Component({
 
         // 动画
         crearteAnimation: function () {
-            let pointAni = wx.createAnimation({
-                duration: 500,
-                timingFunction: "ease",
-            });
-            pointAni.scale(1.5, 1.5).step({
-                duration: 250,
-            });
-            pointAni.scale(1, 1).step({
-                duration: 250,
-            });
-            this.setData({
-                pointAni: pointAni.export(),
-            })
+
+            if(!this.canAni){
+                let _this = this;
+                this.setData({
+                    praiseId: '',
+                    pointAni: null,
+                    praiseEvent: 'catchtap',
+                })
+                let pointAni = wx.createAnimation({
+                    duration: 500,
+                    timingFunction: "linear",
+                });
+                pointAni.scale(1.5, 1.5).step({
+                    duration: 250,
+                });
+                pointAni.scale(1, 1).step({
+                    duration: 250,
+                });
+                this.setData({
+                    pointAni: pointAni.export(),
+                });
+                setTimeout(()=>{
+                    this.setData({
+                        praiseEvent: 'praiseEvent',
+                    })
+                },600)
+            }
         },
 
         praiseEvent: function (e) {
             this.setData({
                 praiseId: '',
                 pointAni: null,
-            })
+            });
             let id = e.currentTarget.dataset.id;
             let index = e.currentTarget.dataset.index;
             if (this.data.contentArr[index].dianji) {
@@ -92,5 +107,5 @@ Component({
                 }
             })
         },
-    }
+    },
 })
