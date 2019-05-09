@@ -24,7 +24,14 @@ Page({
 
         loginApi.wxlogin(app).then(function(value) {
             loginApi.getSettingfnc(app);
-            _this.getContent(0);
+            if (options && options.conId){
+                util.loding('登录中');
+                _this.getContent(0, options.conId);
+            }else{
+                _this.getContent(0);
+            }
+            
+
         });
 
         this.setData({
@@ -65,7 +72,7 @@ Page({
             let index = e.target.dataset.index;
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
-                path: `/pages/index/index`,
+                path: `/pages/index/index?conId=${this.data.contentArr[index].id}`,
                 imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
             }
         }
@@ -103,7 +110,7 @@ Page({
     },
 
     // 获取内容
-    getContent: function(type) {
+    getContent: function (type,conId) {
         util.loding('加载中');
         let _this = this;
         let getContentUrl = loginApi.domin + '/home/index/doindex';
@@ -118,7 +125,6 @@ Page({
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
         }, function(res) {
-            wx.hideLoading();
             if (res.status == 1) {
                 for (let n = 0; n < res.contents.length; n++) {
                     for (let j = 0; j < res.supports.length; j++) {
@@ -140,6 +146,12 @@ Page({
                     _this.setData({
                         showBotTxt: 1,
                     });
+                };
+                if (conId){
+                    wx.hideLoading();
+                    _this.goToDetails(conId);
+                }else{
+                    wx.hideLoading();
                 }
             }
         })
@@ -256,4 +268,10 @@ Page({
     },
 
     catchtap: function() {},
+    // 跳转详情页
+    goToDetails: function (conId) {
+        wx.navigateTo({
+            url: `/pages/details/details?conId=${conId}`,
+        })
+    },
 })

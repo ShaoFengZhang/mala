@@ -5,18 +5,22 @@ const app = getApp();
 Page({
 
     data: {
-        txtValue:"发表你的观点",
+        txtValue: "发表你的观点",
         srcDomin: loginApi.srcDomin,
-        praiseEvent:'praiseEvent'
+        praiseEvent: 'praiseEvent'
     },
 
     onLoad: function(options) {
-        if (options && options.content){
+        if (options && options.conId) {
+            this.getcontent(options.conId);
+            return;
+        }
+        if (options && options.content) {
             this.setData({
                 content: JSON.parse(unescape(options.content)),
                 praiseIndex: options.praiseIndex,
             })
-        }
+        };
     },
 
     onShow: function() {
@@ -26,14 +30,38 @@ Page({
     onShareAppMessage: function() {
         return {
             title: this.data.content.title.slice(0, 28),
-            path: `/pages/index/index`,
+            path: `/pages/index/index?conId=${this.data.content.id}`,
             imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
         }
     },
 
-    bindconfirm:function(e){
+    getcontent: function(conId) {
+        let _this = this;
+        let getcontentUrl = loginApi.domin + '/home/index/contentone';
+        loginApi.requestUrl(_this, getcontentUrl, "POST", {
+            "id": conId,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+        }, function(res) {
+            console.log(res);
+            
+            if (res.status == 1) {
+                let obj = res.content;
+                obj.dianji = res.dianji;
+                obj.imgurl = res.content.imgurl.split(',');
+                _this.setData({
+                    content: obj,
+                    praiseIndex: '',
+                })
+            } else {
+                util.toast("数据获取失败,请重试", 300)
+            }
+        })
+    },
+
+    bindconfirm: function(e) {
         console.log(e);
-        let value=e.detail.value;
+        let value = e.detail.value;
         this.contentTxt = value;
     },
 
@@ -42,9 +70,9 @@ Page({
     //         txtValue:'',
     //     })
     // },
-    
-    praiseEvent: function () {
-        if (this.data.content.dianji){
+
+    praiseEvent: function() {
+        if (this.data.content.dianji) {
             this.crearteAnimation();
             return;
         }
@@ -52,14 +80,14 @@ Page({
     },
 
     // 点赞请求
-    addpriseNum: function () {
+    addpriseNum: function() {
         let _this = this;
         let addpriseNumUrl = loginApi.domin + '/home/index/support';
         loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
             "id": this.data.content.id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
+        }, function(res) {
             console.log(res);
             if (res.status == 1) {
                 _this.data.content.dianji = 1;
@@ -68,25 +96,25 @@ Page({
                 });
                 _this.crearteAnimation();
                 app.praiseIndex = _this.data.praiseIndex;
-            }else{
-                util.toast("点赞失败,请重试",300)
+            } else {
+                util.toast("点赞失败,请重试", 300)
             }
         })
     },
 
     // 提交文案
-    postcontext: function () {
+    postcontext: function() {
         let _this = this;
         let postcontextUrl = loginApi.domin + '/home/index/test';
         loginApi.requestUrl(_this, postcontextUrl, "POST", {
             "txt": this.contentTxt
-        }, function (res) {
+        }, function(res) {
             console.log(res);
         })
     },
 
     // 动画
-    crearteAnimation: function () {
+    crearteAnimation: function() {
         this.setData({
             pointAni: null,
             praiseEvent: '',
@@ -112,15 +140,14 @@ Page({
     },
 
     // 复制文本
-    copytxt:function(){
+    copytxt: function() {
         wx.setClipboardData({
             data: this.data.content.title,
-            success(res) {
-            }
+            success(res) {}
         })
     },
 
-    showImg:function(e){
+    showImg: function(e) {
         console.log(e);
         let src = e.currentTarget.dataset.src;
         wx.previewImage({
