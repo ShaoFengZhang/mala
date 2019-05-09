@@ -26,7 +26,6 @@ Page({
     },
 
     onLoad: function (options) {
-        console.log("onLoad")
         let _this = this;
         this.setData({
             classScrollHeight: app.windowHeight * 750 / app.sysWidth - 98,
@@ -38,7 +37,6 @@ Page({
         if (!this.cantemp){
             return;
         }
-        console.log("onTabItemTap")
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
@@ -87,6 +85,14 @@ Page({
         this.rows = 10;
         this.cangetData = true;
         this.getContent();
+    },
+
+    // 滑动到底部
+    bindscrolltolower: function () {
+        if (this.cangetData) {
+            this.page++;
+            this.getContent();
+        }
     },
 
     // 获取内容

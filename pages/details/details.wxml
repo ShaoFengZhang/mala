@@ -30,7 +30,7 @@
                     <image bindlongpress="showImg"  data-src="{{srcDomin}}{{item}}" mode='widthFix' src='{{srcDomin}}{{item}}' />
                 </view>
 
-                <view class='userComments'>
+                <!-- <view class='userComments'>
 
                     <view class='commentInfoView wrapflex'>
                         <image style='width:76rpx;height:76rpx;' src='/assets/index/icon.png' />
@@ -39,7 +39,7 @@
                         <view style='color:#172434;font-size:28rpx;'>36666</view>
                     </view>
 
-                </view>
+                </view> -->
 
             </view>
 

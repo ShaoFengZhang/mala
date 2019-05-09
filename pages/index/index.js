@@ -89,16 +89,16 @@ Page({
         };
 
         let classlen = this.data.classArr.length;
-        if (classlen<6){
-            this.setData({
-                current: 0,
-            })
-        } else{
-            console.log(index);
-            this.setData({
-                current: index > 4 ? (index == classlen-1 ? index-5:index-4) :0,
-            })
-        }
+        // if (classlen<6){
+        //     this.setData({
+        //         current: 0,
+        //     })
+        // } else{
+        //     console.log(index);
+        //     this.setData({
+        //         current: index > 4 ? (index == classlen-1 ? index-5:index-4) :0,
+        //     })
+        // }
 
         this.setData({
             swiperCurrentIndex: classId,

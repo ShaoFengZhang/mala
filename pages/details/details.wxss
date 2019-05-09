@@ -54,7 +54,8 @@
     margin-top: 24rpx;
     width: 100%;
     min-height: 39rpx;
-    font-size: 32rpx;
+    font-size: 36rpx;
+    line-height: 56rpx;
     color: #282828;
 }
 
@@ -111,9 +112,9 @@ textarea {
     height: 32rpx;
 }
 
-/* .scroll-view_y{
+.scroll-view_y{
     background-color: white;
-} */
+}
 
 /* 评论内容样式 */
 

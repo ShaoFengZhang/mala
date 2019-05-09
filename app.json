@@ -30,12 +30,6 @@
                 "iconPath": "/assets/app/found-noselect.png",
                 "text": "发现",
                 "selectedIconPath": "/assets/app/found-select.png"
-            },
-            {
-                "pagePath": "pages/mine/mine",
-                "iconPath": "/assets/app/my-noselect.png",
-                "text": "我的",
-                "selectedIconPath": "/assets/app/my-select.png"
             }
             
         ]
