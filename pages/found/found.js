@@ -139,7 +139,7 @@ Page({
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
                 path: `/pages/index/index`,
-                imageUrl: this.data.srcDomin + this.data.contentArr[index].imgurl[0]
+                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4) + 1)}.png`,
             }
         }
     },

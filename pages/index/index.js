@@ -36,12 +36,10 @@ Page({
             classScrollHeight: app.windowHeight * 750 / app.sysWidth - 98,
             // classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 416,
         });
-
-        this.getClass();
-        
     },
 
     onShow: function() {
+        this.getClass();
         if (app.praiseIndex){
             console.log(this.data.contentArr[app.praiseIndex])
             this.data.contentArr[app.praiseIndex].dianji=1;
@@ -59,6 +57,7 @@ Page({
             return {
                 title: "点击查看",
                 path: `/pages/index/index`,
+                imageUrl: `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
             }
         }else{
             
@@ -66,7 +65,7 @@ Page({
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
                 path: `/pages/index/index`,
-                imageUrl: this.data.srcDomin + this.data.contentArr[index].imgurl[0]
+                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
             }
         }
     },

@@ -42,7 +42,7 @@ Component({
             if(!this.canAni){
                 let _this = this;
                 this.setData({
-                    praiseId: '',
+                    // praiseId: '',
                     pointAni: null,
                     praiseEvent: 'catchtap',
                 })
@@ -75,10 +75,10 @@ Component({
             let id = e.currentTarget.dataset.id;
             let index = e.currentTarget.dataset.index;
             if (this.data.contentArr[index].dianji) {
-                this.crearteAnimation();
                 this.setData({
                     praiseId: id,
-                })
+                });
+                this.crearteAnimation();
                 return;
             }
             this.addpriseNum(id, index);

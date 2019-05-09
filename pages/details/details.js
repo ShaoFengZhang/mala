@@ -27,7 +27,7 @@ Page({
         return {
             title: this.data.content.title.slice(0, 28),
             path: `/pages/index/index`,
-            imageUrl: this.data.srcDomin+this.data.content.imgurl[0]
+            imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
         }
     },
 
