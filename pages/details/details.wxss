@@ -62,8 +62,8 @@
     width: 100%;
 }
 
-.contentImg{
-   margin-top: 24rpx;
+.contentImg {
+    margin-top: 24rpx;
 }
 
 .botHandleView {
@@ -78,10 +78,10 @@
     justify-content: space-between; */
     padding: 10rpx 40rpx;
     justify-content: space-around;
-    border-top: 2rpx solid rgba(231,231,231,1);
+    border-top: 2rpx solid rgba(231, 231, 231, 1);
 }
 
-.discussView{
+.discussView {
     width: 400rpx;
     min-height: 64rpx;
     background: rgba(243, 245, 249, 1);
@@ -89,10 +89,10 @@
     font-size: 28rpx;
     color: #000;
     box-sizing: border-box;
-    padding:10rpx 20rpx;
+    padding: 10rpx 20rpx;
 }
 
-textarea{
+textarea {
     width: 360rpx;
     height: 44rpx;
     line-height: 44rpx;
@@ -111,7 +111,31 @@ textarea{
     height: 32rpx;
 }
 
-.scroll-view_y{
+/* .scroll-view_y{
     background-color: white;
+} */
+
+/* 评论内容样式 */
+
+.userComments {
+    width: 100%;
+    background-color: #fff;
 }
 
+.commentInfoView {
+    width: 100%;
+    height: 76rpx;
+    background: gray;
+    border-radius: 8rpx;
+    align-items: flex-start;
+}
+
+.commentInfoView image:first-child {
+    box-shadow: 0px 0px 40rpx 0px rgba(0, 0, 0, 0.1);
+    border-radius: 8rpx;
+}
+
+.commentInfoView view:nth-of-type(1){
+    width: 500rpx;
+    background-color: red;
+}

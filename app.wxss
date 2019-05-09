@@ -77,3 +77,9 @@ button::after {
 .hover-class {
     background-color: #f2f2f2;
 }
+
+.oneEllipsis{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}

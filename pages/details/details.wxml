@@ -30,6 +30,17 @@
                     <image bindlongpress="showImg"  data-src="{{srcDomin}}{{item}}" mode='widthFix' src='{{srcDomin}}{{item}}' />
                 </view>
 
+                <view class='userComments'>
+
+                    <view class='commentInfoView wrapflex'>
+                        <image style='width:76rpx;height:76rpx;' src='/assets/index/icon.png' />
+                        <view class='oneEllipsis' style='color:#282828;font-size:32rpx;'>总有些人的呢称超级长很难受</view>
+                       <image style='width:32rpx;height:32rpx;' src='/assets/index/praise.png' />
+                        <view style='color:#172434;font-size:28rpx;'>36666</view>
+                    </view>
+
+                </view>
+
             </view>
 
         </scroll-view>
