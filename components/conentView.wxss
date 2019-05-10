@@ -74,9 +74,9 @@
 .contentDetails {
     margin-top: 24rpx;
     width: 100%;
-    min-height: 50rpx;
-    max-height: 150rpx;
-    font-size: 32rpx;
+    min-height: 55rpx;
+    max-height: 158rpx;
+    font-size: 36rpx;
     color: #282828;
     /* 2行文本溢出 */
     overflow: hidden;

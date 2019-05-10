@@ -27,7 +27,7 @@
                 </view>
 
                 <view class='contentImg' wx:if="{{content.imgurl[0]}}" wx:for="{{content.imgurl}}" wx:key="index">
-                    <image bindlongpress="showImg"  data-src="{{srcDomin}}{{item}}" mode='widthFix' src='{{srcDomin}}{{item}}' />
+                    <image catchtap='showImg' data-src="{{srcDomin}}{{item}}" mode='widthFix' src='{{srcDomin}}{{item}}' />
                 </view>
 
                 <!-- <view class='userComments'>

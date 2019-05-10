@@ -30,8 +30,6 @@ Page({
             }else{
                 _this.getContent(0);
             }
-            
-
         });
 
         this.setData({
