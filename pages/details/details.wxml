@@ -78,8 +78,9 @@
             <text>完成</text>
         </view>
 
-        <view class='shareImg' wx:if="{{!ifPopUp}}" catchtap='collectionContent'>
-            <image src='/assets/details/star.png' />
+        <view class='shareImg' data-url="{{collection?'delcollection':'collection'}}" wx:if="{{!ifPopUp}}" catchtap='collectionContent'>
+            <image wx:if="{{!collection}}" src='/assets/details/star.png' />
+            <image wx:if="{{collection}}" src='/assets/details/starselect.png' />
         </view>
 
         <view class='shareImg' catchtap='{{praiseEvent}}' wx:if="{{!ifPopUp}}">

@@ -8,8 +8,8 @@ Page({
         txtValue: "",
         srcDomin: loginApi.srcDomin,
         praiseEvent: 'praiseEvent',
-        commentArr:[1,2],
-        ifPopUp:0,
+        commentArr: [1, 2],
+        ifPopUp: 0,
     },
 
     onLoad: function(options) {
@@ -21,14 +21,14 @@ Page({
             this.getcontent(options.conId);
             this.setData({
                 praiseIndex: parseInt(options.index),
+                conId: options.conId,
             })
             console.log(this.data.praiseIndex);
             return;
         };
     },
 
-    onShow: function() {
-    },
+    onShow: function() {},
 
     onShareAppMessage: function() {
         return {
@@ -39,10 +39,27 @@ Page({
     },
 
     // 收藏
-    collectionContent:function(){
-
+    collectionContent: function (e) {
+        let _this = this;
+        let url=e.currentTarget.dataset.url;
+        let collectUrl = loginApi.domin + `/home/index/${url}`;
+        loginApi.requestUrl(_this, collectUrl, "POST", {
+            "contentid": this.data.conId,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+        }, function(res) {
+            if (res.status == 1) {
+                _this.setData({
+                    collection: url =="collection"?1:0,
+                });
+                util.toast(url == "collection" ? "收藏成功~":"取消成功~", 1200)
+            } else {
+                util.toast(url == "collection" ? "收藏失败，请重试" : "取消失败，请重试", 1200)
+            }
+        })
     },
 
+    // 获取内容
     getcontent: function(conId) {
         let _this = this;
         let getcontentUrl = loginApi.domin + '/home/index/contentone';
@@ -57,6 +74,7 @@ Page({
                 obj.imgurl = res.content.imgurl.split(',');
                 _this.setData({
                     content: obj,
+                    collection: res.collection,
                 })
             } else {
                 util.toast("数据获取失败,请重试", 300)
@@ -64,11 +82,39 @@ Page({
         })
     },
 
-    commitComments:function(){
-
+    // 提交评论
+    commitComments: function() {
+        if (!util.check(this.contentTxt)) {
+            util.toast('请输入有效的评论', 1200);
+            return;
+        }
     },
 
-    bindinput:function(e){
+    // 提交评论请求
+    commitUrl: function() {
+        let _this = this;
+        let commitUrl = loginApi.domin + '/home/index/support';
+        loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
+            "txt": this.contentTxt,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+        }, function(res) {
+            console.log(res);
+            if (res.status == 1) {
+                _this.data.content.dianji = 1;
+                _this.setData({
+                    content: _this.data.content,
+                });
+                _this.crearteAnimation();
+                app.praiseIndex = _this.data.praiseIndex;
+                console.log(app.praiseIndex);
+            } else {
+                util.toast("点赞失败,请重试", 300)
+            }
+        })
+    },
+
+    bindinput: function(e) {
         console.log(e);
         let value = e.detail.value;
         this.contentTxt = value;
@@ -77,16 +123,17 @@ Page({
     bindblur: function() {
         this.setData({
             ifPopUp: 0,
-            txtValue:'',
+            txtValue: '',
         })
     },
 
-    bindfocus:function(){
+    bindfocus: function() {
         this.setData({
-            ifPopUp:1,
+            ifPopUp: 1,
         })
     },
 
+    // 点赞事件
     praiseEvent: function() {
         if (this.data.content.dianji) {
             this.crearteAnimation();
@@ -161,7 +208,7 @@ Page({
     },
 
     // 跳转用户主页
-    gotoUserHome: function (e) {
+    gotoUserHome: function(e) {
         let uid = e.currentTarget.dataset.uid;
         let openid = e.currentTarget.dataset.openid;
         let urlsrc = e.currentTarget.dataset.src;
