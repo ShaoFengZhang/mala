@@ -1,14 +1,16 @@
-<view class="bg" bindtouchstart="{{drawStart}}" bindtouchmove="{{drawMove}}" bindtouchend='drawEnd'>
+<view class="bg">
 
     <view class='top-swiperView normalView'>
 
-        <swiper id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}" current="{{current}}">
+        <swiper id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}" >
 
             <block wx:for="{{classArr}}" wx:key="index">
 
                 <swiper-item data-id="{{item.id}}" data-index="{{index}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
-                    <text>{{item.title}}</text>
-                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
+                    <view class='swiperTxt'>
+                        <text>{{item.title}}</text>
+                        <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
+                    </view> 
                 </swiper-item>
 
             </block>

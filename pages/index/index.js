@@ -105,11 +105,11 @@ Page({
         }
     },
 
+    // 分享
     onShareAppMessage: function(e) {
         if (e.from == "menu") {
             return util.shareObj
         } else {
-
             let index = e.target.dataset.index;
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
