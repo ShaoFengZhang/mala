@@ -151,6 +151,8 @@ Page({
             "id": this.data.content.id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
+            "bopenid": this.data.content.uid,
+            "buid": this.data.content.openid,
         }, function(res) {
             console.log(res);
             if (res.status == 1) {

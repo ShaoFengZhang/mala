@@ -67,6 +67,22 @@ Page({
         }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
+                // 获赞处理
+                if (parseInt(res.userinfo.support)>10000){
+                    let num = parseInt(res.userinfo.support);
+                    res.userinfo.support = (Math.floor(num / 1000)/10)+'w+'
+                };
+                // 关注
+                if (parseInt(res.userinfo.focu)>10000) {
+                    let num = parseInt(res.userinfo.focu);
+                    res.userinfo.focu = (Math.floor(num / 1000) / 10) + 'w+'
+                };
+                // 粉丝
+                if (parseInt(res.userinfo.focus) > 10000) {
+                    let num = parseInt(res.userinfo.focus);
+                    res.userinfo.focus = (Math.floor(num / 1000) / 10) + 'w+'
+                };
+
                 _this.setData({
                     userInfos: res.userinfo,
                 })

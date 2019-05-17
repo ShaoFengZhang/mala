@@ -114,6 +114,8 @@ Component({
                 "id": cid,
                 "openid": wx.getStorageSync("user_openID"),
                 "uid": wx.getStorageSync("u_id"),
+                "bopenid": this.data.contentArr[index].uid,
+                "buid": this.data.contentArr[index].openid,
             }, function (res) {
                 console.log(res);
                 if (res.status == 1) {
