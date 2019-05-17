@@ -12,11 +12,11 @@
                     <view class='userImg' data-src='{{content.photo?content.photo:content.avatarurl}}' data-uid="{{content.uid}}" data-note="{{content.note}}" data-openid="{{content.openid}}" data-name="{{content.name?content.name:content.nickname}}" catchtap='gotoUserHome'>
                         <!-- <image mode='aspectFill' src='{{srcDomin}}{{content.avatarurl}}' /> -->
                         <image wx:if="{{!content.photo}}" mode='aspectFill' src='{{content.avatarurl}}' />
-                <image wx:if="{{content.photo}}" mode='aspectFill' src='{{content.photo[0]=="h"?"":srcDomin}}{{content.photo}}' />
+                        <image wx:if="{{content.photo}}" mode='aspectFill' src='{{content.photo[0]=="h"?"":srcDomin}}{{content.photo}}' />
                     </view>
 
                     <view class='userNameBox columnflex'>
-                        <view class='userNameView' style='color:#000;'>{{content.nickname}}</view>
+                        <view class='userNameView' style='color:#000;'>{{content.name?content.name:content.nickname}}</view>
                         <view style='color:#666;font-size:24rpx;'>{{content.time}}</view>
                     </view>
 
@@ -41,26 +41,31 @@
             <view class='userComments' wx:for="{{commentArr}}" wx:key="index">
 
                 <view class='commentInfoView wrapflex'>
-                    <image style='width:76rpx;height:76rpx;margin-right:24rpx;' src='/assets/index/icon.png' />
-                    <view class='oneEllipsis' style='color:#282828;font-size:32rpx;'>总有些人的呢称超级长很难受你知道的</view>
-                    <view class='praiseView wrapflex'>
-                        <image src='/assets/index/praise.png' />
-                        <!-- <image src='/assets/index/selectPrase.png' /> -->
-                        <text style='color:#172434;font-size:28rpx;'>666</text>
+
+                    <image style='width:76rpx;height:76rpx;margin-right:24rpx;' wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />
+
+                    <image style='width:76rpx;height:76rpx;margin-right:24rpx;' wx:if="{{item.photo}}" mode='aspectFill' src='{{item.photo[0]=="h"?"":srcDomin}}{{item.photo}}' />
+
+
+                    <view class='oneEllipsis' style='color:#282828;font-size:32rpx;'>{{item.name?item.name:item.nickname}}</view>
+                    <view class='praiseView wrapflex' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent2}}'>
+                        <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
+                    <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
+                        <text style='color:#172434;font-size:28rpx;'>{{item.support}}</text>
                     </view>
 
                 </view>
 
                 <view class='praiseContent'>
                     <text decode='1'>
-                    当教师把每一个学生都理解为他是一个具有个人特点的、具有自己的志向、自己的智慧和性格结构的人的时候，这样的理解才能有助于教师去热爱儿童和尊重儿童。
+                        {{item.title}}
                     </text>
                 </view>
 
             </view>
 
-            <view class='noPrais' wx:if="{{!commentArr.length}}">
-                <text>暂无评论，快来请沙发吧~</text>
+            <view class='botTxt' wx:if="{{showBotTxt}}">
+                <text>暂无更多评论了，快来抢沙发吧~</text>
             </view>
 
         </scroll-view>
@@ -71,11 +76,11 @@
     <view class='botHandleView wrapflex'>
 
         <view class='discussView wrapflex'>
-            <textarea value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' />
+            <textarea maxlength="{{100}}" value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' />
         </view>
 
         <view class='commitBtn' wx:if="{{ifPopUp}}" catchtap='commitComments'>
-            <text>完成</text>
+            <text>评论</text>
         </view>
 
         <view class='shareImg' data-url="{{collection?'delcollection':'collection'}}" wx:if="{{!ifPopUp}}" catchtap='collectionContent'>
@@ -84,8 +89,8 @@
         </view>
 
         <view class='shareImg' catchtap='{{praiseEvent}}' wx:if="{{!ifPopUp}}">
-            <image wx:if="{{!content.dianji}}" animation="{{pointAni}}" src='/assets/index/praise.png' />
-            <image wx:if="{{content.dianji}}" animation="{{pointAni}}" src='/assets/index/selectPrase.png' />
+            <image wx:if="{{!content.dianji}}" animation="{{txtpointAni}}" src='/assets/index/praise.png' />
+            <image wx:if="{{content.dianji}}" animation="{{txtpointAni}}" src='/assets/index/selectPrase.png' />
         </view>
 
         <view class='shareImg' wx:if="{{!ifPopUp}}">

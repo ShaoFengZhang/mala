@@ -190,6 +190,7 @@ Page({
 
                 _this.setData({
                     contentArr: _this.data.contentArr.concat(res.contents),
+                    // [`contentArr[${_this.page-1}]`]: res.contents,
                 });
                 
                 if (res.contents.length < _this.rows) {

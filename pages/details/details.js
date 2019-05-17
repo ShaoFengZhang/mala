@@ -8,17 +8,26 @@ Page({
         txtValue: "",
         srcDomin: loginApi.srcDomin,
         praiseEvent: 'praiseEvent',
-        commentArr: [1, 2],
+        commentArr: [],
         ifPopUp: 0,
+        showBotTxt: 0,
+        praiseId: "",
+        praiseEvent2: 'praiseEvent2'
     },
 
     onLoad: function(options) {
+
+        this.page = 1;
+        this.rows = 10;
+        this.cangetData = true;
+
         this.setData({
             classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 110,
         });
         console.log(options)
         if (options && options.conId) {
             this.getcontent(options.conId);
+            this.getSupportcontent(options.conId);
             this.setData({
                 praiseIndex: parseInt(options.index),
                 conId: options.conId,
@@ -83,40 +92,81 @@ Page({
         })
     },
 
+    // 获取评论内容
+    getSupportcontent: function (conId) {
+        let _this = this;
+        let getSupportcontentUrl = loginApi.domin + '/home/index/getcomments';
+        loginApi.requestUrl(_this, getSupportcontentUrl, "POST", {
+            "id": conId,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+            "page": this.page,
+            "len": this.rows,
+        }, function (res) {
+            if (res.status == 1) {
+
+                for (let n = 0; n < res.comments.length; n++) {
+                    for (let j = 0; j < res.issupport.length; j++) {
+                        if (res.issupport[j].commentsid == res.comments[n].id) {
+                            res.comments[n].dianji = 12;
+                        }
+                    }
+                }
+
+                _this.setData({
+                    commentArr: _this.data.commentArr.concat(res.comments),
+                });
+                if (res.comments.length < _this.rows) {
+                    _this.cangetData = false;
+                    _this.setData({
+                        showBotTxt: 1,
+                    });
+                };
+            } else {
+                util.toast("数据获取失败,请重试", 300)
+            }
+        })
+    },
+
     // 提交评论
     commitComments: function() {
         if (!util.check(this.contentTxt)) {
             util.toast('请输入有效的评论', 1200);
             return;
-        }
+        };
+        this.commitUrl();
     },
 
     // 提交评论请求
     commitUrl: function() {
         let _this = this;
-        let commitUrl = loginApi.domin + '/home/index/support';
-        loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
-            "txt": this.contentTxt,
+        let commitUrl = loginApi.domin + '/home/index/comments';
+        loginApi.requestUrl(_this, commitUrl, "POST", {
+            "title": this.contentTxt,
+            "contentid": this.data.content.id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
+            "bopenid": this.data.content.uid,
+            "buid": this.data.content.openid,
         }, function(res) {
             console.log(res);
             if (res.status == 1) {
-                _this.data.content.dianji = 1;
+                _this.page = 1;
+                _this.rows = 10;
+                _this.cangetData = true;
                 _this.setData({
-                    content: _this.data.content,
-                });
-                _this.crearteAnimation();
-                app.praiseIndex = _this.data.praiseIndex;
-                console.log(app.praiseIndex);
+                    commentArr: [], 
+                    praiseId: '',
+                    pointAni: null,
+                })
+                _this.getSupportcontent(_this.data.conId);
             } else {
-                util.toast("点赞失败,请重试", 300)
+                util.toast("评论失败,请重试", 300)
             }
         })
     },
 
     bindinput: function(e) {
-        console.log(e);
         let value = e.detail.value;
         this.contentTxt = value;
     },
@@ -141,6 +191,24 @@ Page({
             return;
         }
         this.addpriseNum();
+    },
+
+    // 评论点赞事件
+    praiseEvent2: function (e) {
+        this.setData({
+            praiseId: '',
+            pointAni: null,
+        });
+        let id = e.currentTarget.dataset.id;
+        let index = e.currentTarget.dataset.index;
+        if (this.data.commentArr[index].dianji) {
+            this.setData({
+                praiseId: id,
+            });
+            this.crearteAnimationP();
+            return;
+        }
+        this.addpriseNum2(id, index);
     },
 
     // 点赞请求
@@ -169,10 +237,33 @@ Page({
         })
     },
 
+    // 评论点赞请求
+    addpriseNum2: function (id,index) {
+        let _this = this;
+        let addpriseNumUrl = loginApi.domin + '/home/index/commentsupport';
+        loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
+            "commentsid": id,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            console.log(res);
+            if (res.status == 1) {
+                _this.data.commentArr[index].dianji = 1;
+                _this.data.commentArr[index].support++;
+                _this.setData({
+                    commentArr: _this.data.commentArr,
+                });
+                _this.crearteAnimationP();
+            } else {
+                util.toast("点赞失败,请重试", 300)
+            }
+        })
+    },
+
     // 动画
     crearteAnimation: function() {
         this.setData({
-            pointAni: null,
+            txtpointAni: null,
             praiseEvent: '',
         })
         let pointAni = wx.createAnimation({
@@ -186,7 +277,7 @@ Page({
             duration: 250,
         });
         this.setData({
-            pointAni: pointAni.export(),
+            txtpointAni: pointAni.export(),
         });
         setTimeout(() => {
             this.setData({
@@ -195,6 +286,36 @@ Page({
         }, 600)
     },
 
+    // 动画
+    crearteAnimationP: function () {
+
+        if (!this.canAni) {
+            let _this = this;
+            this.setData({
+                pointAni: null,
+                praiseEvent2: 'catchtap',
+            })
+            let pointAni = wx.createAnimation({
+                duration: 500,
+                timingFunction: "linear",
+            });
+            pointAni.scale(1.5, 1.5).step({
+                duration: 250,
+            });
+            pointAni.scale(1, 1).step({
+                duration: 250,
+            });
+            this.setData({
+                pointAni: pointAni.export(),
+            });
+            setTimeout(() => {
+                this.setData({
+                    praiseEvent2: 'praiseEvent2',
+                })
+            }, 600)
+        }
+    },
+    
     // 复制文本
     copytxt: function() {
         wx.setClipboardData({
