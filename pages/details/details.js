@@ -52,6 +52,7 @@ Page({
                 _this.setData({
                     collection: url =="collection"?1:0,
                 });
+                url == "collection" ? app.collectIndex = null : app.collectIndex = _this.data.praiseIndex;
                 util.toast(url == "collection" ? "收藏成功~":"取消成功~", 1200)
             } else {
                 util.toast(url == "collection" ? "收藏失败，请重试" : "取消失败，请重试", 1200)
