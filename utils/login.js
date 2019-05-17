@@ -1,6 +1,6 @@
 const domin = "https://duanju.58100.com"; //线上域名
 const srcDomin = domin; //资源域名
-const checkUserUrl = `${domin}/home/index/updateUser`;
+const checkUserUrl = `${domin}/home/index/getuserinfo`;
 
 let loginNum = 0;
 let checkuserNum = 0;
@@ -87,7 +87,7 @@ const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
         })
         requestUrl(app, checkUserUrl, "POST", {
             // rowData: res.rawData,
-            // open_id: app.user_OpenId,
+            // openid: wx.getStorageSync('user_openID'),
             iv: iv,
             encryptedData: encryptedData,
             seesion_key: session_key,
@@ -101,7 +101,7 @@ const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
                     checkuserNum = 0;
                     return;
                 }
-                wxloginfnc(app);
+                wxlogin(app);
             }
         });
     }

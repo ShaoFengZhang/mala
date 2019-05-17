@@ -1,0 +1,51 @@
+<view class='bg'>
+
+    <scroll-view scroll-y style="height:100vh;">
+
+        <view class='topTextArea'>
+            <!-- <image catchtap='changeOther' src='/assets/release/other.png' /> -->
+            <textarea show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;" bindinput="txtBindInput" auto-height placeholder="写些什么和大家分享…" />
+            <view style='color:#AAAAAA;font-size:28rpx;text-align:right'>最多1000字</view>
+        </view>
+
+        <!-- 选择话题 -->
+        <view class='topicView wrapflex' catchtap='changeClass'>
+            <view class='choseIcon'>#</view>
+            <view class='choseTxt'>{{classTxt}}</view>
+            <!-- <view class='choseTxt'>{{"励志"}}</view> -->
+            <image src='/assets/mine/rightFlow.png' />
+        </view>
+
+        <!-- 选择图片 -->
+        <view class='pictureView'>
+
+            <view class='picItemView' wx:for="{{userPicArr}}" wx:key="{{index}}">
+                <image mode='aspectFill' src='/assets/index/icon.png' />
+                <view data-index="{{index}}" class='closeicon' catchtap='deletepic'> X </view>
+            </view>
+
+            <view class='uploadPictures' catchtap='uploadPictures'>
+                <view class='addIcon'>
+                    <image src='/assets/release/add.png' />
+                </view>
+                <view style='font-size:28rpx'>图片</view>
+            </view>
+
+            <!-- <view class='changePic'>
+                <image src='/assets/release/pic.png' />
+            </view> -->
+
+        </view>
+        <!-- 发布按钮 -->
+        <view class='releaseView wrapflex'>
+            <view class='releaseBtn' catchtap='confirmRelease'>
+                <text>确认发布</text>
+                <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+                </button>
+            </view>
+        </view>
+
+    </scroll-view>
+
+
+</view>

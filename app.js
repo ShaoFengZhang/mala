@@ -3,6 +3,7 @@ import loginApi from './utils/login.js';
 const ald = require('./utils/ald-stat.js');
 App({
     onLaunch: function() {
+        this.netBlock=0;
         let _this=this;
         wx.getSystemInfo({
             success(res) {
@@ -14,9 +15,7 @@ App({
                 _this.Bheight = res.screenHeight - res.windowHeight - res.statusBarHeight - 44;
             }
         });
-
  
-
         // 登录服务器
         // loginApi.wxlogin(this).then(function(value){
         //     loginApi.getSettingfnc(_this);

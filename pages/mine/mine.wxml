@@ -10,51 +10,51 @@
                 <open-data type="userNickName"></open-data>
             </view>
 
-            <view class='userDecs'>
-                <text>这就是一句很长的自我介绍哈哈哈哈哈哈哈哈哈哈</text>
+            <view class='userDecs' wx:if="{{userInfos.note}}">
+                <text>{{userInfos.note}}</text>
             </view>
         </view>
     </view>
 
     <view class='userDataView wrapflex'>
 
-        <view class='foucsOn columnflex'>
-            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>6666666</text>
+        <view class='foucsOn columnflex' data-path="/pages/attention/attention" catchtap='pageNav'>
+            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.focu || 0}}</text>
             <text style='color:#999999;font-size:28rpx;'>关注</text>
         </view>
 
         <view class='praiseNum columnflex'>
-            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>999</text>
+            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.support || 0}}</text>
             <text style='color:#999999;font-size:28rpx;'>获赞</text>
         </view>
 
-        <view class='fansNum columnflex'>
-            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>66666</text>
+        <view class='fansNum columnflex' data-path="/pages/fans/fans" catchtap='pageNav'>
+            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.focus || 0}}</text>
             <text style='color:#999999;font-size:28rpx;'>粉丝</text>
         </view>
 
     </view>
 
-    <view class='dynamicData wrapflex'>
+    <view class='dynamicData wrapflex' data-path="/pages/message/message" catchtap='pageNav'>
         <view class='message'>
             <image src='/assets/mine/message.png' />
             <view style='color:#282828;font-size:28rpx;'>消息</view>
-            <view class='redStar'></view>
+            <view class='redStar' wx:if="{{userInfos.tix}}"></view>
         </view>
 
-        <view class='collection'>
+        <view class='collection' data-path="/pages/collection/collection" catchtap='pageNav'>
             <image src='/assets/mine/collection.png' />
             <view style='color:#282828;font-size:28rpx;'>我的收藏</view>
         </view>
 
-        <view class='dynamic'>
+        <view class='dynamic' data-path="/pages/state/state" catchtap='pageNav'>
             <image src='/assets/mine/dynamic.png' />
             <view style='color:#282828;font-size:28rpx;'>动态</view>
-            <view class='redStar'></view>
+            <!-- <view class='redStar' wx:if="{{userInfo.tix}}"></view> -->
         </view>
     </view>
 
-    <view class='editorView wrapflex' hover-class="hover-class">
+    <view class='editorView wrapflex' hover-class="hover-class" data-path="/pages/editData/editData?note={{userInfos.note}}&name={{userInfos.name}}&photo={{userInfos.photo}}" catchtap='pageNav'>
         <image style='width:36rpx;height:36rpx;' src='/assets/mine/editor.png' />
         <view style='width:500rpx;color:#282828;font-size:32rpx;'>编辑资料</view>
         <image style='width:80rpx;height:80rpx;' src='/assets/mine/rightFlow.png' />
@@ -64,6 +64,10 @@
         <image style='width:36rpx;height:34rpx;' src='/assets/mine/Customer.png' />
         <view style='width:500rpx;color:#282828;font-size:32rpx;'>联系客服</view>
         <image style='width:80rpx;height:80rpx;' src='/assets/mine/rightFlow.png' />
+        <button id='contact' open-type='contact'></button>
     </view>
+
+    <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+    </button>
 
 </view>

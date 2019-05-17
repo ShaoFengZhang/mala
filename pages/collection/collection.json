@@ -1,0 +1,10 @@
+{
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "我的收藏",
+    "backgroundColor": "#000000",
+    "disableScroll": true,
+    "usingComponents": {
+        "contentTxt": "/components/conentView"
+    },
+    "disableSwipeBack": true
+}

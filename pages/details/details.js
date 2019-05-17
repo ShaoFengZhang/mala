@@ -5,34 +5,42 @@ const app = getApp();
 Page({
 
     data: {
-        txtValue: "发表你的观点",
+        txtValue: "",
         srcDomin: loginApi.srcDomin,
-        praiseEvent: 'praiseEvent'
+        praiseEvent: 'praiseEvent',
+        commentArr:[1,2],
+        ifPopUp:0,
     },
 
     onLoad: function(options) {
+        this.setData({
+            classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 110,
+        });
+        console.log(options)
         if (options && options.conId) {
             this.getcontent(options.conId);
-            return;
-        }
-        if (options && options.content) {
             this.setData({
-                content: JSON.parse(unescape(options.content)),
-                praiseIndex: options.praiseIndex,
+                praiseIndex: parseInt(options.index),
             })
+            console.log(this.data.praiseIndex);
+            return;
         };
     },
 
     onShow: function() {
-
     },
 
     onShareAppMessage: function() {
         return {
             title: this.data.content.title.slice(0, 28),
             path: `/pages/index/index?conId=${this.data.content.id}`,
-            imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
+            imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img.png`
         }
+    },
+
+    // 收藏
+    collectionContent:function(){
+
     },
 
     getcontent: function(conId) {
@@ -43,15 +51,12 @@ Page({
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
         }, function(res) {
-            console.log(res);
-            
             if (res.status == 1) {
                 let obj = res.content;
                 obj.dianji = res.dianji;
                 obj.imgurl = res.content.imgurl.split(',');
                 _this.setData({
                     content: obj,
-                    praiseIndex: '',
                 })
             } else {
                 util.toast("数据获取失败,请重试", 300)
@@ -59,17 +64,28 @@ Page({
         })
     },
 
-    bindconfirm: function(e) {
+    commitComments:function(){
+
+    },
+
+    bindinput:function(e){
         console.log(e);
         let value = e.detail.value;
         this.contentTxt = value;
     },
 
-    // bindfocus:function(){
-    //     this.setData({
-    //         txtValue:'',
-    //     })
-    // },
+    bindblur: function() {
+        this.setData({
+            ifPopUp: 0,
+            txtValue:'',
+        })
+    },
+
+    bindfocus:function(){
+        this.setData({
+            ifPopUp:1,
+        })
+    },
 
     praiseEvent: function() {
         if (this.data.content.dianji) {
@@ -96,20 +112,10 @@ Page({
                 });
                 _this.crearteAnimation();
                 app.praiseIndex = _this.data.praiseIndex;
+                console.log(app.praiseIndex);
             } else {
                 util.toast("点赞失败,请重试", 300)
             }
-        })
-    },
-
-    // 提交文案
-    postcontext: function() {
-        let _this = this;
-        let postcontextUrl = loginApi.domin + '/home/index/test';
-        loginApi.requestUrl(_this, postcontextUrl, "POST", {
-            "txt": this.contentTxt
-        }, function(res) {
-            console.log(res);
         })
     },
 
@@ -148,10 +154,21 @@ Page({
     },
 
     showImg: function(e) {
-        console.log(e);
         let src = e.currentTarget.dataset.src;
         wx.previewImage({
             urls: [src] // 需要预览的图片http链接列表
+        })
+    },
+
+    // 跳转用户主页
+    gotoUserHome: function (e) {
+        let uid = e.currentTarget.dataset.uid;
+        let openid = e.currentTarget.dataset.openid;
+        let urlsrc = e.currentTarget.dataset.src;
+        let name = e.currentTarget.dataset.name;
+        let note = e.currentTarget.dataset.note;
+        wx.navigateTo({
+            url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
         })
     },
 })

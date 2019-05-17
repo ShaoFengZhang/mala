@@ -6,22 +6,22 @@
 
             <block wx:for="{{classArr}}" wx:key="index">
 
-                <swiper-item data-id="{{item.classId}}" class="{{swiperCurrentIndex==item.classId?'select-swiper-css':''}}" bindtap='swiperBindtap'>
-                    <text>{{item.txt}}</text>
-                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.classId}}"></text>
+                <swiper-item data-id="{{item.id}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
+                    <text>{{item.title}}</text>
+                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
                 </swiper-item>
 
             </block>
 
         </swiper>
 
-    </view>
+    </view> -->
 
-    <view class='viewLine'></view> -->
+    <view class='viewLine'></view>
 
-    <view class='scrollView' style='height:100vh'>
-        <scroll-view bindscrolltolower="bindscrolltolower" lower-threshold="100" class="scroll-view_y" scroll-y style="height:100%">
-            <contentTxt contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
+    <view class='scrollView' style='height:{{scrollHeight}}rpx'>
+        <scroll-view bindscrolltolower="bindscrolltolower" lower-threshold="100" class="scroll-view_y" scroll-y style="height:{{scrollHeight}}rpx">
+            <contentTxt userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" contentArr="{{contentArr}}" bindmyevent="onMyevent" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
         </scroll-view>
     </view>
 

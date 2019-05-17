@@ -36,6 +36,43 @@ Page({
             classScrollHeight: app.windowHeight * 750 / app.sysWidth - 98,
             // classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 416,
         });
+
+        if (app.globalData.userInfo) {
+            console.log('if');
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            });
+        } else if (this.data.canIUse) {
+            console.log('elseif');
+            app.userInfoReadyCallback = res => {
+                console.log('index');
+                this.setData({
+                    userInfo: res.userInfo,
+                    hasUserInfo: true
+                });
+                app.globalData.userInfo = res.userInfo;
+                let iv = res.iv;
+                let encryptedData = res.encryptedData;
+                let session_key = app.globalData.session_key;
+                loginApi.checkUserInfo(app, res, iv, encryptedData, session_key);
+            }
+        } else {
+            console.log('else');
+            wx.getUserInfo({
+                success: res => {
+                    app.globalData.userInfo = res.userInfo
+                    this.setData({
+                        userInfo: res.userInfo,
+                        hasUserInfo: true
+                    });
+                    let iv = res.iv;
+                    let encryptedData = res.encryptedData;
+                    let session_key = app.globalData.session_key;
+                    loginApi.checkUserInfo(app, res, iv, encryptedData, session_key);
+                }
+            })
+        };
     },
 
     onShow: function() {
@@ -44,9 +81,11 @@ Page({
                 title: "推荐",
                 id: 0,
             }],
-        })
+        });
         this.getClass();
+        console.log(app.praiseIndex)
         if (app.praiseIndex) {
+            app.praiseIndex = parseInt(app.praiseIndex)-1 
             console.log(this.data.contentArr[app.praiseIndex])
             this.data.contentArr[app.praiseIndex].dianji = 1;
             this.data.contentArr[app.praiseIndex].support = this.data.contentArr[app.praiseIndex].support + 1;
@@ -57,14 +96,18 @@ Page({
         app.praiseIndex = null;
     },
 
+    onTabItemTap: function () {
+        try {
+            wx.removeStorageSync('classId');
+            wx.removeStorageSync('className');
+        } catch (e) {
+            
+        }
+    },
 
     onShareAppMessage: function(e) {
         if (e.from == "menu") {
-            return {
-                title: "点击查看",
-                path: `/pages/index/index`,
-                imageUrl: `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
-            }
+            return util.shareObj
         } else {
 
             let index = e.target.dataset.index;
@@ -77,12 +120,21 @@ Page({
     },
 
     // 获取用户信息
-    getUserInfo: function(e) {
+    onMyevent: function(e) {
+        console.log(e);
+        if (!e.detail.userInfo) {
+            util.toast("我们需要您的授权哦亲~", 1200)
+            return
+        };
         app.globalData.userInfo = e.detail.userInfo
         this.setData({
             userInfo: e.detail.userInfo,
             hasUserInfo: true
-        })
+        });
+        let iv = e.detail.iv;
+        let encryptedData = e.detail.encryptedData;
+        let session_key = app.globalData.session_key;
+        loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key);
     },
 
     //swiperBindtap
@@ -139,6 +191,7 @@ Page({
                 _this.setData({
                     contentArr: _this.data.contentArr.concat(res.contents),
                 });
+                
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

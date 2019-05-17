@@ -15,14 +15,20 @@ const formatNumber = n => {
     return n[1] ? n : '0' + n
 };
 
+const shareObj = {
+    title: "点击查看",
+    path: `/pages/index/index`,
+    imageUrl: `/assets/shareimg/img.png`
+}
+
 const loding = function(args) {
     wx.showLoading({
-        title: args?`${args}`:"加载中",
+        title: args ? `${args}` : "加载中",
         mask: true,
     })
 }
 
-const toast = function (ags, time) {
+const toast = function(ags, time) {
     wx.showToast({
         title: `${ags}`,
         icon: "none",
@@ -31,10 +37,130 @@ const toast = function (ags, time) {
     });
 };
 
+const check = function(value) {
+    let strValue = value.replace(/\n/g, '');
+    // console.log(strValue);
+    // console.log(javaTrim(strValue)=="")
+    if (javaTrim(strValue) == "") {
+        return false;
+    } else {
+        return true;
+    }
+};
+
+const javaTrim = function(str) {
+    for (var i = 0;
+        (str.charAt(i) == ' ') && i < str.length; i++);
+    if (i == str.length) return ''; //whole string is space
+    var newstr = str.substr(i);
+    for (var i = newstr.length - 1; newstr.charAt(i) == ' ' && i >= 0; i--);
+    newstr = newstr.substr(0, i + 1);
+    return newstr;
+}
+
+const upLoadImage = function(urlName, name, count, that, loginApi, cb) {
+    const _this = that;
+    wx.chooseImage({
+        count: count,
+        sizeType: ['compressed'],
+        sourceType: ['album'],
+        success: function(res) {
+            wx.showToast({
+                title: '正在上传...',
+                icon: 'loading',
+                mask: true,
+                duration: 10000
+            });
+            let tempFilePaths = res.tempFilePaths;
+            let upImgCount = tempFilePaths.length;
+            let hasCount = 0;
+            for (let i = 0; i < upImgCount; i++) {
+                wx.uploadFile({
+                    url: loginApi.domin + '/home/index/' + urlName,
+                    filePath: tempFilePaths[i],
+                    name: name,
+                    formData: {
+
+                    },
+                    header: {
+                        "Content-Type": "multipart/form-data"
+                    },
+                    success: function(res) {
+                        // console.log(res);
+                        if (res.data) {
+                            let data = JSON.parse(res.data);
+                            if (data.status == 1) {
+                                hasCount++;
+                                cb(data);
+                                if (hasCount == upImgCount) {
+                                    wx.hideToast();
+                                }
+                            } else {
+                                wx.hideToast();
+                                wx.showModal({
+                                    title: '错误提示',
+                                    content: '上传图片失败1',
+                                    showCancel: false,
+                                    success: function(res) {}
+                                });
+                                return;
+                            }
+                        } else {
+                            wx.hideToast();
+                            wx.showModal({
+                                title: '错误提示',
+                                content: '上传图片失败',
+                                showCancel: false,
+                                success: function(res) {}
+                            });
+                            return;
+                        }
+
+
+                    },
+                    fail: function(res) {
+                        wx.hideToast();
+                        wx.showModal({
+                            title: '错误提示',
+                            content: '上传图片请求失败',
+                            showCancel: false,
+                            success: function(res) {}
+                        })
+                    }
+                });
+            }
+
+        }
+    });
+};
+
+// 距离现在最近的时间在前边
+const dateArrStort = function(data, p) {
+    // data 时间数组 p时间key值
+    for (i = 0; i < data.length - 1; i++) {
+        for (j = 0; j < data.length - 1 - i; j++) {
+            console.log(Date.parse(data[j][p]));
+            if (data[j][p] < data[j + 1][p]) {
+                let temp = data[j];
+                data[j] = data[j + 1];
+                data[j + 1] = temp;
+
+            }
+
+        }
+
+    }
+    return data;
+};
+
 
 module.exports = {
     formatTime: formatTime,
     formatNumber: formatNumber,
     loding: loding,
     toast: toast,
+    upLoadImage: upLoadImage,
+    dateArrStort: dateArrStort,
+    check: check,
+    shareObj: shareObj,
 }

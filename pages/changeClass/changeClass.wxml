@@ -1,0 +1,9 @@
+<view class='classView'>
+
+    <scroll-view scroll-y style="height:100vh">
+
+        <view hover-class='hover-class' data-index='{{index}}' catchtap='closeClassView' wx:for="{{classArr}}" wx:key="{{index}}" class='classItem oneEllipsis'>{{item.title}}</view>
+
+    </scroll-view>
+
+</view>

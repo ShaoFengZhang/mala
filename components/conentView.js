@@ -17,6 +17,16 @@ Component({
             type:Boolean,
             value:0,
         },
+
+        hasUserInfo: {
+            type: Boolean,
+            value: false,
+        },
+
+        userInfo: {
+            type: Object,
+            value: {},
+        },
     },
 
     data: {
@@ -24,6 +34,7 @@ Component({
         praiseId:"",
         pointAni: null,
         praiseEvent:'praiseEvent',
+        canIUse: wx.canIUse('button.open-type.getUserInfo'),
     },
 
     methods: {
@@ -32,7 +43,18 @@ Component({
         goToDetails: function (e) {
             let index = parseInt(e.currentTarget.dataset.index);
             wx.navigateTo({
-                url: `/pages/details/details?content=${escape(JSON.stringify(this.data.contentArr[index]))}&praiseIndex=${index}`,
+                url: `/pages/details/details?conId=${this.data.contentArr[index].id}&index=${index+1}`,
+            })
+        },
+
+        gotoUserHome:function(e){
+            let uid = e.currentTarget.dataset.uid;
+            let openid = e.currentTarget.dataset.openid;
+            let urlsrc = e.currentTarget.dataset.src;
+            let name = e.currentTarget.dataset.name;
+            let note = e.currentTarget.dataset.note;
+            wx.navigateTo({
+                url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
             })
         },
 
@@ -106,6 +128,11 @@ Component({
                     _this.crearteAnimation();
                 }
             })
+        },
+
+        // 获取用户信息
+        getUserInfo: function (e) {
+            this.triggerEvent('myevent', e.detail);
         },
     },
 })

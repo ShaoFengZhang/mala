@@ -1,14 +1,16 @@
 <view class='contentCompant'>
+
     <view data-index="{{index}}" catchtap='goToDetails' class='contentView normalView' wx:for="{{contentArr}}" wx:key="index">
 
         <view class='contentUserInfo wrapflex'>
 
-            <view class='userImg'>
-                <image mode='aspectFill' src='{{srcDomin}}{{item.avatarurl}}' />
+            <view class='userImg' data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome'>
+                <image wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />
+                <image wx:if="{{item.photo}}" mode='aspectFill' src='{{item.photo[0]=="h"?"":srcDomin}}{{item.photo}}' />
             </view>
 
             <view class='userNameBox columnflex'>
-                <view class='userNameView'>{{item.nickname}}</view>
+                <view class='userNameView'>{{item.name?item.name:item.nickname}}</view>
                 <view style='color:#666;font-size:24rpx;'>{{item.time}}</view>
             </view>
 
@@ -23,15 +25,15 @@
         </view>
 
         <view class='contentImg' wx:if="{{item.imgurl[0]}}">
-            <image mode='aspectFill' src="{{srcDomin}}{{item.imgurl[0]}}" />
+            <image mode='widthFix' src="{{srcDomin}}{{item.imgurl[0]}}" />
         </view>
 
         <view class='contentshare wrapflex'>
 
-            <!-- <view class='opinionBox'>
-                        <image src='/assets/index/opinion.png' />
-                        <text style='margin-left:14rpx;'>9999+</text>
-                    </view> -->
+            <view class='opinionBox'>
+                <image src='/assets/index/opinion.png' />
+                <text style='margin-left:14rpx;'>{{item.comments}}</text>
+            </view>
 
             <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent}}'>
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
@@ -44,6 +46,10 @@
                 <button data-index='{{index}}' class='shareBtn' open-type='share'></button>
             </view>
         </view>
+
+        <button catchtap='catchtap' class='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+        </button>
+
     </view>
 
     <view class='botTxt' wx:if="{{showBotTxt}}">

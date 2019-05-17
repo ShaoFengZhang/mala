@@ -1,0 +1,24 @@
+<view class="bg">
+
+    <scroll-view lower-threshold="100" scroll-y style="height:100vh">
+
+        <view class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
+
+            <view class='userIcon'>
+                <image src='/assets/index/icon.png' />
+            </view>
+
+            <view class='messageTxt columnflex'>
+                <view style='color:#282828;font-size:32rpx;font-weight:bold;' class='oneEllipsis'>昵称</view>
+                <view style='color:#999999;font-size:28rpx;' class='oneEllipsis'>用户评论的内容</view>
+            </view>
+
+            <view class='contentImg'>
+                <image src='/assets/index/icon.png' />
+            </view>
+
+        </view>
+
+    </scroll-view>
+
+</view>

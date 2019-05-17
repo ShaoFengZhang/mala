@@ -28,16 +28,6 @@ swiper-item {
     background: rgba(39, 188, 173, 1);
 }
 
-.viewLine {
-    width: 100%;
-    height: 2rpx;
-    background-color: #f3f5f9;
-}
-
-.scroll-view_y {
-    background-color: #f3f5f9;
-}
-
 
 
 

@@ -1,0 +1,89 @@
+<view class="bg">
+
+
+    <scroll-view lower-threshold="100" scroll-y style="height:100vh" bindscrolltolower="bindscrolltolower">
+
+        <view class='userInfoView'>
+
+            <view class='userIcon wrapflex'>
+
+                <view class='userImg'>
+                    <image src='{{useIcon}}' />
+                </view>
+
+                <view class='guanzhu' wx:if="{{!focus}}" catchtap='fansFocus'>
+                    <text>+ 关注</text>
+                    <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+                </button>
+                </view>
+
+                <view class='guanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
+                    <text>已关注</text>
+                    <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+                </button>
+                </view>
+
+                
+
+            </view>
+
+            <view class='userInfo'>
+                <view class='userName oneEllipsis'>
+                    <text>{{username}}</text>
+                </view>
+
+                <view class='userdesc'>
+                    {{note}}
+                </view>
+            </view>
+        </view>
+
+        <view data-index="{{index}}" catchtap='goToDetails' class='stateItem wrapflex height638' wx:for="{{contentArr}}" wx:key="{{index}}">
+
+            <view class='timeView height638'>
+
+                <view class='timeing'>
+                    <view>{{item.time[5]}}{{item.time[6]}}/{{item.time[8]}}{{item.time[9]}}</view>
+                    <view>{{item.time[11]}}{{item.time[12]}}{{item.time[13]}}{{item.time[14]}}{{item.time[15]}}</view>
+                </view>
+
+                <view class='point'></view>
+            </view>
+
+            <view class='contentView height638'>
+
+                <view class='wrapflex'>
+                    <view class='imgview' wx:if="{{item.imgurl[0]}}">
+                        <image class='contenticon' mode='aspectFill' src='{{srcDomin}}{{item.imgurl[0]}}' />
+                    </view>
+
+                    <view class='content'>
+                        {{item.title}}
+                    </view>
+                </view>
+
+                <view class='opinionView wrapflex'>
+
+                    <view style='margin-right:70rpx;' class='wrapflex'>
+                        <image src='/assets/index/opinion.png' />
+                        <text>{{item.comments}}</text>
+                    </view>
+
+                    <view class='wrapflex'>
+                        <image wx:if="{{!item.dianji}}" src='/assets/index/praise.png' />
+                        <image wx:if="{{item.dianji}}" src='/assets/index/selectPrase.png' />
+                        <text>{{item.support}}</text>
+                    </view>
+
+                </view>
+            </view>
+
+        </view>
+        <view class='botTxt' wx:if="{{showBotTxt}}">
+            <text>没有数据了亲~</text>
+        </view>
+    </scroll-view>
+
+
+
+</view>

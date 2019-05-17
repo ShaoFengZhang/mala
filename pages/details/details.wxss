@@ -6,8 +6,7 @@
     width: 100%;
     overflow: hidden;
     background-color: white;
-    margin-bottom: 110rpx;
-    padding-bottom: 14rpx;
+    padding-bottom: 60rpx;
 }
 
 /* 内容顶部信息 */
@@ -74,7 +73,7 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    min-height: 88rpx;
+    min-height: 110rpx;
     background: white;
     box-sizing: border-box;
     /* padding: 10rpx 10rpx 10rpx 40rpx;
@@ -86,7 +85,7 @@
 
 .discussView {
     width: 400rpx;
-    min-height: 64rpx;
+    min-height: 66rpx;
     background: rgba(243, 245, 249, 1);
     border-radius: 32rpx;
     font-size: 28rpx;
@@ -114,8 +113,12 @@ textarea {
     height: 32rpx;
 }
 
-.scroll-view_y{
+.scroll-view_y {
     background-color: white;
+}
+
+.viewLine{
+    height: 4rpx;
 }
 
 /* 评论内容样式 */
@@ -123,14 +126,16 @@ textarea {
 .userComments {
     width: 100%;
     background-color: #fff;
+    box-sizing: border-box;
+    padding: 40rpx 40rpx 20rpx;
 }
 
 .commentInfoView {
     width: 100%;
     height: 76rpx;
-    background: gray;
     border-radius: 8rpx;
     align-items: flex-start;
+    position: relative;
 }
 
 .commentInfoView image:first-child {
@@ -138,7 +143,46 @@ textarea {
     border-radius: 8rpx;
 }
 
-.commentInfoView view:nth-of-type(1){
-    width: 500rpx;
-    background-color: red;
+.commentInfoView view:nth-of-type(1) {
+    width: 432rpx;
+}
+
+.praiseView{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.praiseView image {
+    width: 32rpx;
+    height: 32rpx;
+    margin-right: 10rpx;
+}
+
+.praiseContent{
+    width: 552rpx;
+    margin:-60rpx 0 0 100rpx;
+    color: #282828;
+    font-size: 32rpx;
+    line-height: 44rpx;
+}
+
+.noPrais{
+    width: 100%;
+    height: 80rpx;
+    text-align: center;
+    line-height: 80rpx;
+    font-size: 32rpx;
+    margin-top: 20rpx;
+}
+
+.commitBtn{
+    color: white;
+    width: 160rpx;
+    height: 66rpx;
+    background-color:#45CEBD;
+    text-align: center;
+    line-height: 66rpx; 
+    font-size: 32rpx;
+    border-radius: 8rpx;
 }

@@ -1,0 +1,51 @@
+<view class="bg">
+
+
+    <scroll-view lower-threshold="100" scroll-y style="height:100vh">
+
+        <view data-index="{{index}}" catchtap='goToDetails' class='stateItem wrapflex height638' wx:for="{{stateArr}}" wx:key="{{index}}">
+
+            <view class='timeView height638'>
+
+                <view class='timeing'>
+                    <view>11/25</view>
+                    <view>19:38</view>
+                </view>
+
+                <view class='point'></view>
+            </view>
+
+            <view class='contentView height638'>
+
+                <view class='wrapflex'>
+                    <view class='imgview'>
+                        <image class='contenticon' mode='aspectFill' src='/assets/index/icon.png' />
+                    </view>
+
+                    <view class='content'>
+                        迪丽热巴是娱乐圈里公认的美人，精致的五官带有古 典风情，2018年开启霸屏模式的迪丽热巴也是向观众展现了她演技上的多种可能。其实在演艺圈，迪丽热巴的努力大家有目共睹，当回归时尚界的她更是惊艳众人，精致的穿搭让她瞬间变身仙女迪
+                    </view>
+                </view>
+
+                <view class='opinionView wrapflex'>
+
+                    <view style='margin-right:70rpx;' class='wrapflex'>
+                        <image src='/assets/index/opinion.png' />
+                        <text>123456</text>
+                    </view>
+
+                    <view class='wrapflex'>
+                        <image src='/assets/index/praise.png' />
+                        <text>123</text>
+                    </view>
+
+                </view>
+            </view>
+
+        </view>
+
+    </scroll-view>
+
+
+
+</view>
