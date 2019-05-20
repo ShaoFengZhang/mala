@@ -29,3 +29,8 @@ swiper-item {
     background: rgba(39, 188, 173, 1);
 }
 
+scroll-view {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+

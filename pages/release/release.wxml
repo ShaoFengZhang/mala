@@ -20,7 +20,7 @@
         <view class='pictureView'>
 
             <view class='picItemView' wx:for="{{userPicArr}}" wx:key="{{index}}">
-                <image mode='aspectFill' src='/assets/index/icon.png' />
+                <image mode='aspectFill' src='{{srcDomin}}{{item}}' />
                 <view data-index="{{index}}" class='closeicon' catchtap='deletepic'> X </view>
             </view>
 

@@ -10,8 +10,9 @@ Page({
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         userPicArr: [],
         classTxt: "选择话题",
-        classId: '',
+        classId: 10,
         classId: null,
+        srcDomin: loginApi.srcDomin,
     },
 
     onLoad: function(options) {
@@ -39,7 +40,7 @@ Page({
         let className = wx.getStorageSync("className");
         this.setData({
             classTxt: className ? className : "选择话题",
-            classId: classId ? classId : '',
+            classId: classId ? classId : 10,
         })
     },
 
@@ -86,10 +87,23 @@ Page({
 
     // 上传图片
     uploadPictures: function() {
-        util.upLoadImage("uploadphoto", "photo", 1, this, loginApi, function(data) {
-            _this.setData({
-                avatarUrl: loginApi.domin + data.imgurl
-            })
+        let _this=this;
+        if (9 - this.data.userPicArr.length<=0){
+            util.toast("最多上传九张图片",1200);
+            return;
+        }
+        util.upLoadImage("uploadimg", "image", (9-this.data.userPicArr.length), this, loginApi, function(data) {
+            console.log(data);
+            if(data.status==1){
+                _this.data.userPicArr.push(data.imgurl)
+                _this.setData({
+                    userPicArr: _this.data.userPicArr,
+                })
+            }else{
+                util.toast('上传失败',1200);
+                return;
+            }
+            
         });
     },
 
@@ -106,19 +120,19 @@ Page({
     releaseFun: function() {
         util.loding('发布中');
         let _this = this;
-        let releaseFunUrl = loginApi.domin + '/home/index/release';
+        let releaseFunUrl = loginApi.domin + '/home/index/userrelease';
         loginApi.requestUrl(_this, releaseFunUrl, "POST", {
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-            "content": this.txtArea,
-            "pic": this.data.userPicArr,
-            "classId": this.data.classId,
+            "title": this.txtArea,
+            "imgurl": this.data.userPicArr.join(','),
+            "typeid": this.data.classId,
         }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
-                util('发布成功', 1200);
+                util.toast('发布成功', 1200);
             }else{
-                util('发布失败，请重试~',1200);
+                util.toast('发布失败，请重试~',1200);
             }
         })
     },

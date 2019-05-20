@@ -75,6 +75,7 @@ const upLoadImage = function(urlName, name, count, that, loginApi, cb) {
             let upImgCount = tempFilePaths.length;
             let hasCount = 0;
             for (let i = 0; i < upImgCount; i++) {
+                console.log(tempFilePaths[i])
                 wx.uploadFile({
                     url: loginApi.domin + '/home/index/' + urlName,
                     filePath: tempFilePaths[i],
@@ -86,7 +87,6 @@ const upLoadImage = function(urlName, name, count, that, loginApi, cb) {
                         "Content-Type": "multipart/form-data"
                     },
                     success: function(res) {
-                        // console.log(res);
                         if (res.data) {
                             let data = JSON.parse(res.data);
                             if (data.status == 1) {

@@ -1,4 +1,3 @@
-
 import loginApi from '../../utils/login.js'
 import util from '../../utils/util.js'
 const app = getApp();
@@ -8,23 +7,24 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        classArr: [
-            {
+        classArr: [{
                 title: "关注",
                 id: 0,
             },
             {
                 title: "一周精选",
                 id: 2,
-            },    
+            },
         ],
         showBotTxt: 0,
         swiperCurrentIndex: 0,
         contentArr: [],
         srcDomin: loginApi.srcDomin,
+        bindscrolltolower: '',
+        bindscrolltoupper: '',
     },
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         let _this = this;
         this.setData({
             scrollHeight: app.windowHeight * 750 / app.sysWidth - 0,
@@ -45,8 +45,8 @@ Page({
         } catch (e) {
 
         };
-        
-        if (!this.cantemp){
+
+        if (!this.cantemp) {
             return;
         }
         this.page = 1;
@@ -62,7 +62,7 @@ Page({
         this.cantemp = false;
     },
 
-    onShow: function () {
+    onShow: function() {
         // console.log("onShow")
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex) - 1
@@ -73,16 +73,20 @@ Page({
             })
         };
         app.praiseIndex = null;
-        this.canshareHide=false;
+        this.canshareHide = false;
     },
 
-    onHide:function(){
-        if (!this.canshareHide){
+    onHide: function() {
+        if (!this.canshareHide) {
             this.cantemp = true;
-        }          
+        }
     },
 
-    onShareAppMessage: function (e) {
+    bindscroll:function(){
+        console.log('bindscroll');
+    },
+
+    onShareAppMessage: function(e) {
         this.canshareHide = true;
         if (e.from == "menu") {
             return util.shareObj
@@ -97,7 +101,7 @@ Page({
     },
 
     // 获取用户信息
-    onMyevent: function (e) {
+    onMyevent: function(e) {
         console.log(e);
         if (!e.detail.userInfo) {
             util.toast("我们需要您的授权哦亲~", 1200)
@@ -115,7 +119,7 @@ Page({
     },
 
     //swiperBindtap
-    swiperBindtap: function (e) {
+    swiperBindtap: function(e) {
         let classId = e.currentTarget.dataset.id;
         if (this.data.swiperCurrentIndex == classId) {
             return;
@@ -130,19 +134,40 @@ Page({
         this.rows = 10;
         this.cangetData = true;
         classId == 0 ? this.getContent("focus") : this.getContent("selected")
-        
+
+    },
+
+    //滑动到顶部
+    bindscrolltoupper: function() {
+        if (this.page > 1) {
+            this.page--;
+            this.setData({
+                bindscrolltolower: '',
+                bindscrolltoupper: '',
+                contentArr: null,
+            })
+            this.getContent("selected")
+        } else {
+            util.toast('暂无更多更新', 1200);
+        }
     },
 
     // 滑动到底部
-    bindscrolltolower: function () {
+    bindscrolltolower: function() {
         if (this.cangetData) {
             this.page++;
-            this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
+            this.setData({
+                bindscrolltolower: '',
+                bindscrolltoupper: '',
+                contentArr: null,
+            })
+            // this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
+            this.getContent("selected")
         }
     },
 
     // 获取一周精选内容
-    getContent: function (url) {
+    getContent: function(url) {
         util.loding('加载中');
         let _this = this;
         let getContentUrl = loginApi.domin + `/home/index/${url}`;
@@ -151,7 +176,7 @@ Page({
             "len": this.rows,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
+        }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
 
@@ -167,17 +192,25 @@ Page({
                     res.contents[i].imgurl = res.contents[i].imgurl.split(',');
                 }
                 _this.setData({
-                    contentArr: _this.data.contentArr.concat(res.contents),
+                    // contentArr: _this.data.contentArr.concat(res.contents),
+                    contentArr: res.contents,
+                    bindscrolltolower: 'bindscrolltolower', 
                 });
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
                         showBotTxt: 1,
                     });
-                }
+                };
+                clearTimeout(_this.scrollTime);
+                _this.scrollTime = setTimeout(function () {
+                    _this.setData({
+                        bindscrolltoupper: 'bindscrolltoupper',
+                    })
+                }, 1000);
             }
         })
     },
 
-    catchtap: function () { },
+    catchtap: function() {},
 })
