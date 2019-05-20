@@ -4,7 +4,7 @@
 
         <view class='topTextArea'>
             <!-- <image catchtap='changeOther' src='/assets/release/other.png' /> -->
-            <textarea show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;" bindinput="txtBindInput" auto-height placeholder="写些什么和大家分享…" />
+            <textarea value="{{textArea}}" show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;" bindinput="txtBindInput" auto-height placeholder="写些什么和大家分享…" />
             <view style='color:#AAAAAA;font-size:28rpx;text-align:right'>最多1000字</view>
         </view>
 

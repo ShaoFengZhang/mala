@@ -13,6 +13,7 @@ Page({
         classId: 10,
         classId: null,
         srcDomin: loginApi.srcDomin,
+        textArea:'',
     },
 
     onLoad: function(options) {
@@ -131,6 +132,16 @@ Page({
             wx.hideLoading();
             if (res.status == 1) {
                 util.toast('发布成功', 1200);
+                _this.setData({
+                    userPicArr: [],
+                    classTxt: "选择话题",
+                    classId: 10,
+                    classId: null,
+                    textArea: '',
+                });
+                wx.navigateTo({
+                    url: '/pages/state/state',
+                })
             }else{
                 util.toast('发布失败，请重试~',1200);
             }
