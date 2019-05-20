@@ -41,6 +41,7 @@ Component({
         catchtap:function(){},
         // 跳转详情页
         goToDetails: function (e) {
+            console.log("goToDetails")
             let index = parseInt(e.currentTarget.dataset.index);
             wx.navigateTo({
                 url: `/pages/details/details?conId=${this.data.contentArr[index].id}&index=${index+1}`,

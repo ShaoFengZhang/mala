@@ -1,31 +1,34 @@
 <view class="bg">
 
-    <view class='top-swiperView normalView'>
+    <view class='topFixed'>
+        <view class='top-swiperView normalView'>
 
-        <swiper id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}" >
+            <swiper id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}">
 
-            <block wx:for="{{classArr}}" wx:key="index">
+                <block wx:for="{{classArr}}" wx:key="index">
 
-                <swiper-item data-id="{{item.id}}" data-index="{{index}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
-                    <view class='swiperTxt'>
-                        <text>{{item.title}}</text>
-                        <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
-                    </view> 
-                </swiper-item>
+                    <swiper-item data-id="{{item.id}}" data-index="{{index}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
+                        <view class='swiperTxt'>
+                            <text>{{item.title}}</text>
+                            <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
+                        </view>
+                    </swiper-item>
 
-            </block>
+                </block>
 
-        </swiper>
+            </swiper>
 
+        </view>
+
+        <view class='viewLine'></view>
     </view>
 
-    <view class='viewLine'></view>
 
-    <view class='scrollView' style='height:{{classScrollHeight}}rpx'>
-        <scroll-view lower-threshold="100" upper-threshold="0" class="scroll-view_y" scroll-y style="height:100%" bindscrolltolower="{{bindscrolltolower}}" bindscrolltoupper="{{bindscrolltoupper}}">
-            <view style='width:100%;height:2rpx'></view>
-            <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
-        </scroll-view>
+    <view class='scrollView'>
+        <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
+        <view class='loading' wx:if="{{ifloadtxt}}">
+            加载中 . . .
+        </view>
     </view>
 
 </view>

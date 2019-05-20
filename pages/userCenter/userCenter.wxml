@@ -14,16 +14,16 @@
                 <view class='guanzhu' wx:if="{{!focus}}" catchtap='fansFocus'>
                     <text>+ 关注</text>
                     <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
-                </button>
+                    </button>
                 </view>
 
                 <view class='guanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
                     <text>已关注</text>
                     <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
-                </button>
+                    </button>
                 </view>
 
-                
+
 
             </view>
 

@@ -20,15 +20,14 @@ Page({
         swiperCurrentIndex: 0,
         contentArr: [],
         srcDomin: loginApi.srcDomin,
-        bindscrolltolower: '',
-        bindscrolltoupper: '',
+        ifloadtxt: 0,
     },
 
     onLoad: function(options) {
         let _this = this;
-        this.setData({
-            scrollHeight: app.windowHeight * 750 / app.sysWidth - 0,
-        });
+        // this.setData({
+        //     scrollHeight: app.windowHeight * 750 / app.sysWidth - 0,
+        // });
         this.cantemp = true;
     },
 
@@ -82,10 +81,6 @@ Page({
         }
     },
 
-    bindscroll:function(){
-        console.log('bindscroll');
-    },
-
     onShareAppMessage: function(e) {
         this.canshareHide = true;
         if (e.from == "menu") {
@@ -137,32 +132,38 @@ Page({
 
     },
 
-    //滑动到顶部
-    bindscrolltoupper: function() {
+    // 加载上一页
+    onPullDownRefresh: function () {
+        let _this = this;
+        wx.startPullDownRefresh();
         if (this.page > 1) {
             this.page--;
             this.setData({
-                bindscrolltolower: '',
-                bindscrolltoupper: '',
                 contentArr: null,
             })
             this.getContent("selected")
         } else {
             util.toast('暂无更多更新', 1200);
-        }
+            wx.stopPullDownRefresh();
+        };
+        return;
     },
 
-    // 滑动到底部
-    bindscrolltolower: function() {
+    // 加载下一页
+    onReachBottom: function () {
         if (this.cangetData) {
             this.page++;
-            this.setData({
-                bindscrolltolower: '',
-                bindscrolltoupper: '',
-                contentArr: null,
-            })
-            // this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
-            this.getContent("selected")
+            clearTimeout(this.bottomTime);
+            this.bottomTime = setTimeout(() => {
+                this.setData({
+                    contentArr: null,
+                });
+                // this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
+                this.getContent("selected")
+            }, 1000)
+
+        } else {
+            util.toast('暂无更多更新', 1200);
         }
     },
 
@@ -192,22 +193,16 @@ Page({
                     res.contents[i].imgurl = res.contents[i].imgurl.split(',');
                 }
                 _this.setData({
-                    // contentArr: _this.data.contentArr.concat(res.contents),
                     contentArr: res.contents,
-                    bindscrolltolower: 'bindscrolltolower', 
+                    ifloadtxt: 1,
                 });
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
                         showBotTxt: 1,
+                        ifloadtxt: 0,
                     });
                 };
-                clearTimeout(_this.scrollTime);
-                _this.scrollTime = setTimeout(function () {
-                    _this.setData({
-                        bindscrolltoupper: 'bindscrolltoupper',
-                    })
-                }, 1000);
             }
         })
     },

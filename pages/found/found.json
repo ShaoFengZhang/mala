@@ -5,5 +5,7 @@
     "usingComponents": {
         "contentTxt": "/components/conentView"
     },
-    "disableScroll": true
+    "disableSwipeBack": true,
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 0
 }

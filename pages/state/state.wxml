@@ -8,8 +8,8 @@
             <view class='timeView height638'>
 
                 <view class='timeing'>
-                    <view>11/25</view>
-                    <view>19:38</view>
+                    <view>{{item.time[5]}}{{item.time[6]}}/{{item.time[8]}}{{item.time[9]}}</view>
+                    <view>{{item.time[11]}}{{item.time[12]}}{{item.time[13]}}{{item.time[14]}}{{item.time[15]}}</view>
                 </view>
 
                 <view class='point'></view>
@@ -18,12 +18,12 @@
             <view class='contentView height638'>
 
                 <view class='wrapflex'>
-                    <view class='imgview'>
-                        <image class='contenticon' mode='aspectFill' src='/assets/index/icon.png' />
+                    <view class='imgview' wx:if="{{item.imgurl[0]}}">
+                        <image class='contenticon' mode='aspectFill' src='{{srcDomin}}{{item.imgurl[0]}}' />
                     </view>
 
                     <view class='content'>
-                        迪丽热巴是娱乐圈里公认的美人，精致的五官带有古 典风情，2018年开启霸屏模式的迪丽热巴也是向观众展现了她演技上的多种可能。其实在演艺圈，迪丽热巴的努力大家有目共睹，当回归时尚界的她更是惊艳众人，精致的穿搭让她瞬间变身仙女迪
+                        {{item.title}}
                     </view>
                 </view>
 
@@ -31,17 +31,22 @@
 
                     <view style='margin-right:70rpx;' class='wrapflex'>
                         <image src='/assets/index/opinion.png' />
-                        <text>123456</text>
+                       <text>{{item.comments}}</text>
                     </view>
 
                     <view class='wrapflex'>
-                        <image src='/assets/index/praise.png' />
-                        <text>123</text>
+                        <image wx:if="{{!item.dianji}}" src='/assets/index/praise.png' />
+                        <image wx:if="{{item.dianji}}" src='/assets/index/selectPrase.png' />
+                        <text>{{item.support}}</text>
                     </view>
 
                 </view>
             </view>
 
+        </view>
+
+        <view class='botTxt' wx:if="{{showBotTxt}}">
+            <text>没有数据了亲~</text>
         </view>
 
     </scroll-view>

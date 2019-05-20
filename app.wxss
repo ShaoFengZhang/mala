@@ -61,7 +61,7 @@ button::after {
 .bg {
     position: relative;
     width: 100%;
-    height: 100vh;
+    /* height: 100vh; */
     background-color: white;
     overflow: hidden;
 }
@@ -105,4 +105,13 @@ button::after {
     font-size: 24rpx;
     color: #999;
     /* background-color: #f3f5f9; */
+}
+
+.loading{
+    width: 100%;
+    height: 88rpx;
+    line-height: 88rpx;
+    text-align: center;
+    color: #3c3c3c;
+    font-size: 28rpx;
 }

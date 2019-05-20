@@ -14,14 +14,13 @@ Page({
         swiperCurrentIndex: 0,
         contentArr: [],
         current: 0,
-        bindscrolltolower:'',
-        bindscrolltoupper:'',
+        ifloadtxt:0,
     },
 
     onLoad: function(options) {
         let _this = this;
         this.page = 1;
-        this.rows = 20;
+        this.rows = 5;
         this.cangetData = true;
 
         loginApi.wxlogin(app).then(function(value) {
@@ -33,12 +32,7 @@ Page({
                 _this.getContent(0);
             }
         });
-
-        this.setData({
-            classScrollHeight: app.windowHeight * 750 / app.sysWidth - 98,
-            // classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 416,
-        });
-
+        
         if (app.globalData.userInfo) {
             console.log('if');
             this.setData({
@@ -148,6 +142,7 @@ Page({
         };
 
         let classlen = this.data.classArr.length;
+        clearTimeout(this.bottomTime);
         this.setData({
             swiperCurrentIndex: classId,
             contentArr: [],
@@ -158,7 +153,6 @@ Page({
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
-        clearTimeout(this.scrollTime);
         this.getContent(classId);
     },
 
@@ -192,16 +186,16 @@ Page({
                 };
 
                 _this.setData({
-                    // contentArr: _this.data.contentArr.concat(res.contents),
                     contentArr:res.contents,
-                    bindscrolltolower: 'bindscrolltolower',                    
-                    // [`contentArr[${_this.page-1}]`]: res.contents,
+                    ifloadtxt: 1,
                 });
+                wx.stopPullDownRefresh();
                                 
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
                         showBotTxt: 1,
+                        ifloadtxt: 0,
                     });
                 };
                 if (conId){
@@ -211,12 +205,6 @@ Page({
                     wx.hideLoading();
                 };
                 
-                clearTimeout(_this.scrollTime);
-                _this.scrollTime = setTimeout(function () {
-                    _this.setData({
-                        bindscrolltoupper: 'bindscrolltoupper',
-                    })
-                }, 1000);
             }
         })
     },
@@ -236,32 +224,39 @@ Page({
         })
     },
 
-    //滑动到顶部
-    bindscrolltoupper:function(){
-        if (this.page>1){
+    // 加载上一页
+    onPullDownRefresh:function(){
+        console.log("onPullDownRefresh")
+        let _this=this;
+        wx.startPullDownRefresh();
+        if (this.page > 1) {
             this.page--;
             this.setData({
-                bindscrolltolower: '',
-                bindscrolltoupper: '',
                 contentArr: null,
             })
             this.getContent(this.data.swiperCurrentIndex);
-        }else{
-            util.toast('暂无更多更新',1200);
-        }    
+        } else {
+            util.toast('暂无更多更新', 1200);
+            wx.stopPullDownRefresh();
+        };
+        return; 
     },
 
-    // 滑动到底部
-    bindscrolltolower: function() {
+    // 加载下一页
+    onReachBottom:function(){
         if (this.cangetData) {
             this.page++;
-            this.setData({
-                bindscrolltolower: '',
-                bindscrolltoupper: '',
-                contentArr: null,
-            })
-            this.getContent(this.data.swiperCurrentIndex);
-        }
+            clearTimeout(this.bottomTime);
+            this.bottomTime=setTimeout(()=>{
+                this.setData({
+                    contentArr: null,
+                });
+                this.getContent(this.data.swiperCurrentIndex);
+            },1000)
+            
+        } else {
+            util.toast('暂无更多更新', 1200);
+        } 
     },
 
     // 滑动切换选项相关事件

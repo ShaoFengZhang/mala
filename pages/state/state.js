@@ -5,11 +5,17 @@ const app = getApp();
 Page({
 
     data: {
-        stateArr:[1,2,3,4,5,6,7,8]
+        stateArr:[],
+        showBotTxt:0,
+        srcDomin: loginApi.srcDomin,
     },
 
     onLoad: function (options) {
-
+        let _this = this;
+        this.page = 1;
+        this.rows = 10;
+        this.cangetData = true;
+        this.getUserContent();
     },
 
     onShow: function () {
@@ -31,6 +37,44 @@ Page({
 
     onShareAppMessage: function () {
         return util.shareObj
+    },
+
+    // 得到内容信息
+    getUserContent: function () {
+        let _this = this;
+        let getUserContent = loginApi.domin + '/home/index/getusercontents';
+        loginApi.requestUrl(_this, getUserContent, "POST", {
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+            "page": this.page,
+            "len": this.rows,
+        }, function (res) {
+            console.log(res);
+            if (res.status == 1) {
+
+                for (let n = 0; n < res.contents.length; n++) {
+                    for (let j = 0; j < res.support.length; j++) {
+                        if (res.support[j].contentid == res.contents[n].id) {
+                            res.contents[n].dianji = 12;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < res.contents.length; i++) {
+                    res.contents[i].imgurl = res.contents[i].imgurl.split(',');
+                };
+
+                _this.setData({
+                    stateArr: _this.data.stateArr.concat(res.contents),
+                });
+                if (res.contents.length < _this.rows) {
+                    _this.cangetData = false;
+                    _this.setData({
+                        showBotTxt: 1,
+                    });
+                };
+            }
+        })
     },
 
     // 跳转详情页

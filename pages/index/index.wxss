@@ -1,8 +1,23 @@
 
+.bg {
+     background-color: #f3f5f9;
+     position: relative;
+}
+
+.topFixed{
+    width: 100%;
+    height: 98rpx;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+
 .top-swiperView {
     line-height: 96rpx;
     font-size: 32rpx;
     color: #666;
+    background-color: white;
 }
 
 #swiper-ID, .top-swiperView {
@@ -34,12 +49,7 @@ swiper-item {
     background: rgba(39, 188, 173, 1);
 }
 
-#top {
-    width: 100%;
-    height: 1rpx;
+.scrollView{
+    padding-top: 98rpx;
 }
 
-scroll-view {
-    overflow-y: scroll;
-    overflow-x: hidden;
-}

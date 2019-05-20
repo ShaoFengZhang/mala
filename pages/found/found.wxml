@@ -19,11 +19,11 @@
 
     <view class='viewLine'></view>
 
-    <view class='scrollView' style='height:{{scrollHeight}}rpx'>
-        <scroll-view lower-threshold="100" upper-threshold="0" class="scroll-view_y" scroll-y style="height:{{scrollHeight}}rpx" bindscrolltolower="{{bindscrolltolower}}">
-        <view style='width:100%;height:2rpx'></view>
-            <contentTxt id="content" userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" contentArr="{{contentArr}}" bindmyevent="onMyevent" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
-        </scroll-view>
+    <view class='scrollView'>
+        <contentTxt id="content" userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" contentArr="{{contentArr}}" bindmyevent="onMyevent" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
+        <view class='loading' wx:if="{{ifloadtxt}}">
+            加载中 . . .
+        </view>
     </view>
 
 </view>

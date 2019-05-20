@@ -1,3 +1,8 @@
+.bg {
+     background-color: #f3f5f9;
+     position: relative;
+}
+
 .top-swiperView {
     line-height: 96rpx;
     font-size: 32rpx;
