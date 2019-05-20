@@ -14,12 +14,14 @@ Page({
         swiperCurrentIndex: 0,
         contentArr: [],
         current: 0,
+        bindscrolltolower:'',
+        bindscrolltoupper:'',
     },
 
     onLoad: function(options) {
         let _this = this;
         this.page = 1;
-        this.rows = 10;
+        this.rows = 20;
         this.cangetData = true;
 
         loginApi.wxlogin(app).then(function(value) {
@@ -114,7 +116,7 @@ Page({
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
                 path: `/pages/index/index?conId=${this.data.contentArr[index].id}`,
-                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img${Math.floor(Math.random() * (4 - 1 + 1) + 1)}.png`
+                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`
             }
         }
     },
@@ -156,6 +158,7 @@ Page({
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
+        clearTimeout(this.scrollTime);
         this.getContent(classId);
     },
 
@@ -189,10 +192,12 @@ Page({
                 };
 
                 _this.setData({
-                    contentArr: _this.data.contentArr.concat(res.contents),
+                    // contentArr: _this.data.contentArr.concat(res.contents),
+                    contentArr:res.contents,
+                    bindscrolltolower: 'bindscrolltolower',                    
                     // [`contentArr[${_this.page-1}]`]: res.contents,
                 });
-                
+                                
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
@@ -204,7 +209,14 @@ Page({
                     _this.goToDetails(conId);
                 }else{
                     wx.hideLoading();
-                }
+                };
+                
+                clearTimeout(_this.scrollTime);
+                _this.scrollTime = setTimeout(function () {
+                    _this.setData({
+                        bindscrolltoupper: 'bindscrolltoupper',
+                    })
+                }, 1000);
             }
         })
     },
@@ -224,10 +236,30 @@ Page({
         })
     },
 
+    //滑动到顶部
+    bindscrolltoupper:function(){
+        if (this.page>1){
+            this.page--;
+            this.setData({
+                bindscrolltolower: '',
+                bindscrolltoupper: '',
+                contentArr: null,
+            })
+            this.getContent(this.data.swiperCurrentIndex);
+        }else{
+            util.toast('暂无更多更新',1200);
+        }    
+    },
+
     // 滑动到底部
     bindscrolltolower: function() {
         if (this.cangetData) {
             this.page++;
+            this.setData({
+                bindscrolltolower: '',
+                bindscrolltoupper: '',
+                contentArr: null,
+            })
             this.getContent(this.data.swiperCurrentIndex);
         }
     },

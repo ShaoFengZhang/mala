@@ -22,8 +22,9 @@
     <view class='viewLine'></view>
 
     <view class='scrollView' style='height:{{classScrollHeight}}rpx'>
-        <scroll-view lower-threshold="100" class="scroll-view_y" scroll-y style="height:100%" bindscrolltolower="bindscrolltolower">
-            <contentTxt userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
+        <scroll-view lower-threshold="100" upper-threshold="0" class="scroll-view_y" scroll-y style="height:100%" bindscrolltolower="{{bindscrolltolower}}" bindscrolltoupper="{{bindscrolltoupper}}">
+            <view style='width:100%;height:2rpx'></view>
+            <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
         </scroll-view>
     </view>
 
