@@ -64,9 +64,23 @@ Page({
                     res.contents[i].imgurl = res.contents[i].imgurl.split(',');
                 };
 
+                for (let i = 0; i < res.contents.length; i++) {
+                    // 获赞处理
+                    if (parseInt(res.contents[i].support) > 10000) {
+                        let num = parseInt(res.contents[i].support);
+                        res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
+                    };
+                    // 评论
+                    if (parseInt(res.contents[i].comments) > 10000) {
+                        let num = parseInt(res.contents[i].comments);
+                        res.contents[i].comments = (Math.floor(num / 1000) / 10) + 'w+'
+                    };
+                };
+
                 _this.setData({
                     stateArr: _this.data.stateArr.concat(res.contents),
                 });
+
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
