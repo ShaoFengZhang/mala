@@ -107,15 +107,22 @@ Page({
 
                 for (let n = 0; n < res.comments.length; n++) {
                     for (let j = 0; j < res.issupport.length; j++) {
+                        
                         if (res.issupport[j].commentsid == res.comments[n].id) {
                             res.comments[n].dianji = 12;
-                        }
+                        };
+
+                        if (parseInt(res.contents[i].support) > 10000) {
+                            let num = parseInt(res.contents[i].support);
+                            res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
+                        };
                     }
                 }
 
                 _this.setData({
                     commentArr: _this.data.commentArr.concat(res.comments),
                 });
+
                 if (res.comments.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

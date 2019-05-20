@@ -104,7 +104,7 @@ button::after {
     text-align: center;
     font-size: 24rpx;
     color: #999;
-    background-color:#f3f5f9; 
+    /* background-color:#f3f5f9;  */
 }
 
 .loading{
