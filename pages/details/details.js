@@ -135,6 +135,14 @@ Page({
         })
     },
 
+    // 滑动到底部
+    bindscrolltolower: function () {
+        if (this.cangetData) {
+            this.page++;
+            this.getSupportcontent(options.conId);
+        }
+    },
+
     // 提交评论
     commitComments: function() {
         if (!util.check(this.contentTxt)) {

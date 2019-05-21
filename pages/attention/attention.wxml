@@ -2,7 +2,7 @@
 
     <scroll-view lower-threshold="100" scroll-y style="height:100vh" >
 
-        <view hover-class='hover-class' data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome' class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
+        <view data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome' class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
 
             <view class='userIcon'>
                 <image wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />

@@ -2,7 +2,7 @@
 
     <view class='scrollView' style='height:{{classScrollHeight}}rpx'>
 
-        <scroll-view class="scroll-view_y" scroll-y style="height:{{classScrollHeight}}rpx">
+        <scroll-view class="scroll-view_y" scroll-y style="height:{{classScrollHeight}}rpx" bindscrolltolower="bindscrolltolower">
 
             <!-- 文章内容 -->
             <view class='normalView contentView '>

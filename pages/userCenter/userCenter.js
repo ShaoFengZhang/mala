@@ -9,8 +9,8 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         contentArr: [],
-        showBotTxt:1,
-        focus:0,
+        showBotTxt: 1,
+        focus: 0,
         srcDomin: loginApi.srcDomin,
     },
 
@@ -26,14 +26,19 @@ Page({
         this.rows = 10;
         this.cangetData = true;
         console.log(options);
+
         if (options && options.uid) {
             this.openid = options.openid;
             this.uid = options.uid;
             this.getUserContent();
             this.setData({
                 useIcon: options.urlsrc[0] == '/' ? loginApi.domin + options.urlsrc : options.urlsrc,
-                note: util.check(options.note) ? options.note:"这个人很懒，什么也不想写~",
-                username:options.name,
+                note: util.check(options.note) ? options.note : "这个人很懒，什么也不想写~",
+                username: options.name,
+            });
+
+            wx.setNavigationBarTitle({
+                title: options.name,
             })
         }
     },
@@ -41,7 +46,7 @@ Page({
     onShow: function() {
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex) - 1
-            console.log(this.data.contentArr[app.praiseIndex-1])
+            console.log(this.data.contentArr[app.praiseIndex - 1])
             this.data.contentArr[app.praiseIndex].dianji = 1;
             this.data.contentArr[app.praiseIndex].support = this.data.contentArr[app.praiseIndex].support + 1;
             this.setData({
@@ -60,10 +65,10 @@ Page({
         return util.shareObj
     },
 
-    catchtap:function(){},
+    catchtap: function() {},
 
     // 获取授权信息
-    getUserInfo: function (e) {
+    getUserInfo: function(e) {
         console.log(e);
         if (!e.detail.userInfo) {
             util.toast("关注需要授权哦亲~", 1200)
@@ -122,7 +127,7 @@ Page({
 
                 _this.setData({
                     contentArr: _this.data.contentArr.concat(res.contents),
-                    focus:res.focus,
+                    focus: res.focus,
                 });
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
@@ -135,14 +140,14 @@ Page({
     },
 
     // 滑动到底部
-    bindscrolltolower: function () {
+    bindscrolltolower: function() {
         if (this.cangetData) {
             this.page++;
             this.getUserContent();
         }
     },
 
-    fansFocus:function(){
+    fansFocus: function() {
         let _this = this;
         let fansFocusUrl = loginApi.domin + '/home/index/addfocus';
         loginApi.requestUrl(_this, fansFocusUrl, "POST", {
@@ -150,20 +155,20 @@ Page({
             "buid": _this.uid,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
+        }, function(res) {
             console.log(res);
             if (res.status == 1) {
-                util.toast("关注成功",1200);
+                util.toast("关注成功", 1200);
                 _this.setData({
-                    focus:1,
-                })               
-            }else{
-                util.toast("关注失败", 1200); 
+                    focus: 1,
+                })
+            } else {
+                util.toast("关注失败", 1200);
             }
         })
     },
 
-    fansCancelFocus:function(){
+    fansCancelFocus: function() {
         let _this = this;
         let fansFocusUrl = loginApi.domin + '/home/index/delfocus';
         loginApi.requestUrl(_this, fansFocusUrl, "POST", {
@@ -171,12 +176,12 @@ Page({
             "buid": _this.uid,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
+        }, function(res) {
             console.log(res);
             if (res.status == 1) {
                 util.toast("取消关注", 1200)
                 _this.setData({
-                    focus:0,
+                    focus: 0,
                 })
             } else {
                 util.toast("取消失败", 1200);
@@ -185,7 +190,7 @@ Page({
     },
 
     // 跳转详情页
-    goToDetails: function (e) {
+    goToDetails: function(e) {
         let index = parseInt(e.currentTarget.dataset.index);
         wx.navigateTo({
             url: `/pages/details/details?conId=${this.data.contentArr[index].id}&index=${index+1}`,

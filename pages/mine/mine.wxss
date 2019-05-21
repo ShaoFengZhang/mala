@@ -110,3 +110,6 @@
     top: 0;
     opacity: 0;
 }
+.fansNum{
+    position: relative;
+}

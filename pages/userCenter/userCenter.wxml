@@ -5,37 +5,30 @@
 
         <view class='userInfoView'>
 
-            <view class='userIcon wrapflex'>
-
-                <view class='userImg'>
-                    <image src='{{useIcon}}' />
-                </view>
-
-                <view class='guanzhu' wx:if="{{!focus}}" catchtap='fansFocus'>
-                    <text>+ 关注</text>
-                    <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
-                    </button>
-                </view>
-
-                <view class='guanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
-                    <text>已关注</text>
-                    <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
-                    </button>
-                </view>
-
-
-
+            <view class='userImg'>
+                <image src='{{useIcon}}' />
             </view>
 
-            <view class='userInfo'>
-                <view class='userName oneEllipsis'>
-                    <text>{{username}}</text>
-                </view>
+            <view class='guanzhu' wx:if="{{!focus}}" catchtap='fansFocus'>
+                <text>+ 关注</text>
+                <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+                </button>
+            </view>
 
-                <view class='userdesc'>
+            <view class='guanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
+                <text>已关注</text>
+                <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+                </button>
+            </view>
+
+            <view class='usernoteView'>
+
+                <view class='userInfo'>
                     {{note}}
                 </view>
+
             </view>
+
         </view>
 
         <view data-index="{{index}}" catchtap='goToDetails' class='stateItem wrapflex height638' wx:for="{{contentArr}}" wx:key="{{index}}">
