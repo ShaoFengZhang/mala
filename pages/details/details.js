@@ -111,12 +111,12 @@ Page({
                         if (res.issupport[j].commentsid == res.comments[n].id) {
                             res.comments[n].dianji = 12;
                         };
+                    };
 
-                        if (parseInt(res.contents[i].support) > 10000) {
-                            let num = parseInt(res.contents[i].support);
-                            res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
-                        };
-                    }
+                    if (parseInt(res.comments[n].support) > 10000) {
+                        let num = parseInt(res.comments[n].support);
+                        res.comments[n].support = (Math.floor(num / 1000) / 10) + 'w+'
+                    };
                 }
 
                 _this.setData({

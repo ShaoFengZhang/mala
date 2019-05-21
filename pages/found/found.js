@@ -135,7 +135,6 @@ Page({
     // 加载上一页
     onPullDownRefresh: function () {
         let _this = this;
-        wx.startPullDownRefresh();
         if (this.page > 1) {
             this.page--;
             this.setData({

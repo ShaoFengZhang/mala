@@ -241,7 +241,6 @@ Page({
     onPullDownRefresh:function(){
         console.log("onPullDownRefresh")
         let _this=this;
-        wx.startPullDownRefresh();
         if (this.page > 1) {
             this.page--;
             this.setData({
@@ -249,7 +248,7 @@ Page({
             })
             this.getContent(this.data.swiperCurrentIndex);
         } else {
-            util.toast('暂无更多更新', 1200);
+            util.toast('暂无更多更新', 800);
             wx.stopPullDownRefresh();
         };
         return; 
