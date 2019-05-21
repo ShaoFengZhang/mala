@@ -153,8 +153,8 @@ Page({
             "contentid": this.data.content.id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-            "bopenid": this.data.content.uid,
-            "buid": this.data.content.openid,
+            "bopenid": this.data.content.openid,
+            "buid": this.data.content.uid,
         }, function(res) {
             console.log(res);
             if (res.status == 1) {
@@ -226,8 +226,8 @@ Page({
             "id": this.data.content.id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
-            "bopenid": this.data.content.uid,
-            "buid": this.data.content.openid,
+            "bopenid": this.data.content.openid,
+            "buid": this.data.content.uid,
         }, function(res) {
             console.log(res);
             if (res.status == 1) {
@@ -252,6 +252,8 @@ Page({
             "commentsid": id,
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
+            "bopenid": this.data.commentArr[index].openid,
+            "buid": this.data.commentArr[index].uid,
         }, function (res) {
             console.log(res);
             if (res.status == 1) {

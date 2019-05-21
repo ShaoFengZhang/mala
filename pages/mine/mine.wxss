@@ -48,6 +48,8 @@
     margin-top: 42rpx;
     justify-content: space-around;
     text-align: center;
+    box-sizing: border-box;
+    padding-left: 34rpx;
 }
 
 /* 实时通知 */

@@ -37,6 +37,8 @@
 
             <view class='viewLine'></view>
 
+            <view class='remen'>热门评论</view>
+
             <!-- 评论内容 -->
             <view class='userComments' wx:for="{{commentArr}}" wx:key="index">
 
@@ -64,8 +66,13 @@
 
             </view>
 
-            <view class='botTxt' wx:if="{{showBotTxt}}">
-                <text>暂无更多评论了，快来抢沙发吧~</text>
+            <view class='botTxt' wx:if="{{showBotTxt && commentArr.length}}">
+                <text>已显示全部评论</text>
+            </view>
+
+            <view class='nocom' wx:if="{{!commentArr.length}}">
+                <image src='/assets/details/nocom.png' />
+                <view>快来抢沙发吧~</view>
             </view>
 
         </scroll-view>
@@ -76,7 +83,7 @@
     <view class='botHandleView wrapflex'>
 
         <view class='discussView wrapflex'>
-            <textarea maxlength="{{100}}" value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' />
+            <textarea maxlength="{{100}}" value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' placeholder-style="font-size:28rpx;" />
         </view>
 
         <view class='commitBtn' wx:if="{{ifPopUp}}" catchtap='commitComments'>

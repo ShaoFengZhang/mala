@@ -21,11 +21,11 @@ Page({
     onShow: function () {
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex) - 1
-            console.log(this.data.contentArr[app.praiseIndex - 1])
-            this.data.contentArr[app.praiseIndex].dianji = 1;
-            this.data.contentArr[app.praiseIndex].support = this.data.contentArr[app.praiseIndex].support + 1;
+            console.log(this.data.stateArr[app.praiseIndex - 1])
+            this.data.stateArr[app.praiseIndex].dianji = 1;
+            this.data.stateArr[app.praiseIndex].support = this.data.stateArr[app.praiseIndex].support + 1;
             this.setData({
-                contentArr: this.data.contentArr
+                stateArr: this.data.stateArr
             })
         };
         app.praiseIndex = null;
@@ -95,7 +95,7 @@ Page({
     goToDetails: function (e) {
         let index = parseInt(e.currentTarget.dataset.index);
         wx.navigateTo({
-            url: `/pages/details/details?conId=${this.data.contentArr[index].id}&index=${index + 1}`,
+            url: `/pages/details/details?conId=${this.data.stateArr[index].id}&index=${index + 1}`,
         })
     },
 })

@@ -5,6 +5,7 @@ App({
     onLaunch: function() {
         this.netBlock=0;
         let _this=this;
+        loginApi.getSettingfnc(this);
         wx.getSystemInfo({
             success(res) {
                 // console.log(res);

@@ -9,19 +9,38 @@ let checkuserNum = 0;
 const wxlogin = function(app) {
 
     const promise = new Promise(function(resolve, reject) {
-
-        const loginPro = new Promise(function(resolve, reject) {
-            wx.login({
-                success: res => {
-                    resolve(res);
-                }
-            })
-        }).then(function (res) {
-            loginServer(resolve, res, app)
+        wx.login({
+            success: res => {
+                wx.request({
+                    url: `${domin}/home/index/dologin`,
+                    method: "POST",
+                    header: {
+                        'content-type': 'application/x-www-form-urlencoded',
+                        'Accept': '+json',
+                    },
+                    data: {
+                        code: res.code
+                    },
+                    success: function(value) {
+                        if (value.data.status == 1) {
+                            app.globalData.session_key = value.data.session_key;
+                            wx.setStorageSync('user_openID', value.data.openid);
+                            wx.setStorageSync('u_id', value.data.uid);
+                            console.log(value, "login");
+                            resolve(value);
+                        } else {
+                            loginNum++;
+                            if (loginNum >= 3) {
+                                loginNum = 0;
+                                return
+                            }
+                            wxlogin(app);
+                        }
+                    }
+                });
+            }
         });
-
     });
-
     return promise;
 }
 
@@ -42,6 +61,7 @@ const loginServer = function(resolve, res, app) {
                 app.globalData.session_key = value.data.session_key;
                 wx.setStorageSync('user_openID', value.data.openid);
                 wx.setStorageSync('u_id', value.data.uid);
+                console.log(value, "login");
                 resolve(value);
             } else {
                 loginNum++;
@@ -92,7 +112,7 @@ const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
             encryptedData: encryptedData,
             seesion_key: session_key,
             uid: wx.getStorageSync('u_id'),
-        }, function (data) {
+        }, function(data) {
             console.log('checkUser', data);
             //失败重新登录
             if (data.status != 1) {
@@ -121,27 +141,27 @@ const requestUrl = (app, url, method, data, cb) => {
         },
         data: data,
         method: method,
-        success: function (resdata) {
+        success: function(resdata) {
             wx.hideLoading();
             // console.log(url, resdata);
             app.netBlock = 0;
             cb(resdata.data);
         },
-        fali: function (res) {
+        fali: function(res) {
             wx.hideLoading();
             console.log("requestFali", res)
             wx.showModal({
                 title: '提示',
                 content: '请求失败,请稍后再试',
                 showCancel: false,
-                success: function (res) { 
+                success: function(res) {
                     wx.switchTab({
                         url: '/pages/index/index'
                     })
                 }
             })
         },
-        complete: function (res) {
+        complete: function(res) {
             if (!res.statusCode) {
                 app.netBlock++;
                 wx.hideLoading();
@@ -154,7 +174,7 @@ const requestUrl = (app, url, method, data, cb) => {
                         title: '提示',
                         content: '网络异常,请稍后再试',
                         showCancel: false,
-                        success: function (res) {
+                        success: function(res) {
                             wx.switchTab({
                                 url: '/pages/index/index'
                             })
@@ -168,7 +188,7 @@ const requestUrl = (app, url, method, data, cb) => {
                     title: '提示',
                     content: '服务器抛锚了,请稍后再试',
                     showCancel: false,
-                    success: function (res) {
+                    success: function(res) {
                         wx.switchTab({
                             url: '/pages/index/index'
                         })
@@ -180,7 +200,7 @@ const requestUrl = (app, url, method, data, cb) => {
 };
 
 module.exports = {
-    domin:domin,
+    domin: domin,
     wxlogin: wxlogin,
     getSettingfnc: getSettingfnc,
     requestUrl: requestUrl,

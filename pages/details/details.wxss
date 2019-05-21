@@ -79,15 +79,15 @@
     /* padding: 10rpx 10rpx 10rpx 40rpx;
     justify-content: space-between; */
     padding: 10rpx 40rpx;
-    justify-content: space-around;
-    border-top: 2rpx solid rgba(231, 231, 231, 1);
+    justify-content: space-between;
+    border-top: 1rpx solid #e7e7e7;
 }
 
 .discussView {
     width: 400rpx;
-    min-height: 66rpx;
+    min-height: 64rpx;
     background: rgba(243, 245, 249, 1);
-    border-radius: 32rpx;
+    border-radius: 64rpx;
     font-size: 28rpx;
     color: #000;
     box-sizing: border-box;
@@ -96,14 +96,14 @@
 
 textarea {
     width: 360rpx;
-    height: 44rpx;
+    height: 32rpx;
     line-height: 44rpx;
 }
 
 .shareImg {
-    width: 100rpx;
+    width: 40rpx;
     height: 66rpx;
-    text-align: center;
+    text-align: right;
     line-height: 66rpx;
     position: relative;
 }
@@ -117,8 +117,19 @@ textarea {
     background-color: white;
 }
 
-.viewLine{
-    height: 4rpx;
+.viewLine {
+    height: 16rpx;
+    background: #f3f5f9;
+}
+
+.remen {
+    font-size: 40rpx;
+    color: #282828;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 40rpx;
+    padding-top: 40rpx;
 }
 
 /* 评论内容样式 */
@@ -147,7 +158,7 @@ textarea {
     width: 432rpx;
 }
 
-.praiseView{
+.praiseView {
     position: absolute;
     top: 0;
     right: 0;
@@ -159,15 +170,15 @@ textarea {
     margin-right: 10rpx;
 }
 
-.praiseContent{
+.praiseContent {
     width: 552rpx;
-    margin:-60rpx 0 0 100rpx;
+    margin: -60rpx 0 0 100rpx;
     color: #282828;
     font-size: 32rpx;
     line-height: 44rpx;
 }
 
-.noPrais{
+.noPrais {
     width: 100%;
     height: 80rpx;
     text-align: center;
@@ -176,13 +187,27 @@ textarea {
     margin-top: 20rpx;
 }
 
-.commitBtn{
+.commitBtn {
     color: white;
     width: 160rpx;
     height: 66rpx;
-    background-color:#45CEBD;
+    background-color: #45cebd;
     text-align: center;
-    line-height: 66rpx; 
+    line-height: 66rpx;
     font-size: 32rpx;
     border-radius: 8rpx;
+}
+
+.nocom {
+    font-size: 32rpx;
+    color: #999;
+    text-align: center;
+    padding: 80rpx 0 80rpx 0;
+}
+
+.nocom image {
+    width: 280rpx;
+    height: 280rpx;
+    vertical-align: middle;
+    margin-bottom: 40rpx;
 }

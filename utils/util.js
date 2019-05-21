@@ -137,7 +137,7 @@ const upLoadImage = function(urlName, name, count, that, loginApi, cb) {
 // 距离现在最近的时间在前边
 const dateArrStort = function(data, p) {
     // data 时间数组 p时间key值
-    for (i = 0; i < data.length - 1; i++) {
+    for (let i = 0; i < data.length - 1; i++) {
         for (j = 0; j < data.length - 1 - i; j++) {
             console.log(Date.parse(data[j][p]));
             if (data[j][p] < data[j + 1][p]) {

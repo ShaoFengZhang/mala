@@ -35,8 +35,9 @@
 
     </view>
 
-    <view class='dynamicData wrapflex' data-path="/pages/message/message" catchtap='pageNav'>
-        <view class='message'>
+    <view class='dynamicData wrapflex'>
+
+        <view class='message' data-path="/pages/message/message" catchtap='pageNav'>
             <image src='/assets/mine/message.png' />
             <view style='color:#282828;font-size:28rpx;'>消息</view>
             <view class='redStar' wx:if="{{userInfos.tix}}"></view>

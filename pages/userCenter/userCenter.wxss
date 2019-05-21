@@ -20,7 +20,7 @@
 }
 
 .userImg {
-    box-shadow: 0px 20rpx 40rpx 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 20rpx 40rpx 0px rgba(0, 0, 0, 0.1);
     border-radius: 20rpx;
     overflow: hidden;
 }
@@ -34,7 +34,7 @@
     width: 204rpx;
     height: 70rpx;
     background: linear-gradient(90deg, rgba(110, 198, 252, 1) 0%, rgba(69, 206, 189, 1) 100%);
-    box-shadow: 0px 20rpx 40rpx 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 20rpx 40rpx 0px rgba(39,188,173, 0.1);
     border-radius: 16rpx;
     color: #fff;
     font-size: 36rpx;
@@ -59,7 +59,7 @@
     min-height: 322rpx;
     max-height: 410rpx;
     background: #fff;
-    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 20px 40px 0px rgba(0, 0, 0, 0.04);
     border-radius: 20rpx;
     margin-top: 120rpx;
     overflow: hidden;
@@ -102,6 +102,7 @@ scroll-view {
     width: 100%;
     margin-bottom: 32rpx;
     justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0)
 }
 
 .timeView {
@@ -147,11 +148,11 @@ scroll-view {
 
 .content {
     min-width: 116rpx;
-    height: 144rpx;
+    height: 120rpx;
     font-size: 28rpx;
     color: #282828;
     padding: 0;
-    line-height: 48rpx;
+    line-height: 40rpx;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;

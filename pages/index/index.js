@@ -23,16 +23,6 @@ Page({
         this.rows = 5;
         this.cangetData = true;
 
-        loginApi.wxlogin(app).then(function(value) {
-            loginApi.getSettingfnc(app);
-            if (options && options.conId){
-                util.loding('登录中');
-                _this.getContent(0, options.conId);
-            }else{
-                _this.getContent(0);
-            }
-        });
-        
         if (app.globalData.userInfo) {
             console.log('if');
             this.setData({
@@ -69,6 +59,15 @@ Page({
                 }
             })
         };
+
+        loginApi.wxlogin(app).then(function (value) {
+            console.log(options)
+            if (options && options.conId) {
+                _this.getContent(0, options.conId);
+            } else {
+                _this.getContent(0);
+            }
+        });
     },
 
     onShow: function() {
@@ -79,7 +78,7 @@ Page({
             }],
         });
         this.getClass();
-        console.log(app.praiseIndex)
+        console.log(app.praiseIndex,'app.praiseIndex')
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex)-1 
             console.log(this.data.contentArr[app.praiseIndex])
@@ -173,6 +172,7 @@ Page({
             "uid": wx.getStorageSync("u_id"),
         }, function(res) {
             if (res.status == 1) {
+                console.log("content")
                 for (let n = 0; n < res.contents.length; n++) {
                     for (let j = 0; j < res.supports.length; j++) {
                         if (res.supports[j].contentid == res.contents[n].id) {
