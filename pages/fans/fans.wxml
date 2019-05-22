@@ -16,8 +16,14 @@
 
         </view>
 
-        <view class='botTxt' wx:if="{{showBotTxt}}">
+        <!-- <view class='botTxt' wx:if="{{showBotTxt && messageArr.length}}">
             <text>没有数据了亲~</text>
+        </view> -->
+
+        <view class='nocom' wx:if="{{showBotTxt && !messageArr.length}}">
+            <image src='/assets/index/nodata.png' />
+            <view style='font-weight:bold;margin-bottom:10rpx;'>还没人关注你</view>
+            <view>快去发布短句吧~</view>
         </view>
 
     </scroll-view>

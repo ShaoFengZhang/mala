@@ -15,7 +15,7 @@
                 </button>
             </view>
 
-            <view class='guanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
+            <view class='yiguanzhu' wx:if="{{focus}}" catchtap='fansCancelFocus'>
                 <text>已关注</text>
                 <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
                 </button>
@@ -72,8 +72,14 @@
             </view>
 
         </view>
-        <view class='botTxt' wx:if="{{showBotTxt}}">
+
+        <view class='botTxt' wx:if="{{showBotTxt && contentArr.length}}">
             <text>这个人很懒，什么都没写~</text>
+        </view>
+
+        <view class='nocom' wx:if="{{showBotTxt && !contentArr.length}}">
+            <image src='/assets/index/nodata.png' />
+            <view>暂时还没有数据亲~</view>
         </view>
     </scroll-view>
 

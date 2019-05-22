@@ -49,7 +49,7 @@ Page({
             return;
         }
         this.page = 1;
-        this.rows = 10;
+        this.rows = 20;
         this.cangetData = true;
         this.setData({
             showBotTxt: 0,

@@ -1,8 +1,9 @@
 <view class="bg">
 
-    <scroll-view lower-threshold="100" scroll-y style="height:100vh" >
+    <scroll-view lower-threshold="100" scroll-y style="height:100vh">
 
-        <view data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome' class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
+        <view data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome' class='messageItem wrapflex' wx:for="{{messageArr}}"
+            wx:key="{{index}}">
 
             <view class='userIcon'>
                 <image wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />
@@ -22,14 +23,19 @@
                 <text>已关注</text>
             </view>
 
-            <view class='approve' wx:if="{{item.ifcacelfocus}}">
+            <view class='approve' wx:if="{{!item.ifcacelfocus}}">
                 <image src='/assets/release/approve.png' />
             </view>
 
         </view>
 
-        <view class='botTxt' wx:if="{{showBotTxt}}">
+        <!-- <view class='botTxt' wx:if="{{showBotTxt && messageArr.length}}">
             <text>没有数据了亲~</text>
+        </view> -->
+
+        <view class='nocom' wx:if="{{showBotTxt && !messageArr.length}}">
+            <image src='/assets/index/nodata.png' />
+            <view>快去关注些句友吧~</view>
         </view>
 
     </scroll-view>

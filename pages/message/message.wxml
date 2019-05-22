@@ -43,8 +43,13 @@
 
         </view>
 
-        <view class='botTxt' wx:if="{{showBotTxt}}">
+        <!-- <view class='botTxt' wx:if="{{showBotTxt && messageArr.length}}">
             <text>没有数据了亲~</text>
+        </view> -->
+
+        <view class='nocom' wx:if="{{showBotTxt && !messageArr.length}}">
+            <image src='/assets/index/nodata.png' />
+            <view>空空如也~</view>
         </view>
 
     </scroll-view>

@@ -61,13 +61,24 @@ Page({
         };
 
         loginApi.wxlogin(app).then(function (value) {
-            console.log(options)
+            console.log(options);
             if (options && options.conId) {
                 _this.getContent(0, options.conId);
             } else {
                 _this.getContent(0);
             }
-        });
+        }).catch(function (error) {
+            console.log("error", error);
+            if (options && options.conId) {
+                _this.getContent(0, options.conId);
+            } else {
+                _this.getContent(0);
+            }
+            
+        });;
+    },
+
+    onReady:function(){
     },
 
     onShow: function() {

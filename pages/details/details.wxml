@@ -70,7 +70,7 @@
                 <text>已显示全部评论</text>
             </view>
 
-            <view class='nocom' wx:if="{{!commentArr.length}}">
+            <view class='nocom' wx:if="{{showBotTxt && !commentArr.length}}">
                 <image src='/assets/details/nocom.png' />
                 <view>快来抢沙发吧~</view>
             </view>

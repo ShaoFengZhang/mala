@@ -16,7 +16,7 @@ const formatNumber = n => {
 };
 
 const shareObj = {
-    title: "点击查看",
+    title: "@你，给你留了一段话，快来看看吧~",
     path: `/pages/index/index`,
     imageUrl: `/assets/shareimg/img.png`
 }
