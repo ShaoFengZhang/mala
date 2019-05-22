@@ -21,7 +21,7 @@
 
     <scroll-view lower-threshold="100" scroll-y style="height:{{scrollHeight}}rpx" bindscrolltolower="bindscrolltolower">
 
-        <view class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
+        <view catchtap='goToDetails' data-id='{{item.contentid}}' class='messageItem wrapflex' wx:for="{{messageArr}}" wx:key="{{index}}">
 
             <view class='userIcon'>
                 <image wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />

@@ -127,4 +127,12 @@ Page({
             }
         })
     },
+
+    // 跳转详情页
+    goToDetails: function (e) {
+        let id = parseInt(e.currentTarget.dataset.id);
+        wx.navigateTo({
+            url: `/pages/details/details?conId=${id}`,
+        })
+    },
 })

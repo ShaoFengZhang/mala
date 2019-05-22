@@ -22,7 +22,7 @@
                 <text>已关注</text>
             </view>
 
-            <view class='approve'>
+            <view class='approve' wx:if="{{item.ifcacelfocus}}">
                 <image src='/assets/release/approve.png' />
             </view>
 

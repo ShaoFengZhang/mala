@@ -73,10 +73,8 @@
 
         </view>
         <view class='botTxt' wx:if="{{showBotTxt}}">
-            <text>没有数据了亲~</text>
+            <text>这个人很懒，什么都没写~</text>
         </view>
     </scroll-view>
-
-
 
 </view>

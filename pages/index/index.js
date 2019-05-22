@@ -228,11 +228,11 @@ Page({
 
     //获取分类
     getClass: function() {
-        util.loding('加载中');
+        // util.loding('加载中');
         let _this = this;
         let getClassUrl = loginApi.domin + '/home/index/dotype';
         loginApi.requestUrl(_this, getClassUrl, "POST", {}, function(res) {
-            wx.hideLoading();
+            // wx.hideLoading();
             if (res.status == 1) {
                 _this.setData({
                     classArr: _this.data.classArr.concat(res.type)

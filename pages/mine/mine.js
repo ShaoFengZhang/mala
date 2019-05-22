@@ -14,7 +14,9 @@ Page({
         
     },
 
-    onShow: function() {},
+    onShow: function() {
+        this.getMyDate();
+    },
 
     onHide: function() {
 
@@ -33,7 +35,7 @@ Page({
                 hasUserInfo: true
             });
         }
-        this.getMyDate();
+       
     },
 
     onShareAppMessage: function() {
