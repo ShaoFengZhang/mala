@@ -125,6 +125,7 @@ Page({
             praiseId: '',
             showBotTxt: 0,
         });
+        clearTimeout(this.bottomTime);
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
@@ -137,9 +138,6 @@ Page({
         let _this = this;
         if (this.page > 1) {
             this.page--;
-            this.setData({
-                contentArr: null,
-            })
             this.getContent("selected")
         } else {
             util.toast('暂无更多更新', 1200);
@@ -154,9 +152,7 @@ Page({
             this.page++;
             clearTimeout(this.bottomTime);
             this.bottomTime = setTimeout(() => {
-                this.setData({
-                    contentArr: null,
-                });
+                
                 // this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
                 this.getContent("selected")
             }, 1000)
@@ -170,6 +166,10 @@ Page({
     getContent: function(url) {
         util.loding('加载中');
         let _this = this;
+        this.setData({
+            contentArr: [],
+            ifloadtxt: 0,
+        });
         let getContentUrl = loginApi.domin + `/home/index/${url}`;
         loginApi.requestUrl(_this, getContentUrl, "POST", {
             "page": this.page,

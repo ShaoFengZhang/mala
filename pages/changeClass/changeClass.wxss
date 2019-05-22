@@ -15,5 +15,5 @@
     height: 110rpx;
     box-sizing: border-box;
     padding: 0 40rpx;
-    border-bottom: 2rpx solid #E7E7E7;
+    border-bottom: 2rpx solid #f3f5f9;
 }

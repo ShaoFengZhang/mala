@@ -108,6 +108,7 @@ Page({
         let urlsrc = e.currentTarget.dataset.src;
         let name = e.currentTarget.dataset.name;
         let note = e.currentTarget.dataset.note;
+        console.log(note);
         wx.navigateTo({
             url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
         })

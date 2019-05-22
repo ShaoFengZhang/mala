@@ -78,13 +78,13 @@
     box-sizing: border-box;
     /* padding: 10rpx 10rpx 10rpx 40rpx;
     justify-content: space-between; */
-    padding: 10rpx 40rpx;
+    padding: 10rpx 40rpx 10rpx 30rpx;
     justify-content: space-between;
     border-top: 1rpx solid #e7e7e7;
 }
 
 .discussView {
-    width: 400rpx;
+    width: 410rpx;
     min-height: 64rpx;
     background: rgba(243, 245, 249, 1);
     border-radius: 64rpx;
@@ -94,10 +94,18 @@
     padding: 10rpx 20rpx;
 }
 
+.discussView1{
+    width: 580rpx;
+}
+
 textarea {
-    width: 360rpx;
+    width: 370rpx;
     height: 32rpx;
     line-height: 44rpx;
+}
+
+.textarea1{
+     width: 540rpx;
 }
 
 .shareImg {
@@ -188,13 +196,13 @@ textarea {
 }
 
 .commitBtn {
-    color: white;
-    width: 160rpx;
+    color: #45cebd;
+    /* width: 160rpx; */
     height: 66rpx;
-    background-color: #45cebd;
     text-align: center;
     line-height: 66rpx;
     font-size: 32rpx;
+    font-weight: bold;
     border-radius: 8rpx;
 }
 

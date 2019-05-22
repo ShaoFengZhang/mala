@@ -20,7 +20,7 @@ Page({
     onLoad: function(options) {
         let _this = this;
         this.page = 1;
-        this.rows = 5;
+        this.rows = 20;
         this.cangetData = true;
 
         if (app.globalData.userInfo) {
@@ -159,6 +159,10 @@ Page({
     getContent: function (type,conId) {
         util.loding('加载中');
         let _this = this;
+        this.setData({
+            contentArr: [],
+            ifloadtxt: 0,
+        });
         let getContentUrl = loginApi.domin + '/home/index/doindex';
         wx.reportAnalytics('classclickevent', {
             uid: wx.getStorageSync("u_id"),
@@ -243,9 +247,6 @@ Page({
         let _this=this;
         if (this.page > 1) {
             this.page--;
-            this.setData({
-                contentArr: null,
-            })
             this.getContent(this.data.swiperCurrentIndex);
         } else {
             util.toast('暂无更多更新', 800);
@@ -260,9 +261,6 @@ Page({
             this.page++;
             clearTimeout(this.bottomTime);
             this.bottomTime=setTimeout(()=>{
-                this.setData({
-                    contentArr: null,
-                });
                 this.getContent(this.data.swiperCurrentIndex);
             },1000)
             

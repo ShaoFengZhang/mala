@@ -9,7 +9,7 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         contentArr: [],
-        showBotTxt: 1,
+        showBotTxt: 0,
         focus: 0,
         srcDomin: loginApi.srcDomin,
     },
@@ -33,7 +33,7 @@ Page({
             this.getUserContent();
             this.setData({
                 useIcon: options.urlsrc[0] == '/' ? loginApi.domin + options.urlsrc : options.urlsrc,
-                note: util.check(options.note) ? options.note : "这个人很懒，什么也不想写~",
+                note: util.check(options.note) ? (options.note == "undefined" ? "这个人很懒，什么也不想写~": options.note) : "这个人很懒，什么也不想写~",
                 username: options.name,
             });
 
