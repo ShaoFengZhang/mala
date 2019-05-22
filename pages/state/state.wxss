@@ -77,3 +77,12 @@ scroll-view {
     height: 28rpx;
     margin-right: 14rpx;
 }
+
+.deleteView{
+    width: 368rpx;
+    height: 28rpx;
+}
+
+.deleteView image{
+    vertical-align: middle;
+}

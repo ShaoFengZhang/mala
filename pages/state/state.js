@@ -5,12 +5,12 @@ const app = getApp();
 Page({
 
     data: {
-        stateArr:[],
-        showBotTxt:0,
+        stateArr: [],
+        showBotTxt: 0,
         srcDomin: loginApi.srcDomin,
     },
 
-    onLoad: function (options) {
+    onLoad: function(options) {
         let _this = this;
         this.page = 1;
         this.rows = 10;
@@ -18,7 +18,7 @@ Page({
         this.getUserContent();
     },
 
-    onShow: function () {
+    onShow: function() {
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex) - 1
             console.log(this.data.stateArr[app.praiseIndex - 1])
@@ -31,16 +31,16 @@ Page({
         app.praiseIndex = null;
     },
 
-    onHide: function () {
+    onHide: function() {
 
     },
 
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         return util.shareObj
     },
 
     // 得到内容信息
-    getUserContent: function () {
+    getUserContent: function() {
         let _this = this;
         let getUserContent = loginApi.domin + '/home/index/getusercontents';
         loginApi.requestUrl(_this, getUserContent, "POST", {
@@ -48,7 +48,7 @@ Page({
             "uid": wx.getStorageSync("u_id"),
             "page": this.page,
             "len": this.rows,
-        }, function (res) {
+        }, function(res) {
             console.log(res);
             if (res.status == 1) {
 
@@ -92,10 +92,32 @@ Page({
     },
 
     // 跳转详情页
-    goToDetails: function (e) {
+    goToDetails: function(e) {
         let index = parseInt(e.currentTarget.dataset.index);
         wx.navigateTo({
             url: `/pages/details/details?conId=${this.data.stateArr[index].id}&index=${index + 1}`,
+        })
+    },
+
+    deleteArticle: function(e) {
+        util.toast("正在删除~");
+        let id = parseInt(e.currentTarget.dataset.id);
+        let index = parseInt(e.currentTarget.dataset.index);
+        let _this = this;
+        let deleteArticleUrl = loginApi.domin + '/home/index/delcontent';
+        loginApi.requestUrl(_this, deleteArticleUrl, "POST", {
+            "contentid": id,
+        }, function(res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                util.toast('删除成功', 1200);
+                _this.data.stateArr.splice(index,1);
+                _this.setData({
+                    stateArr: _this.data.stateArr
+                })
+            } else {
+                util.toast('删除失败，请重试~', 1200);
+            }
         })
     },
 })
