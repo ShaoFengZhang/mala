@@ -140,7 +140,7 @@ Page({
                     textArea: '',
                 });
                 wx.navigateTo({
-                    url: '/pages/state/state',
+                    url: `/pages/details/details?conId=${res.contentid}`,
                 })
             }else{
                 util.toast('发布失败，请重试~',1200);

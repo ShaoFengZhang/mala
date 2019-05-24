@@ -73,9 +73,9 @@
 
         </view>
 
-        <view class='botTxt' wx:if="{{showBotTxt && contentArr.length}}">
+        <!-- <view class='botTxt' wx:if="{{showBotTxt && contentArr.length}}">
             <text>这个人很懒，什么都没写~</text>
-        </view>
+        </view> -->
 
         <view class='nocom' wx:if="{{showBotTxt && !contentArr.length}}">
             <image src='/assets/index/nodata.png' />

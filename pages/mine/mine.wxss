@@ -16,6 +16,12 @@
     margin-right: 24rpx;
 }
 
+.userIcon image {
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 20rpx;
+}
+
 .userDetails {
     height: 100%;
     color: #282828;
@@ -44,7 +50,7 @@
     width: 720rpx;
     height: 140rpx;
     box-shadow: 10rpx 8 rpx 40rpx 0px rgba(0, 0, 0, 0.1);
-    box-shadow: 6px 5px 10px -4px rgba(0, 0, 0, 0.06),5px 1px 10px -4px  rgba(0, 0, 0, 0.06);
+    box-shadow: 6px 5px 10px -4px rgba(0, 0, 0, 0.06), 5px 1px 10px -4px rgba(0, 0, 0, 0.06);
     border-radius: 10rpx;
     margin-top: 42rpx;
     justify-content: space-around;
@@ -111,6 +117,7 @@
     top: 0;
     opacity: 0;
 }
-.fansNum{
+
+.fansNum {
     position: relative;
 }

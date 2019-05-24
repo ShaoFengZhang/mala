@@ -190,6 +190,9 @@ Page({
         this.setData({
             ifPopUp: 0,
             txtValue: '',
+            praiseId: '',
+            pointAni: null,
+            txtpointAni: null,
         })
     },
 

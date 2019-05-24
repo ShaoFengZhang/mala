@@ -75,7 +75,7 @@ Page({
                 _this.getContent(0);
             }
             
-        });;
+        });
     },
 
     onReady:function(){
@@ -158,10 +158,10 @@ Page({
             contentArr: [],
             praiseId: '',
             showBotTxt: 0,
-            current: classlen < 6 ? 0 : (index > 4 ? (index == classlen - 1 ? index - 5 : index - 4) : 0)
+            current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current):index-4):0,
         });
         this.page = 1;
-        this.rows = 10;
+        this.rows = 20;
         this.cangetData = true;
         this.getContent(classId);
     },

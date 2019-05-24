@@ -2,12 +2,13 @@
 
     <view class='userInfoView wrapflex'>
         <view class='userIcon'>
-            <open-data type="userAvatarUrl"></open-data>
+            <image wx:if="{{!userInfos.photo}}" mode='aspectFill' src='{{userInfos.avatarurl}}' />
+            <image wx:if="{{userInfos.photo}}" mode='aspectFill' src='{{userInfos.photo[0]=="h"?"":srcDomin}}{{userInfos.photo}}' />
         </view>
 
         <view class='userDetails columnflex'>
             <view class='userName'>
-                <open-data type="userNickName"></open-data>
+                {{userInfos.name?userInfos.name:userInfos.nickname}}
             </view>
 
             <view class='userDecs' wx:if="{{userInfos.note}}">
