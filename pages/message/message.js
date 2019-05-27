@@ -135,4 +135,8 @@ Page({
             url: `/pages/details/details?conId=${id}`,
         })
     },
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

@@ -152,4 +152,8 @@ Page({
     txtBindInput: function(e) {
         this.txtArea = e.detail.value;
     }, 
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

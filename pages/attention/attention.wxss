@@ -15,6 +15,7 @@
 
 .userIcon {
     margin-right: 16rpx;
+    position: relative;
 }
 
 .messageTxt {
@@ -41,6 +42,7 @@
     color: white;
     line-height: 60rpx;
     font-size: 28rpx;
+    position: relative;
 }
 
 .attentionTxt {

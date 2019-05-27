@@ -97,5 +97,9 @@ Page({
         wx.navigateTo({
             url: `${navPath}`,
         })
-    }
+    },
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

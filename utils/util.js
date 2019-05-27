@@ -1,3 +1,5 @@
+import login from './login.js';
+
 const formatTime = date => {
     const year = date.getFullYear()
     const month = date.getMonth() + 1
@@ -153,6 +155,26 @@ const dateArrStort = function(data, p) {
     return data;
 };
 
+const formSubmit = function(app,e) {
+    console.log(1212121, e.detail.formId);
+    return;
+    let _this = this;
+    let collectFormIdUrl = login.domin + 'formid';
+    if (e.detail.formId == 'the formId is a mock one') {
+        return;
+    }
+    let form_id = e.detail.formId;
+    let data = {
+        openid: wx.getStorageSync('user_openID'),
+        formid: form_id,
+        uid: wx.getStorageSync('u_id'),
+    }
+
+    login.requestUrl(app, collectFormIdUrl, "POST", data, function(res) {
+        console.log("???????")
+    })
+}
+
 
 module.exports = {
     formatTime: formatTime,
@@ -163,4 +185,5 @@ module.exports = {
     dateArrStort: dateArrStort,
     check: check,
     shareObj: shareObj,
+    formSubmit: formSubmit,
 }

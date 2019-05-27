@@ -44,12 +44,14 @@ button::after {
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    position: relative;
 }
 
 .columnflex {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
 }
 
 .normalView {
@@ -132,3 +134,14 @@ button::after {
     margin-bottom: 40rpx;
 }
 
+/* 收集formid */
+.Sbtn{
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}

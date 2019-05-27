@@ -196,4 +196,8 @@ Page({
             url: `/pages/details/details?conId=${this.data.contentArr[index].id}&index=${index+1}`,
         })
     },
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

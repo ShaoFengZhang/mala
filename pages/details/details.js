@@ -48,9 +48,9 @@ Page({
     },
 
     // 收藏
-    collectionContent: function (e) {
+    collectionContent: function(e) {
         let _this = this;
-        let url=e.currentTarget.dataset.url;
+        let url = e.currentTarget.dataset.url;
         let collectUrl = loginApi.domin + `/home/index/${url}`;
         loginApi.requestUrl(_this, collectUrl, "POST", {
             "contentid": this.data.conId,
@@ -59,10 +59,10 @@ Page({
         }, function(res) {
             if (res.status == 1) {
                 _this.setData({
-                    collection: url =="collection"?1:0,
+                    collection: url == "collection" ? 1 : 0,
                 });
                 url == "collection" ? app.collectIndex = null : app.collectIndex = _this.data.praiseIndex;
-                util.toast(url == "collection" ? "收藏成功~":"取消成功~", 1200)
+                util.toast(url == "collection" ? "收藏成功~" : "取消成功~", 1200)
             } else {
                 util.toast(url == "collection" ? "收藏失败，请重试" : "取消失败，请重试", 1200)
             }
@@ -93,7 +93,7 @@ Page({
     },
 
     // 获取评论内容
-    getSupportcontent: function (conId) {
+    getSupportcontent: function(conId) {
         let _this = this;
         let getSupportcontentUrl = loginApi.domin + '/home/index/getcomments';
         loginApi.requestUrl(_this, getSupportcontentUrl, "POST", {
@@ -102,12 +102,12 @@ Page({
             "uid": wx.getStorageSync("u_id"),
             "page": this.page,
             "len": this.rows,
-        }, function (res) {
+        }, function(res) {
             if (res.status == 1) {
 
                 for (let n = 0; n < res.comments.length; n++) {
                     for (let j = 0; j < res.issupport.length; j++) {
-                        
+
                         if (res.issupport[j].commentsid == res.comments[n].id) {
                             res.comments[n].dianji = 12;
                         };
@@ -136,7 +136,7 @@ Page({
     },
 
     // 滑动到底部
-    bindscrolltolower: function () {
+    bindscrolltolower: function() {
         if (this.cangetData) {
             this.page++;
             this.getSupportcontent(options.conId);
@@ -170,7 +170,7 @@ Page({
                 _this.rows = 10;
                 _this.cangetData = true;
                 _this.setData({
-                    commentArr: [], 
+                    commentArr: [],
                     praiseId: '',
                     pointAni: null,
                 })
@@ -212,7 +212,7 @@ Page({
     },
 
     // 评论点赞事件
-    praiseEvent2: function (e) {
+    praiseEvent2: function(e) {
         this.setData({
             praiseId: '',
             pointAni: null,
@@ -256,7 +256,7 @@ Page({
     },
 
     // 评论点赞请求
-    addpriseNum2: function (id,index) {
+    addpriseNum2: function(id, index) {
         let _this = this;
         let addpriseNumUrl = loginApi.domin + '/home/index/commentsupport';
         loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
@@ -265,7 +265,7 @@ Page({
             "uid": wx.getStorageSync("u_id"),
             "bopenid": this.data.commentArr[index].openid,
             "buid": this.data.commentArr[index].uid,
-        }, function (res) {
+        }, function(res) {
             console.log(res);
             if (res.status == 1) {
                 _this.data.commentArr[index].dianji = 1;
@@ -307,7 +307,7 @@ Page({
     },
 
     // 动画
-    crearteAnimationP: function () {
+    crearteAnimationP: function() {
 
         if (!this.canAni) {
             let _this = this;
@@ -335,7 +335,7 @@ Page({
             }, 600)
         }
     },
-    
+
     // 复制文本
     copytxt: function() {
         wx.setClipboardData({
@@ -361,5 +361,9 @@ Page({
         wx.navigateTo({
             url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
         })
+    },
+
+    formSubmit: function(e) {
+        util.formSubmit(app, e);
     },
 })

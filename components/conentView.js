@@ -137,5 +137,10 @@ Component({
         getUserInfo: function (e) {
             this.triggerEvent('myevent', e.detail);
         },
+
+        // 收集formid
+        formSubmit: function (e) {
+            util.formSubmit(app, e);
+        }
     },
 })

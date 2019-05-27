@@ -73,4 +73,8 @@ Page({
             url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
         })
     },
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

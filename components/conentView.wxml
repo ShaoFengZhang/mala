@@ -9,11 +9,25 @@
             <view class='userImg' data-src='{{item.photo?item.photo:item.avatarurl}}' data-uid="{{item.uid}}" data-note="{{item.note}}" data-openid="{{item.openid}}" data-name="{{item.name?item.name:item.nickname}}" catchtap='gotoUserHome'>
                 <image wx:if="{{!item.photo}}" mode='aspectFill' src='{{item.avatarurl}}' />
                 <image wx:if="{{item.photo}}" mode='aspectFill' src='{{item.photo[0]=="h"?"":srcDomin}}{{item.photo}}' />
+
+                <form bindsubmit="formSubmit" report-submit="{{true}}">
+                    <button formType="submit" class='Sbtn'>
+                        <view class='sbtnview'></view>
+                    </button>
+                </form>
             </view>
 
             <view class='userNameBox columnflex'>
+
                 <view class='userNameView'>{{item.name?item.name:item.nickname}}</view>
                 <view style='color:#666;font-size:24rpx;'>{{item.time[5]}}{{item.time[6]}}-{{item.time[8]}}{{item.time[9]}}</view>
+
+                <form bindsubmit="formSubmit" report-submit="{{true}}">
+                    <button formType="submit" class='Sbtn'>
+                        <view class='sbtnview'></view>
+                    </button>
+                </form>
+
             </view>
 
             <!-- <view class='pointMenu'>
@@ -24,10 +38,20 @@
 
         <view class='contentDetails'>
             <text decode='1'>{{item.title}}</text>
+            <form bindsubmit="formSubmit" report-submit="{{true}}">
+                <button formType="submit" class='Sbtn'>
+                    <view class='sbtnview'></view>
+                </button>
+            </form>
         </view>
 
         <view class='contentImg' wx:if="{{item.imgurl[0]}}">
             <image mode='widthFix' src="{{srcDomin}}{{item.imgurl[0]}}" />
+            <form bindsubmit="formSubmit" report-submit="{{true}}">
+                <button formType="submit" class='Sbtn'>
+                    <view class='sbtnview'></view>
+                </button>
+            </form>
         </view>
 
         <view class='contentshare wrapflex'>
@@ -35,12 +59,23 @@
             <view class='opinionBox'>
                 <image src='/assets/index/opinion.png' />
                 <text style='margin-left:14rpx;'>{{item.comments}}</text>
+                <form bindsubmit="formSubmit" report-submit="{{true}}">
+                    <button formType="submit" class='Sbtn'>
+                        <view class='sbtnview'></view>
+                    </button>
+                </form>
             </view>
 
             <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent}}'>
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
                 <text style='margin-left:14rpx;'>{{item.support}}</text>
+
+                <form bindsubmit="formSubmit" report-submit="{{true}}">
+                    <button formType="submit" class='Sbtn'>
+                        <view class='sbtnview'></view>
+                    </button>
+                </form>
             </view>
 
             <view class='shareImg' catchtap='catchtap'>
@@ -51,7 +86,6 @@
 
         <button catchtap='catchtap' class='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
         </button>
-
     </view>
 
     <!-- </block> -->

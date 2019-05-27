@@ -16,4 +16,5 @@
     box-sizing: border-box;
     padding: 0 40rpx;
     border-bottom: 2rpx solid #f3f5f9;
+    position: relative;
 }

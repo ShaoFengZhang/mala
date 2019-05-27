@@ -107,4 +107,8 @@ Page({
         })
     },
 
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
+
 })

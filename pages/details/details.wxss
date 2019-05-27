@@ -204,6 +204,7 @@ textarea {
     font-size: 32rpx;
     font-weight: bold;
     border-radius: 8rpx;
+    position: relative;
 }
 
 .nocom {
