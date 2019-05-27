@@ -157,9 +157,8 @@ const dateArrStort = function(data, p) {
 
 const formSubmit = function(app,e) {
     console.log(1212121, e.detail.formId);
-    return;
     let _this = this;
-    let collectFormIdUrl = login.domin + 'formid';
+    let collectFormIdUrl = login.domin + '/home/index/formid';
     if (e.detail.formId == 'the formId is a mock one') {
         return;
     }
@@ -168,7 +167,7 @@ const formSubmit = function(app,e) {
         openid: wx.getStorageSync('user_openID'),
         formid: form_id,
         uid: wx.getStorageSync('u_id'),
-    }
+    };
 
     login.requestUrl(app, collectFormIdUrl, "POST", data, function(res) {
         console.log("???????")
