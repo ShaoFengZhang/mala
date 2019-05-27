@@ -60,6 +60,12 @@ Page({
             })
         };
 
+        if (options && options.scene) {//记得改条件
+            console.log('SCENE', options);
+            let scene = decodeURIComponent(options.scene);
+            options.conId = scene.split('&')[0];
+        };
+
         loginApi.wxlogin(app).then(function (value) {
             console.log(options);
             if (options && options.conId) {

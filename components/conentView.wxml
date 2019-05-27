@@ -69,7 +69,8 @@
             <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent}}'>
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
-                <text style='margin-left:14rpx;'>{{item.support}}</text>
+                <text style='margin-left:14rpx;' wx:if="{{!item.dianji}}">{{item.support}}</text>
+                <text style='margin-left:14rpx; color:#27BCAD' wx:if="{{item.dianji}}">{{item.support}}</text>
 
                 <form bindsubmit="formSubmit" report-submit="{{true}}">
                     <button formType="submit" class='Sbtn'>

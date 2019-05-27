@@ -42,7 +42,8 @@
                     <view class='wrapflex'>
                         <image wx:if="{{!item.dianji}}" src='/assets/index/praise.png' />
                         <image wx:if="{{item.dianji}}" src='/assets/index/selectPrase.png' />
-                        <text>{{item.support}}</text>
+                        <text wx:if="{{!item.dianji}}">{{item.support}}</text>
+                        <text style='color:#27BCAD' wx:if="{{item.dianji}}">{{item.support}}</text>
                     </view>
 
                 </view>
