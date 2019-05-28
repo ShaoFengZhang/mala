@@ -204,6 +204,9 @@ Page({
 
     // 点赞事件
     praiseEvent: function() {
+        this.setData({
+            praiseEvent: '',
+        })
         if (this.data.content.dianji) {
             this.crearteAnimation();
             return;
@@ -216,6 +219,7 @@ Page({
         this.setData({
             praiseId: '',
             pointAni: null,
+            praiseEvent2: 'catchtap',
         });
         let id = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;

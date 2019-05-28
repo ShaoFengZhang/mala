@@ -94,6 +94,7 @@ Component({
             this.setData({
                 praiseId: '',
                 pointAni: null,
+                praiseEvent: 'catchtap',
             });
             let id = e.currentTarget.dataset.id;
             let index = e.currentTarget.dataset.index;

@@ -59,8 +59,9 @@ Page({
                 }
             })
         };
-
-        if (options && options.scene) {//记得改条件
+        
+        // 带参数二维码
+        if (options && options.scene) {
             console.log('SCENE', options);
             let scene = decodeURIComponent(options.scene);
             options.conId = scene.split('&')[0];
