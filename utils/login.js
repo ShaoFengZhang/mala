@@ -100,7 +100,7 @@ const getSettingfnc = (app) => {
 };
 
 // 存储用户信息
-const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
+const checkUserInfo = (app, res, iv, encryptedData, session_key,cb) => {
     if (wx.getStorageSync('rawData') != res.rawData) {
         wx.setStorage({
             key: "rawData",
@@ -115,6 +115,9 @@ const checkUserInfo = (app, res, iv, encryptedData, session_key) => {
             uid: wx.getStorageSync('u_id'),
         }, function(data) {
             console.log('checkUser', data);
+            if(cb){
+                cb();
+            }
             //失败重新登录
             if (data.status != 1) {
                 checkuserNum++;

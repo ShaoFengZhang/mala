@@ -44,6 +44,7 @@ Page({
 
     getUserInfo:function(e){
         console.log(e);
+        let _this=this;
         if (!e.detail.userInfo){
             util.toast("微信授权没有风险哦亲~",1200)
             return
@@ -56,7 +57,9 @@ Page({
         let iv = e.detail.iv;
         let encryptedData = e.detail.encryptedData;
         let session_key = app.globalData.session_key;
-        loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key)
+        loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key,function(){
+            _this.getMyDate();
+        });
     },
 
     getMyDate: function() {
