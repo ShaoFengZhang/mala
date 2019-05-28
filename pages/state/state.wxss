@@ -79,8 +79,12 @@ scroll-view {
 }
 
 .deleteView{
-    width: 368rpx;
-    height: 28rpx;
+    width: 100rpx;
+    height: 38rpx;
+    position: absolute;
+    bottom: 0rpx;
+    left: 0rpx;
+    z-index: 999;
 }
 
 .deleteView image{

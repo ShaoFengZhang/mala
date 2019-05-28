@@ -29,7 +29,7 @@
 
                 <view class='opinionView wrapflex'>
 
-                    <view data-id='{{item.id}}' data-index="{{index}}" class='deleteView' catchtap='deleteArticle'>
+                    <view class='deleteView' data-id='{{item.id}}' data-index="{{index}}" catchtap='deleteArticle'>
                         <image src='/assets/index/delete.png' />
                         <text style='color:#27BCAD;font-size: 24rpx;'>删除</text>
                     </view>

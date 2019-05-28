@@ -2,13 +2,13 @@
 
     <view class='userInfoView wrapflex'>
         <view class='userIcon'>
-            <image wx:if="{{!userInfos.photo}}" mode='aspectFill' src='{{userInfos.avatarurl}}' />
+            <image wx:if="{{!userInfos.photo}}" mode='aspectFill' src='{{userInfos.avatarurl?userInfos.avatarurl:"/assets/details/nocom.png"}}' />
             <image wx:if="{{userInfos.photo}}" mode='aspectFill' src='{{userInfos.photo[0]=="h"?"":srcDomin}}{{userInfos.photo}}' />
         </view>
 
         <view class='userDetails columnflex'>
             <view class='userName'>
-                {{userInfos.name?userInfos.name:userInfos.nickname}}
+                {{userInfos.name?userInfos.name:(userInfos.nickname?userInfos.nickname:'点击授权')}}
             </view>
 
             <view class='userDecs' wx:if="{{userInfos.note}}">
