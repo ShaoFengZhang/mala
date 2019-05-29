@@ -166,10 +166,6 @@ Page({
     getContent: function(url) {
         util.loding('加载中');
         let _this = this;
-        this.setData({
-            contentArr: [],
-            ifloadtxt: 0,
-        });
         let getContentUrl = loginApi.domin + `/home/index/${url}`;
         loginApi.requestUrl(_this, getContentUrl, "POST", {
             "page": this.page,
@@ -204,6 +200,22 @@ Page({
                         res.contents[i].comments = (Math.floor(num / 1000) / 10) + 'w+'
                     };
                 };
+
+                if (res.contents.length == 0) {
+                    _this.page == 1 ? _this.page : _this.page--;
+                    _this.cangetData=false;
+                    util.toast("暂无更多更新");
+                    _this.setData({
+                        ifloadtxt: 0, 
+                        showBotTxt: 1,
+                    })
+                    return;
+                }
+
+                _this.setData({
+                    contentArr: [],
+                    ifloadtxt: 0,
+                });
 
                 _this.setData({
                     contentArr: res.contents,

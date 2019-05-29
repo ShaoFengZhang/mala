@@ -110,7 +110,7 @@ button::after {
     /* background-color:#f3f5f9;  */
 }
 
-.loading{
+.loading {
     width: 100%;
     height: 88rpx;
     line-height: 88rpx;
@@ -120,6 +120,7 @@ button::after {
 }
 
 /* 没有一条数据时 */
+
 .nocom {
     font-size: 32rpx;
     color: #999;
@@ -135,11 +136,21 @@ button::after {
 }
 
 /* 收集formid */
-.Sbtn{
+
+.Sbtn {
     width: 100%;
     height: 100%;
     padding: 0;
     margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+form {
+    width: 100%;
+    height: 100%;
     position: absolute;
     top: 0;
     left: 0;
