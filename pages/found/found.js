@@ -53,11 +53,12 @@ Page({
         this.cangetData = true;
         this.setData({
             showBotTxt: 0,
+            ifloadtxt:0,
             swiperCurrentIndex: 0,
             contentArr: [],
             praiseId: '',
         })
-        this.getContent('selected');
+        this.getContent('selected'); 
         this.cantemp = false;
     },
 

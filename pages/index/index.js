@@ -165,6 +165,7 @@ Page({
             contentArr: [],
             praiseId: '',
             showBotTxt: 0,
+            ifloadtxt: 0,
             current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current):index-4):0,
         });
         this.page = 1;
@@ -222,7 +223,7 @@ Page({
                     util.toast("暂无更多更新");
                     _this.setData({
                         ifloadtxt: 0,
-                        showBotTxt: 1,
+                        showBotTxt:1,
                     });
                     return;
                 };
