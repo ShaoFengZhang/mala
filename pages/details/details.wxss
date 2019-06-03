@@ -46,6 +46,7 @@
     width: 52rpx;
     height: 76rpx;
     text-align: center;
+    position: relative;
 }
 
 .pointMenu image{

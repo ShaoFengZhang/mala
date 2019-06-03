@@ -23,6 +23,7 @@
                     <view class='pointMenu' data-id='{{content.id}}' catchtap='showTables'>
                         <!-- <text>...</text> -->
                         <image src='/assets/index/posterShare.png' />
+                        <button id='shareBtn' open-type='share'></button>
                     </view>
 
                 </view>
@@ -123,9 +124,8 @@
             </form>
         </view>
 
-        <view class='shareImg' wx:if="{{!ifPopUp}}">
+        <view class='shareImg' wx:if="{{!ifPopUp}}" catchtap='goToQrCode'>
             <image src='/assets/index/shareImg.png' />
-            <button id='shareBtn' open-type='share'></button>
         </view>
 
     </view>

@@ -4,7 +4,7 @@
         <text>点开大图，长按可以分享给朋友</text>
     </view>
 
-    <view class='posterImg' style='width:{{imgW}}rpx'>
+    <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
         <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
     </view>
 

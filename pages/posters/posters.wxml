@@ -1,13 +1,15 @@
 <view class="bg">
 
-    <view class='posterImg' style='width:{{imgW}}rpx'>
+    <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
         <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
     </view>
 
     <view class='botCardView'>
+
         <view catchtap='changeCard' class='card {{selectCardId==item.id?"selectCard":""}}' wx:for="{{cardArr}}" wx:key="{{index}}" data-id='{{item.id}}'>
             <text>{{item.txt}}</text>
         </view>
+
         <view class='card savecard' catchtap='savePic'>
             <text>保存</text>
         </view>

@@ -30,9 +30,10 @@
 
             </view>
 
-            <view class='pointMenu' data-id='{{item.id}}' catchtap='showTables'>
+            <view class='pointMenu' data-id='{{item.id}}' catchtap='catchtap'>
                 <!-- <text>...</text> -->
                 <image src='/assets/index/posterShare.png' />
+                <button data-index='{{index}}' class='shareBtn' open-type='share'></button>
             </view>
 
         </view>
@@ -80,9 +81,8 @@
                 </form>
             </view>
 
-            <view class='shareImg' catchtap='catchtap'>
+            <view class='shareImg' catchtap='goToQrCode' data-id='{{item.id}}'>
                 <image src='/assets/index/shareImg.png' />
-                <button data-index='{{index}}' class='shareBtn' open-type='share'></button>
             </view>
         </view>
 

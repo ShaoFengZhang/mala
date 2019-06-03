@@ -40,6 +40,14 @@ Component({
     methods: {
         catchtap: function() {},
 
+        goToQrCode:function(e){
+            console.log(e)
+            let id = e.currentTarget.dataset.id;
+            wx.navigateTo({
+                url: `/pages/posters/posters?contentID=${id}`,
+            })
+        },
+
         showTables: function(e) {
             let id = parseInt(e.currentTarget.dataset.id);
             console.log(id);

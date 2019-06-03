@@ -152,6 +152,12 @@ Page({
         this.commitUrl();
     },
 
+    goToQrCode: function () {
+        wx.navigateTo({
+            url: `/pages/posters/posters?contentID=${this.data.content.id}`,
+        })
+    },
+
     // 提交评论请求
     commitUrl: function() {
         let _this = this;

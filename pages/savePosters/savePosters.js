@@ -27,6 +27,7 @@ Page({
         },
         ],
         selectCardId: 0,
+        postSrc: "/assets/shareimg/img2.png"
     },
 
     onLoad: function (options) {
@@ -47,7 +48,13 @@ Page({
     onShareAppMessage: function () {
         return util.shareObj
     },
-
+    
+    previewImage: function (e) {
+        let src = e.currentTarget.dataset.src;
+        wx.previewImage({
+            urls: ["https://duanju.58100.com/upload/usercontent/1559530636695.png"],
+        })
+    },
 
     formSubmit: function (e) {
         util.formSubmit(app, e);
