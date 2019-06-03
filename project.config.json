@@ -47,7 +47,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 13,
+			"current": 15,
 			"list": [
 				{
 					"id": 0,
@@ -144,6 +144,20 @@
 					"id": -1,
 					"name": "海报",
 					"pathName": "pages/posters/posters",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "保存海报",
+					"pathName": "pages/savePosters/savePosters",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "赚句豆",
+					"pathName": "pages/shareMakes/shareMakes",
 					"scene": null
 				}
 			]

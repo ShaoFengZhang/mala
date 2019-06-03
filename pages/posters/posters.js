@@ -5,12 +5,34 @@ const app = getApp();
 Page({
 
     data: {
-
+        cardArr: [{
+                txt: "文艺",
+                id:0,
+            },
+            {
+                txt: "祝福",
+                id: 1,
+            },
+            {
+                txt: "爱情",
+                id: 2,
+            },
+            {
+                txt: "贺卡",
+                id: 3,
+            },
+            {
+                txt: "信纸",
+                id: 4,
+            },
+        ],
+        selectCardId:0,
     },
 
     onLoad: function(options) {
+        let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
         this.setData({
-            imgW: ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946),
+            imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
         });
     },
 
@@ -24,6 +46,21 @@ Page({
 
     onShareAppMessage: function() {
         return util.shareObj
+    },
+
+    // 切换贺卡
+    changeCard:function(e){
+        let id = e.currentTarget.dataset.id;
+        if(id==this.data.selectCardId){
+            return;
+        };
+        this.setData({
+            selectCardId:id, 
+        })
+    },
+
+    savePic:function(){
+        console.log("保存图片")
     },
 
     formSubmit: function(e) {

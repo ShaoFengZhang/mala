@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "已保存到手机相册",
+    "backgroundColor": "#000000",
+    "disableScroll": true
 }

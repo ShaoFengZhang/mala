@@ -1,3 +1,7 @@
 {
-  "usingComponents": {}
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "分享赚句豆",
+    "backgroundColor": "#000000",
+    "enablePullDownRefresh": true,
+    "onReachBottomDistance": 0
 }

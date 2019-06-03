@@ -36,4 +36,5 @@
 
     </view>
 
+    <view class='mask' catchtap='maskeclick'></view>
 </view>

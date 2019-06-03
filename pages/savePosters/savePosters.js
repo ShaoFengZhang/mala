@@ -1,66 +1,55 @@
-// pages/savePosters/savePosters.js
+import loginApi from '../../utils/login.js'
+import util from '../../utils/util.js'
+const app = getApp();
+
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
-
+        cardArr: [{
+            txt: "文艺",
+            id: 0,
+        },
+        {
+            txt: "祝福",
+            id: 1,
+        },
+        {
+            txt: "爱情",
+            id: 2,
+        },
+        {
+            txt: "贺卡",
+            id: 3,
+        },
+        {
+            txt: "信纸",
+            id: 4,
+        },
+        ],
+        selectCardId: 0,
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
-
+        let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
+        this.setData({
+            imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
+        });
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
     onShareAppMessage: function () {
+        return util.shareObj
+    },
 
-    }
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })

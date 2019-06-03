@@ -23,6 +23,10 @@ Page({
         return util.shareObj
     },
 
+    maskeclick:function(){
+        util.toast("敬请期待！",1200)
+    },
+
     // 收集formid
     formSubmit: function (e) {
         util.formSubmit(app, e);

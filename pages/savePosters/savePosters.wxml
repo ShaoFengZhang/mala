@@ -1,2 +1,30 @@
-<!--pages/savePosters/savePosters.wxml-->
-<text>pages/savePosters/savePosters.wxml</text>
+<view class="bg">
+
+    <view class='toptxt'>
+        <text>点开大图，长按可以分享给朋友</text>
+    </view>
+
+    <view class='posterImg' style='width:{{imgW}}rpx'>
+        <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
+    </view>
+
+    <view class='botBtnView'>
+        <view class='shareFriend'>
+            <view>
+                <image src='/assets/poster/shareF.png' />
+            </view>
+
+            <view style='height:62rpx;'>发给朋友</view>
+            <button  id='shareBtn' open-type='share'></button>
+        </view>
+
+        <view class='backbtn'>
+            <view>
+                <image src='/assets/poster/back.png' />
+            </view>
+
+            <view style='height:62rpx;'>返回</view>
+        </view>
+    </view>
+
+</view>

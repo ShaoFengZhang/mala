@@ -1,66 +1,67 @@
-// pages/shareMakes/shareMakes.js
+import loginApi from '../../utils/login.js'
+import util from '../../utils/util.js'
+const app = getApp();
+
 Page({
 
-    /**
-     * 页面的初始数据
-     */
     data: {
-
+        ifshowInput:0,
+        inputValue:'来麻辣短句，分享你的诗意',
+        focusNum:0,
+        focusUserArr:[1,23,5,6],
+        rewardView:0,
     },
 
-    /**
-     * 生命周期函数--监听页面加载
-     */
     onLoad: function (options) {
-
+        
     },
 
-    /**
-     * 生命周期函数--监听页面初次渲染完成
-     */
-    onReady: function () {
-
-    },
-
-    /**
-     * 生命周期函数--监听页面显示
-     */
     onShow: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面隐藏
-     */
     onHide: function () {
 
     },
 
-    /**
-     * 生命周期函数--监听页面卸载
-     */
-    onUnload: function () {
-
-    },
-
-    /**
-     * 页面相关事件处理函数--监听用户下拉动作
-     */
-    onPullDownRefresh: function () {
-
-    },
-
-    /**
-     * 页面上拉触底事件的处理函数
-     */
-    onReachBottom: function () {
-
-    },
-
-    /**
-     * 用户点击右上角分享
-     */
     onShareAppMessage: function () {
+        return util.shareObj
+    },
 
-    }
+    editorTxt:function(){
+        this.setData({
+            ifshowInput:1,
+            inputValue:'',
+        });
+    },
+
+    saveTxt:function(){
+        if (!util.check(this.data.inputValue)) {
+            util.toast("请输入有效内容~", 1200);
+            this.setData({
+                inputValue:'来麻辣短句，分享你的诗意',
+            });
+        };
+
+        let inputValue=null;
+        if (this.data.inputValue==""){
+            inputValue ="来麻辣短句，分享你的诗意";
+        }else{
+            inputValue = this.data.inputValue
+        }
+        this.setData({
+            ifshowInput: 0,
+            inputValue: inputValue,
+        })
+    },
+
+    closeReward:function(){
+        this.setData({
+            rewardView: !this.data.rewardView, 
+        })
+    },
+
+    formSubmit: function (e) {
+        util.formSubmit(app, e);
+    },
 })
