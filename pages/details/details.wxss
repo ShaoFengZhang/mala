@@ -45,8 +45,13 @@
 .pointMenu {
     width: 52rpx;
     height: 76rpx;
-    line-height: 26rpx;
-    text-align: right;
+    text-align: center;
+}
+
+.pointMenu image{
+    width: 28rpx;
+    height: 28rpx;
+    vertical-align: middle;
 }
 
 /* 内容文字简介 */

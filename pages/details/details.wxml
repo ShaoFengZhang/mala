@@ -20,9 +20,10 @@
                         <view style='color:#666;font-size:24rpx;'>{{content.time}}</view>
                     </view>
 
-                    <!-- <view class='pointMenu'>
-                        <text>...</text>
-                    </view> -->
+                    <view class='pointMenu' data-id='{{content.id}}' catchtap='showTables'>
+                        <!-- <text>...</text> -->
+                        <image src='/assets/index/posterShare.png' />
+                    </view>
 
                 </view>
 

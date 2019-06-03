@@ -5,17 +5,17 @@ Component({
 
     properties: {
 
-        contentArr:{
-            type:Array,
-            value:{}
+        contentArr: {
+            type: Array,
+            value: {}
         },
-        srcDomin:{
-            type:String,
-            value:'',
+        srcDomin: {
+            type: String,
+            value: '',
         },
-        showBotTxt:{
-            type:Boolean,
-            value:0,
+        showBotTxt: {
+            type: Boolean,
+            value: 0,
         },
 
         hasUserInfo: {
@@ -30,17 +30,26 @@ Component({
     },
 
     data: {
-        showBotTxt:0,
-        praiseId:"",
+        showBotTxt: 0,
+        praiseId: "",
         pointAni: null,
-        praiseEvent:'praiseEvent',
+        praiseEvent: 'praiseEvent',
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
     },
 
     methods: {
-        catchtap:function(){},
+        catchtap: function() {},
+
+        showTables: function(e) {
+            let id = parseInt(e.currentTarget.dataset.id);
+            console.log(id);
+            // wx.navigateTo({
+            //     url: `/pages/details/details?conId=${this.data.contentArr[index].id}`,
+            // })
+        },
+
         // 跳转详情页
-        goToDetails: function (e) {
+        goToDetails: function(e) {
             console.log("goToDetails")
             let index = parseInt(e.currentTarget.dataset.index);
             wx.navigateTo({
@@ -48,7 +57,7 @@ Component({
             })
         },
 
-        gotoUserHome:function(e){
+        gotoUserHome: function(e) {
             let uid = e.currentTarget.dataset.uid;
             let openid = e.currentTarget.dataset.openid;
             let urlsrc = e.currentTarget.dataset.src;
@@ -60,9 +69,9 @@ Component({
         },
 
         // 动画
-        crearteAnimation: function () {
+        crearteAnimation: function() {
 
-            if(!this.canAni){
+            if (!this.canAni) {
                 let _this = this;
                 this.setData({
                     // praiseId: '',
@@ -82,15 +91,15 @@ Component({
                 this.setData({
                     pointAni: pointAni.export(),
                 });
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.setData({
                         praiseEvent: 'praiseEvent',
                     })
-                },600)
+                }, 600)
             }
         },
 
-        praiseEvent: function (e) {
+        praiseEvent: function(e) {
             this.setData({
                 praiseId: '',
                 pointAni: null,
@@ -109,7 +118,7 @@ Component({
         },
 
         // 点赞请求
-        addpriseNum: function (cid, index) {
+        addpriseNum: function(cid, index) {
             let _this = this;
             let addpriseNumUrl = loginApi.domin + '/home/index/support';
             loginApi.requestUrl(_this, addpriseNumUrl, "POST", {
@@ -118,7 +127,7 @@ Component({
                 "uid": wx.getStorageSync("u_id"),
                 "bopenid": this.data.contentArr[index].openid,
                 "buid": this.data.contentArr[index].uid,
-            }, function (res) {
+            }, function(res) {
                 console.log(res);
                 if (res.status == 1) {
                     let arr = _this.data.contentArr;
@@ -135,12 +144,12 @@ Component({
         },
 
         // 获取用户信息
-        getUserInfo: function (e) {
+        getUserInfo: function(e) {
             this.triggerEvent('myevent', e.detail);
         },
 
         // 收集formid
-        formSubmit: function (e) {
+        formSubmit: function(e) {
             util.formSubmit(app, e);
         }
     },

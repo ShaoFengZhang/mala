@@ -49,7 +49,6 @@
 .userDataView {
     width: 720rpx;
     height: 140rpx;
-    box-shadow: 10rpx 8 rpx 40rpx 0px rgba(0, 0, 0, 0.1);
     box-shadow: 6px 5px 10px -4px rgba(0, 0, 0, 0.06), 5px 1px 10px -4px rgba(0, 0, 0, 0.06);
     border-radius: 10rpx;
     margin-top: 42rpx;
@@ -66,7 +65,9 @@
     height: 162rpx;
     margin: 42rpx auto 0;
     text-align: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding: 0 20rpx;
 }
 
 .message, .collection, .dynamic {

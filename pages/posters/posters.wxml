@@ -1,0 +1,7 @@
+<view class="bg">
+
+    <view class='posterImg' style='width:{{imgW}}rpx'>
+        <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img.png' />
+    </view>
+
+</view>

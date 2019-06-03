@@ -12,7 +12,11 @@
         "pages/fans/fans",
         "pages/collection/collection",
         "pages/state/state",
-        "pages/userCenter/userCenter"
+        "pages/userCenter/userCenter",
+        "pages/beansMall/beansMall",
+        "pages/shareMakes/shareMakes",
+        "pages/posters/posters",
+        "pages/savePosters/savePosters"
     ],
 
     "window": {

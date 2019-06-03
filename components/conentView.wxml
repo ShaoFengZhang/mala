@@ -30,9 +30,10 @@
 
             </view>
 
-            <!-- <view class='pointMenu'>
-                        <text>...</text>
-                    </view> -->
+            <view class='pointMenu' data-id='{{item.id}}' catchtap='showTables'>
+                <!-- <text>...</text> -->
+                <image src='/assets/index/posterShare.png' />
+            </view>
 
         </view>
 

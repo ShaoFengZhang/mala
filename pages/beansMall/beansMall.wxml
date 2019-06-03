@@ -1,0 +1,39 @@
+<view class='bg'>
+
+    <view class='goodsList goodsFlex'>
+
+
+        <view class='goodsView' wx:for="{{mallArr}}" wx:key="{{index}}">
+
+            <view class='goodsImg'>
+                <image mode='aspectFill' src='/assets/shareimg/img.png' />
+            </view>
+
+            <view class='goodsDes'>
+                <text decode='1'>六爪钻戒白18K金PT950铂金时群镶钻石女戒钻石戒指</text>
+            </view>
+
+            <view class='goodsDate'>
+                <text style='color:#FF493A;'>3000句豆</text>
+                <text style='color:#999999'>1人次/周</text>
+                <!-- <text style='color:#999999'>剩余x件</text> -->
+            </view>
+
+            <view class='exchange goodsStatus'>
+                <text>立即兑换</text>
+            </view>
+
+            <!-- <view class='goodsStatus nogoods'>
+                <text>抢购一空</text>
+            </view>
+
+            <view class='goodsStatus forward'>
+                <text>敬请期待</text>
+            </view> -->
+
+        </view>
+
+
+    </view>
+
+</view>

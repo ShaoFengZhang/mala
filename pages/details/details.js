@@ -284,6 +284,14 @@ Page({
         })
     },
 
+    showTables: function (e) {
+        let id = parseInt(e.currentTarget.dataset.id);
+        console.log(id);
+        // wx.navigateTo({
+        //     url: `/pages/details/details?conId=${this.data.contentArr[index].id}`,
+        // })
+    },
+
     // 动画
     crearteAnimation: function() {
         this.setData({
