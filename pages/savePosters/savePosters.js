@@ -56,6 +56,12 @@ Page({
         })
     },
 
+    backTopPage:function(){
+        wx.navigateBack({
+            delta: 1
+        })
+    },
+
     formSubmit: function (e) {
         util.formSubmit(app, e);
     },

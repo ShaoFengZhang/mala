@@ -65,6 +65,7 @@ Page({
             console.log('SCENE', options);
             let scene = decodeURIComponent(options.scene);
             options.conId = scene.split('&')[0];
+            this.shareUid = scene.split('&')[1];
         };
 
         loginApi.wxlogin(app).then(function (value) {

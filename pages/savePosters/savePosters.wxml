@@ -18,7 +18,7 @@
             <button  id='shareBtn' open-type='share'></button>
         </view>
 
-        <view class='backbtn'>
+        <view class='backbtn' catchtap='backTopPage'>
             <view>
                 <image src='/assets/poster/back.png' />
             </view>

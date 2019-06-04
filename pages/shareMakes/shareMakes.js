@@ -33,9 +33,17 @@ Page({
             ifshowInput:1,
             inputValue:'',
         });
+        this.inputValue=null;
+    },
+
+    bindinput:function(e){
+        this.inputValue=e.detail.value;
     },
 
     saveTxt:function(){
+        this.setData({
+            inputValue: this.inputValue ? this.inputValue:'',
+        })
         if (!util.check(this.data.inputValue)) {
             util.toast("请输入有效内容~", 1200);
             this.setData({
