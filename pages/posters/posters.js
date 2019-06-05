@@ -42,7 +42,8 @@ Page({
             },
         ],
         selectCardId: 0,
-        postSrc: "/assets/shareimg/img2.png"
+        postSrc: "/assets/shareimg/img2.png",
+        ifGif:1,
     },
 
     onLoad: function(options) {
@@ -71,6 +72,12 @@ Page({
         })
     },
 
+    bindload:function(){
+        this.setData({
+            ifGif:0,
+        })
+    },
+
     // 设置背景颜色
     setBackColor: function(color) {
         wx.setNavigationBarColor({
@@ -91,6 +98,7 @@ Page({
         };
         this.setData({
             selectCardId: id,
+            ifGif: 1,
         });
         this.setBackColor(this.data.cardArr[id].color)
     },

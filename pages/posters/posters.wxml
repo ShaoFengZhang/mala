@@ -1,7 +1,7 @@
 <view class="bg {{cardArr[selectCardId].bg}}">
 
     <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
-        <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
+        <image bindload="bindload" style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
     </view>
 
     <view class='botCardView'>
@@ -13,6 +13,10 @@
         <view class='card savecard' catchtap='savePic'>
             <text>保存</text>
         </view>
+    </view>
+
+    <view class='LoadingView' wx:if="{{ifGif}}">
+        <image src='/assets/poster/load.gif'/>
     </view>
 
 </view>

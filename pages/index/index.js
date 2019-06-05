@@ -89,6 +89,7 @@ Page({
         })
 
         this.timeOut = setTimeout(() => {
+            console.log("timeOut")
             if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
                 console.log("this.timeOut")
                 if (options && options.conId) {
@@ -97,7 +98,7 @@ Page({
                     _this.getContent(0);
                 }
             }
-        }, 1000)
+        }, 2200)
     },
 
     onReady: function() {},
