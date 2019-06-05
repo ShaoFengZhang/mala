@@ -8,22 +8,37 @@ Page({
         cardArr: [{
                 txt: "文艺",
                 id: 0,
+                color: "#D0CCE4",
+                bg: "bgw",
+                cardColor: "#ACA5CE",
             },
             {
                 txt: "祝福",
                 id: 1,
+                color: "#FFD973",
+                bg: "bgz",
+                cardColor: "#FF744F",
             },
             {
                 txt: "爱情",
                 id: 2,
+                color: "#F7D5DE",
+                bg: "bga",
+                cardColor: "#DC284F",
             },
             {
                 txt: "贺卡",
                 id: 3,
+                color: "#BF1A1F",
+                bg: "bgh",
+                cardColor: "#FFCA5F",
             },
             {
                 txt: "信纸",
                 id: 4,
+                color: "#E5D1C4",
+                bg: "bgx",
+                cardColor: "#806B5D",
             },
         ],
         selectCardId: 0,
@@ -31,6 +46,7 @@ Page({
     },
 
     onLoad: function(options) {
+        this.setBackColor(this.data.cardArr[0].color);
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
         this.setData({
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
@@ -38,9 +54,7 @@ Page({
         console.log(options);
     },
 
-    onShow: function() {
-
-    },
+    onShow: function() {},
 
     onHide: function() {
 
@@ -57,6 +71,18 @@ Page({
         })
     },
 
+    // 设置背景颜色
+    setBackColor: function(color) {
+        wx.setNavigationBarColor({
+            frontColor: '#ffffff',
+            backgroundColor: color,
+            animation: {
+                duration: 400,
+                timingFunc: 'easeIn'
+            }
+        });
+    },
+
     // 切换贺卡
     changeCard: function(e) {
         let id = e.currentTarget.dataset.id;
@@ -65,11 +91,12 @@ Page({
         };
         this.setData({
             selectCardId: id,
-        })
+        });
+        this.setBackColor(this.data.cardArr[id].color)
     },
 
     savePic: function() {
-        let _this=this;
+        let _this = this;
         wx.getSetting({
             success(res) {
                 // 进行授权检测，未授权则进行弹层授权
@@ -89,7 +116,7 @@ Page({
                 } else {
                     // 已授权则直接进行保存图片
                     _this.saveImage()
-                    
+
                 }
             },
             fail(res) {
@@ -115,8 +142,7 @@ Page({
                             url: `/pages/savePosters/savePosters`,
                         })
                     },
-                    complete(res){
-                    }
+                    complete(res) {}
                 })
             }
         })

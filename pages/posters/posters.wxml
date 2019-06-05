@@ -1,4 +1,4 @@
-<view class="bg">
+<view class="bg {{cardArr[selectCardId].bg}}">
 
     <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
         <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
@@ -6,7 +6,7 @@
 
     <view class='botCardView'>
 
-        <view catchtap='changeCard' class='card {{selectCardId==item.id?"selectCard":""}}' wx:for="{{cardArr}}" wx:key="{{index}}" data-id='{{item.id}}'>
+        <view catchtap='changeCard' class='card {{selectCardId==item.id?"selectCard":""}}' wx:for="{{cardArr}}" style='background-color:{{selectCardId==item.id?cardArr[selectCardId].cardColor:""}}' wx:key="{{index}}" data-id='{{item.id}}'>
             <text>{{item.txt}}</text>
         </view>
 

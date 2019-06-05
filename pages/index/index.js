@@ -14,7 +14,7 @@ Page({
         swiperCurrentIndex: 0,
         contentArr: [],
         current: 0,
-        ifloadtxt:0,
+        ifloadtxt: 0,
     },
 
     onLoad: function(options) {
@@ -59,7 +59,7 @@ Page({
                 }
             })
         };
-        
+
         // 带参数二维码
         if (options && options.scene) {
             console.log('SCENE', options);
@@ -68,26 +68,39 @@ Page({
             this.shareUid = scene.split('&')[1];
         };
 
-        loginApi.wxlogin(app).then(function (value) {
+        loginApi.wxlogin(app).then(function(value) {
             console.log(options);
             if (options && options.conId) {
                 _this.getContent(0, options.conId);
             } else {
                 _this.getContent(0);
             }
-        }).catch(function (error) {
+        }, function(error) {
             console.log("error", error);
             if (options && options.conId) {
-                _this.getContent(0, options.conId);
+                if (wx.getStorageSync("u_id")) {
+                    _this.getContent(0, options.conId);
+                }
             } else {
-                _this.getContent(0);
+                if (wx.getStorageSync("u_id")) {
+                    _this.getContent(0);
+                }
             }
-            
-        });
+        })
+
+        this.timeOut = setTimeout(() => {
+            if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
+                console.log("this.timeOut")
+                if (options && options.conId) {
+                    _this.getContent(0, options.conId);
+                } else {
+                    _this.getContent(0);
+                }
+            }
+        }, 1000)
     },
 
-    onReady:function(){
-    },
+    onReady: function() {},
 
     onShow: function() {
         this.setData({
@@ -97,9 +110,9 @@ Page({
             }],
         });
         this.getClass();
-        console.log(app.praiseIndex,'app.praiseIndex')
+        console.log(app.praiseIndex, 'app.praiseIndex')
         if (app.praiseIndex) {
-            app.praiseIndex = parseInt(app.praiseIndex)-1 
+            app.praiseIndex = parseInt(app.praiseIndex) - 1
             console.log(this.data.contentArr[app.praiseIndex])
             this.data.contentArr[app.praiseIndex].dianji = 1;
             this.data.contentArr[app.praiseIndex].support = this.data.contentArr[app.praiseIndex].support + 1;
@@ -110,12 +123,12 @@ Page({
         app.praiseIndex = null;
     },
 
-    onTabItemTap: function () {
+    onTabItemTap: function() {
         try {
             wx.removeStorageSync('classId');
             wx.removeStorageSync('className');
         } catch (e) {
-            
+
         }
     },
 
@@ -167,7 +180,7 @@ Page({
             praiseId: '',
             showBotTxt: 0,
             ifloadtxt: 0,
-            current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current):index-4):0,
+            current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current) : index - 4) : 0,
         });
         this.page = 1;
         this.rows = 20;
@@ -176,7 +189,7 @@ Page({
     },
 
     // 获取内容
-    getContent: function (type,conId) {
+    getContent: function(type, conId) {
         util.loding('加载中');
         let _this = this;
         let getContentUrl = loginApi.domin + '/home/index/doindex';
@@ -218,13 +231,13 @@ Page({
                     };
                 };
 
-                if (res.contents.length==0){
-                    _this.page==1?_this.page:_this.page--;
+                if (res.contents.length == 0) {
+                    _this.page == 1 ? _this.page : _this.page--;
                     _this.cangetData = false;
                     util.toast("暂无更多更新");
                     _this.setData({
                         ifloadtxt: 0,
-                        showBotTxt:1,
+                        showBotTxt: 1,
                     });
                     return;
                 };
@@ -235,11 +248,11 @@ Page({
                 });
 
                 _this.setData({
-                    contentArr:res.contents,
+                    contentArr: res.contents,
                     ifloadtxt: 1,
                 });
                 wx.stopPullDownRefresh();
-                                
+
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
@@ -247,13 +260,13 @@ Page({
                         ifloadtxt: 0,
                     });
                 };
-                if (conId){
+                if (conId) {
                     wx.hideLoading();
                     _this.goToDetails(conId);
-                }else{
+                } else {
                     wx.hideLoading();
                 };
-                
+
             }
         })
     },
@@ -274,31 +287,32 @@ Page({
     },
 
     // 加载上一页
-    onPullDownRefresh:function(){
+    onPullDownRefresh: function() {
         console.log("onPullDownRefresh")
-        let _this=this;
+        let _this = this;
         if (this.page > 1) {
             this.page--;
             this.getContent(this.data.swiperCurrentIndex);
         } else {
-            util.toast('暂无更多更新', 800);
+            // util.toast('暂无更多更新', 800);
+            this.getContent(this.data.swiperCurrentIndex);
             wx.stopPullDownRefresh();
         };
-        return; 
+        return;
     },
 
     // 加载下一页
-    onReachBottom:function(){
+    onReachBottom: function() {
         if (this.cangetData) {
             this.page++;
             clearTimeout(this.bottomTime);
-            this.bottomTime=setTimeout(()=>{
+            this.bottomTime = setTimeout(() => {
                 this.getContent(this.data.swiperCurrentIndex);
-            },1000)
-            
+            }, 1000)
+
         } else {
             util.toast('暂无更多更新', 1200);
-        } 
+        }
     },
 
     // 滑动切换选项相关事件
@@ -390,13 +404,13 @@ Page({
 
     catchtap: function() {},
     // 跳转详情页
-    goToDetails: function (conId) {
+    goToDetails: function(conId) {
         wx.navigateTo({
             url: `/pages/details/details?conId=${conId}`,
         })
     },
 
-    formSubmit:function(e){
-        util.formSubmit(app,e);
+    formSubmit: function(e) {
+        util.formSubmit(app, e);
     },
 })
