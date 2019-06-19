@@ -1,7 +1,42 @@
 <view class="bg {{cardArr[selectCardId].bg}}">
 
-    <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
+    <!-- <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
         <image bindload="bindload" style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
+    </view> -->
+
+    <view class='posterImgView'>
+        <view>
+            <image class='contentImg' src='/assets/shareimg/img.png' />
+        </view>
+
+        <view class='cardView posterImgView' style='background-image: url({{cardArr[selectCardId].bgUrl}});'>
+            <view class='contentImg'></view>
+            <view class='contentTxt'>
+                <text style='color:{{cardArr[selectCardId].posterColor}}' class='fourEllipsis' decode='1' space="nbsp">哈哈哈哈    哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
+            </text>
+            </view>
+
+            <view class='qrView'>
+
+                <view class='qrcodeView'>
+                    <view class='qrcode'>
+                        <image src='{{qrcode}}' />
+                    </view>
+                    <view class='userIcon'>
+                        <image src='{{userIcon}}' />
+                    </view>
+                </view>
+
+                <view class='userinfoView' style='color:{{cardArr[selectCardId].posterColor}}'>
+                    <view style='font-size:32rpx;'>Henery</view>
+                    <view style='font-size:24rpx;margin-top:6rpx;'>2019/05/28</view>
+                </view>
+
+            </view>
+        </view>
+
+
+
     </view>
 
     <view class='botCardView'>
@@ -15,8 +50,7 @@
         </view>
     </view>
 
-    <view class='LoadingView' wx:if="{{ifGif}}">
+    <!-- <view class='LoadingView' wx:if="{{ifGif}}">
         <image src='/assets/poster/load.gif'/>
-    </view>
-
+    </view> -->
 </view>

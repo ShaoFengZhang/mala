@@ -34,6 +34,80 @@
     width: 670rpx;
     border-radius: 20rpx;
 }
+/* 假海报start */
+.posterImgView {
+    width: 670rpx;
+    height: 946rpx;
+    border-radius: 16rpx;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    position: relative;
+    background-size: 100%;
+    margin: 32rpx auto 0;
+}
+
+.cardView{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin:0;
+}
+
+.contentImg {
+    width: 670rpx;
+    height: 400rpx;
+    vertical-align: top;
+}
+
+.contentTxt {
+    width: 590rpx;
+    height: 240rpx;
+    font-size: 36rpx;
+    line-height: 56rpx;
+    margin: 40rpx auto 0;
+}
+
+.qrView {
+    width: 550rpx;
+    height: 144rpx;
+    margin: 42rpx auto 0;
+    display: flex;
+}
+
+.qrcodeView {
+    width: 144rpx;
+    height: 144rpx;
+    position: relative;
+}
+
+.qrcode, .qrcode image {
+    width: 144rpx;
+    height: 144rpx;
+    border-radius: 50%;
+}
+
+.userIcon {
+    position: absolute;
+    top: 38rpx;
+    left: 38rpx;
+}
+
+.userIcon, .userIcon image {
+    width: 70rpx;
+    height: 70rpx;
+    border-radius: 50%;
+}
+
+.userinfoView{
+    width: 286rpx;
+    height: 144rpx;
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    margin-left: 20rpx;
+}
+/* 假海报end */
 
 .posterImg image {
     vertical-align: middle;
@@ -88,7 +162,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#f9f7ef;
+    background-color: #f9f7ef;
 }
 
 .LoadingView image {

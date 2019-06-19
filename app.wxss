@@ -89,6 +89,13 @@ button::after {
     text-overflow: ellipsis;
 }
 
+.fourEllipsis {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+
 .viewLine {
     width: 100%;
     height: 2rpx;

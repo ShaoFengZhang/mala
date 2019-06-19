@@ -11,6 +11,8 @@ Page({
                 color: "#D0CCE4",
                 bg: "bgw",
                 cardColor: "#ACA5CE",
+                posterColor: "#75789C",
+                bgUrl: "https://duanju.58100.com/upload/wenyi.png"
             },
             {
                 txt: "祝福",
@@ -18,6 +20,8 @@ Page({
                 color: "#FFD973",
                 bg: "bgz",
                 cardColor: "#FF744F",
+                posterColor: "#fff",
+                bgUrl: "https://duanju.58100.com/upload/zhufu.png"
             },
             {
                 txt: "爱情",
@@ -25,6 +29,8 @@ Page({
                 color: "#F7D5DE",
                 bg: "bga",
                 cardColor: "#DC284F",
+                posterColor: "#DC284F",
+                bgUrl: "https://duanju.58100.com/upload/aiqing.png"
             },
             {
                 txt: "贺卡",
@@ -32,6 +38,8 @@ Page({
                 color: "#BF1A1F",
                 bg: "bgh",
                 cardColor: "#FFCA5F",
+                posterColor: "#C40900",
+                bgUrl: "https://duanju.58100.com/upload/heka.png"
             },
             {
                 txt: "信纸",
@@ -39,18 +47,24 @@ Page({
                 color: "#E5D1C4",
                 bg: "bgx",
                 cardColor: "#806B5D",
+                posterColor: "#806B5D",
+                bgUrl: "https://duanju.58100.com/upload/xinzhi.png"
             },
         ],
         selectCardId: 0,
         postSrc: "/assets/shareimg/img2.png",
-        ifGif:1,
+        ifGif: 1,
     },
 
     onLoad: function(options) {
+        console.log(app.globalData)
         this.setBackColor(this.data.cardArr[0].color);
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
         this.setData({
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
+            qrcode: this.qrcodeImg = `${loginApi.domin}/home/index/qcodes?page=pages/index/index&uid=${wx.getStorageSync('u_id')}&contentid=${2057}`,
+            // userIcon: app.globalData.userInfo.avatarUrl
+            userIcon: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqibOnajgQ9rXbM64pBA6MPZb8S8RicBhY10Nr4C9Fo6UPnRlNY8ZAdZ2hVlJz1tMMRys64NxpCnwOQ/132"
         });
         console.log(options);
     },
@@ -65,16 +79,9 @@ Page({
         return util.shareObj
     },
 
-    previewImage: function(e) {
-        let src = e.currentTarget.dataset.src;
-        wx.previewImage({
-            urls: ["https://duanju.58100.com/upload/usercontent/1559530636695.png"],
-        })
-    },
-
-    bindload:function(){
+    bindload: function() {
         this.setData({
-            ifGif:0,
+            ifGif: 0,
         })
     },
 
@@ -98,7 +105,7 @@ Page({
         };
         this.setData({
             selectCardId: id,
-            ifGif: 1,
+            // ifGif: 1,
         });
         this.setBackColor(this.data.cardArr[id].color)
     },
