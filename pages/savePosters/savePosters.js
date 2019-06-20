@@ -130,7 +130,7 @@ Page({
                 obj.imgurl = res.content.imgurl.split(',');
                 _this.setData({
                     contentId: obj.id,
-                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "/assets/shareimg/img.png",
+                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "https://duanju.58100.com/upload/usercontent/1561007045451.png",
                     contentTxt: obj.title ? obj.title : "麻辣短句欢迎您！"
                 });
                 _this.drawcanvs();
@@ -163,6 +163,7 @@ Page({
                 wx.getImageInfo({
                     src: _this.data.contentImg,
                     success: function(res1) {
+                        console.log(res1.path)
                         ctx.drawImage(res1.path,0,0,res1.width,res1.height, cantarget.left, cantarget.top, cantarget.width, cantarget.height);
                         ctx.drawImage(canvasImg, 0, 0, _this.data.bgimgW, _this.data.bgimgH);
                         ctx.setTextBaseline('top');

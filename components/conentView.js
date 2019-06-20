@@ -102,6 +102,8 @@ Component({
                 setTimeout(() => {
                     this.setData({
                         praiseEvent: 'praiseEvent',
+                        praiseId: '',
+                        pointAni: null,
                     })
                 }, 600)
             }
@@ -139,8 +141,13 @@ Component({
                 console.log(res);
                 if (res.status == 1) {
                     let arr = _this.data.contentArr;
-                    arr[index].support = parseInt(arr[index].support) + 1;
+                    console.log(arr[index])
+                    arr[index].support = parseInt(arr[index].ySupport) + 1;
+                    let num = parseInt(arr[index].support);
+                    arr[index].ySupport = parseInt(arr[index].support);
+                    arr[index].support = (Math.floor(num / 1000) / 10) + 'w+'
                     arr[index].dianji = 1;
+                    console.log(arr[index]);
                     _this.setData({
                         contentArr: arr,
                         praiseId: cid,

@@ -74,7 +74,11 @@ Page({
                 _this.getContent(0, options.conId);
             } else {
                 _this.getContent(0);
+            };
+            if (options && options.scene){
+                _this.checkNewFans(_this.shareUid)
             }
+            _this.checkNewFans('5cd022665293d');
         }, function(error) {
             console.log("error", error);
             if (options && options.conId) {
@@ -86,8 +90,11 @@ Page({
                     _this.getContent(0);
                 }
             }
+            if (options && options.scene) {
+                _this.checkNewFans(_this.shareUid)
+            }
         })
-
+        
         this.timeOut = setTimeout(() => {
             if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
                 console.log("this.timeOut")
@@ -95,6 +102,9 @@ Page({
                     _this.getContent(0, options.conId);
                 } else {
                     _this.getContent(0);
+                }
+                if (options && options.scene) {
+                    _this.checkNewFans(_this.shareUid)
                 }
             }
         }, 2200)
@@ -217,16 +227,18 @@ Page({
 
                 for (let i = 0; i < res.contents.length; i++) {
                     res.contents[i].imgurl = res.contents[i].imgurl.split(',');
+                    res.contents[i].ySupport = parseInt(res.contents[i].support);
+                    res.contents[i].yComments = parseInt(res.contents[i].comments);
                 };
 
                 for (let i = 0; i < res.contents.length; i++) {
                     // 获赞处理
-                    if (parseInt(res.contents[i].support) > 10000) {
+                    if (parseInt(res.contents[i].support) >= 10000) {
                         let num = parseInt(res.contents[i].support);
                         res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
                     };
                     // 评论
-                    if (parseInt(res.contents[i].comments) > 10000) {
+                    if (parseInt(res.contents[i].comments) >= 10000) {
                         let num = parseInt(res.contents[i].comments);
                         res.contents[i].comments = (Math.floor(num / 1000) / 10) + 'w+'
                     };
@@ -316,98 +328,22 @@ Page({
         }
     },
 
-    // 滑动切换选项相关事件
-    drawStart: function(e) {
-        let touch = e.touches[0];
-        this.setData({
-            startX: touch.clientX,
-            startY: touch.clientY,
-        });
-        this.canmove = true;
-    },
-
-    drawMove: function(e) {
-        let _this = this;
-        let touch = e.touches[0]
-        let disX = this.data.startX - touch.clientX;
-        let disY = touch.clientY - this.data.startY;
-        if (!this.canmove) {
-            return;
-        }
-        if (Math.abs(disY) > 8) {
-            return;
-        } else {
-            this.canmove = false;
-            // 往左边
-            if (disX <= -10) {
-                _this.setData({
-                    drawStart: "",
-                    drawMove: '',
-                });
-                if (_this.data.swiperCurrentIndex == _this.data.classArr[0].id) {
-                    return;
-                }
-                for (let i = 0; i < _this.data.classArr.length; i++) {
-                    if (_this.data.classArr[i].id == _this.data.swiperCurrentIndex) {
-                        _this.setData({
-                            swiperCurrentIndex: _this.data.classArr[i - 1].id,
-                            current: i - 1 > 2 ? (this.data.classArr.length - i + 1 > 3 ? i - 1 - 2 : this.data.current) : 0,
-                            contentArr: [],
-                            praiseId: '',
-                        });
-                        this.page = 1;
-                        this.rows = 10;
-                        this.cangetData = true;
-                        this.getContent(_this.data.classArr[i - 1].id);
-                        return;
-                    }
-                };
-                // 往右边
-            } else if (disX >= 10) {
-                _this.setData({
-                    drawStart: "",
-                    drawMove: '',
-                });
-
-                if (_this.data.swiperCurrentIndex == _this.data.classArr[_this.data.classArr.length - 1].id) {
-                    return;
-                };
-                for (let i = 0; i < _this.data.classArr.length; i++) {
-                    if (_this.data.classArr[i].id == _this.data.swiperCurrentIndex) {
-                        _this.setData({
-                            swiperCurrentIndex: _this.data.classArr[i + 1].id,
-                            current: i + 1 > 2 ? (this.data.classArr.length - i - 1 > 3 ? (i + 1) - 2 : this.data.current) : 0,
-                            contentArr: [],
-                            praiseId: '',
-                        });
-                        this.page = 1;
-                        this.rows = 10;
-                        this.cangetData = true;
-                        this.getContent(_this.data.classArr[i + 1].id);
-                        return;
-                    }
-                };
-            }
-        }
-    },
-
-    drawEnd: function(e) {
-        let _this = this;
-        setTimeout(function() {
-            _this.setData({
-                drawStart: "drawStart",
-                drawMove: 'drawMove',
-                startX: null,
-                startY: null,
-            });
-        }, 500);
-    },
-
     catchtap: function() {},
     // 跳转详情页
     goToDetails: function(conId) {
         wx.navigateTo({
             url: `/pages/details/details?conId=${conId}`,
+        })
+    },
+
+    checkNewFans:function(fatherId){
+        let _this = this;
+        let checkNewFansUrl = loginApi.domin + '/home/index/newfan';
+        loginApi.requestUrl(_this, checkNewFansUrl, "POST", {
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+            "fuid": fatherId,
+        }, function (res) {
         })
     },
 

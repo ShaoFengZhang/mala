@@ -8,7 +8,7 @@
 
         <view class='moeditorTxt' wx:if="{{!ifshowInput}}">
             <text>{{inputValue}}</text>
-            <image src='/assets/poster/edit.png' catchtap='editorTxt' />
+            <!-- <image src='/assets/poster/edit.png' catchtap='editorTxt' /> -->
         </view>
 
         <view class='inputTxtView' wx:if="{{ifshowInput}}">
@@ -23,7 +23,8 @@
     </view>
 
     <view class='zidingyiTxt'>
-        <text>点击上方输入自定义文案</text>
+        <!-- <text>点击上方输入自定义文案</text> -->
+        <text style='color:#27BCAD;' catchtap='closeReward'>奖励规则</text>
     </view>
 
     <view class='botBtnView'>
@@ -36,7 +37,7 @@
             <button  id='shareBtn' open-type='share'></button>
         </view>
 
-        <view class='backbtn'>
+        <view class='backbtn' catchtap='savePic'>
             <view>
                 <image src='/assets/poster/save.png' />
             </view>
@@ -45,7 +46,7 @@
         </view>
     </view>
 
-    <view class='focusNum'>
+    <!-- <view class='focusNum'>
         <text style='color:#282828;'>共有{{focusNum}}人成功关注了你</text>
         <text style='color:#27BCAD;' catchtap='closeReward'>奖励规则</text>
     </view>
@@ -58,7 +59,7 @@
         <view class='focustxtView oneEllipsis'>
             <text>麻辣短句成功关注了你</text>
         </view>
-    </view>
+    </view> -->
 
     <view class='rewardView' wx:if="{{rewardView}}">
 
@@ -104,3 +105,5 @@
     </view>
 
 </view>
+
+<canvas canvas-id="canvas" style="width:{{bgimgW}}px;height:{{bgimgH}}px;display:block;position:absolute; bottom:1500px" />
