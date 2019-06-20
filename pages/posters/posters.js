@@ -5,6 +5,7 @@ const app = getApp();
 Page({
 
     data: {
+        srcDomin: loginApi.srcDomin,
         cardArr: [{
                 txt: "文艺",
                 id: 0,
@@ -12,7 +13,12 @@ Page({
                 bg: "bgw",
                 cardColor: "#ACA5CE",
                 posterColor: "#75789C",
-                bgUrl: "https://duanju.58100.com/upload/wenyi.png"
+                bgUrl: loginApi.srcDomin + "/upload/wenyi.png",
+                topimg: "wenyiimg",
+                top: 0,
+                left: 0,
+                width: 670,
+                height: 400,
             },
             {
                 txt: "祝福",
@@ -21,7 +27,12 @@ Page({
                 bg: "bgz",
                 cardColor: "#FF744F",
                 posterColor: "#fff",
-                bgUrl: "https://duanju.58100.com/upload/zhufu.png"
+                bgUrl: loginApi.srcDomin + "/upload/zhufu.png",
+                topimg: "zhufuimg",
+                top: 24,
+                left: 14,
+                width: 642,
+                height: 252,
             },
             {
                 txt: "爱情",
@@ -30,7 +41,12 @@ Page({
                 bg: "bga",
                 cardColor: "#DC284F",
                 posterColor: "#DC284F",
-                bgUrl: "https://duanju.58100.com/upload/aiqing.png"
+                bgUrl: loginApi.srcDomin + "/upload/aiqing.png",
+                topimg: "aiqingimg",
+                top: 42,
+                left: 142,
+                width: 390,
+                height: 320,
             },
             {
                 txt: "贺卡",
@@ -39,7 +55,12 @@ Page({
                 bg: "bgh",
                 cardColor: "#FFCA5F",
                 posterColor: "#C40900",
-                bgUrl: "https://duanju.58100.com/upload/heka.png"
+                bgUrl: loginApi.srcDomin + "/upload/heka.png",
+                topimg: "hekaimg",
+                top: 0,
+                left: 114,
+                width: 442,
+                height: 346,
             },
             {
                 txt: "信纸",
@@ -48,12 +69,18 @@ Page({
                 bg: "bgx",
                 cardColor: "#806B5D",
                 posterColor: "#806B5D",
-                bgUrl: "https://duanju.58100.com/upload/xinzhi.png"
+                bgUrl: loginApi.srcDomin + "/upload/xinzhi.png",
+                topimg: "xinzhiimg",
+                top: 92,
+                left: 48,
+                width: 616,
+                height: 224,
             },
         ],
         selectCardId: 0,
         postSrc: "/assets/shareimg/img2.png",
-        ifGif: 1,
+        contentImg: "/assets/shareimg/img.png",
+        contentTxt: '麻辣短句欢迎您！'
     },
 
     onLoad: function(options) {
@@ -62,11 +89,15 @@ Page({
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
         this.setData({
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
-            qrcode: this.qrcodeImg = `${loginApi.domin}/home/index/qcodes?page=pages/index/index&uid=${wx.getStorageSync('u_id')}&contentid=${2057}`,
-            // userIcon: app.globalData.userInfo.avatarUrl
-            userIcon: "https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eqibOnajgQ9rXbM64pBA6MPZb8S8RicBhY10Nr4C9Fo6UPnRlNY8ZAdZ2hVlJz1tMMRys64NxpCnwOQ/132"
+            qrcode: `${loginApi.domin}/home/index/qcodes?page=pages/index/index&uid=${wx.getStorageSync('u_id')}&contentid=${options.contentID ? options.contentID : null}`,
+            contentID: options.contentID ? options.contentID : null,
+            userIcon: app.globalData.userInfo.avatarUrl,
         });
         console.log(options);
+        if (options && options.contentID) {
+            this.getcontent(options.contentID);
+        }
+
     },
 
     onShow: function() {},
@@ -110,6 +141,29 @@ Page({
         this.setBackColor(this.data.cardArr[id].color)
     },
 
+    // 获取内容
+    getcontent: function(conId) {
+        let _this = this;
+        let getcontentUrl = loginApi.domin + '/home/index/contentone';
+        loginApi.requestUrl(_this, getcontentUrl, "POST", {
+            "id": conId,
+            "openid": wx.getStorageSync("user_openID"),
+            "uid": wx.getStorageSync("u_id"),
+        }, function(res) {
+            if (res.status == 1) {
+                let obj = res.content;
+                obj.imgurl = res.content.imgurl.split(',');
+                _this.setData({
+                    contentId: obj.id,
+                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "/assets/shareimg/img.png",
+                    contentTxt: obj.title ? obj.title : "麻辣短句欢迎您！"
+                })
+            } else {
+                util.toast("数据获取失败,请重试", 300)
+            }
+        })
+    },
+
     savePic: function() {
         let _this = this;
         wx.getSetting({
@@ -119,47 +173,28 @@ Page({
                     wx.authorize({
                         scope: 'scope.writePhotosAlbum',
                         success() {
-                            _this.saveImage()
+                            _this.toSaveposters()
                         },
                         // 拒绝授权时
                         fail() {
-                            wx.navigateTo({
-                                url: `/pages/savePosters/savePosters`,
-                            })
+                            _this.toSaveposters()
                         }
                     })
                 } else {
                     // 已授权则直接进行保存图片
-                    _this.saveImage()
-
+                    _this.toSaveposters()
                 }
             },
             fail(res) {
-                wx.navigateTo({
-                    url: `/pages/savePosters/savePosters`,
-                })
+                _this.toSaveposters()
             }
         })
 
     },
 
-    saveImage: function() {
-        wx.getImageInfo({
-            src: 'https://duanju.58100.com/upload/usercontent/1559530636695.png',
-            success(res) {
-                let {
-                    path
-                } = res;
-                wx.saveImageToPhotosAlbum({
-                    filePath: path,
-                    success(res) {
-                        wx.navigateTo({
-                            url: `/pages/savePosters/savePosters`,
-                        })
-                    },
-                    complete(res) {}
-                })
-            }
+    toSaveposters: function() {
+        wx.navigateTo({
+            url: `/pages/savePosters/savePosters?contentID=${this.data.contentID}&posterId=${this.data.selectCardId}`,
         })
     },
 

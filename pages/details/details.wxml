@@ -29,7 +29,7 @@
                 </view>
 
                 <view class='contentDetails' bindlongpress="copytxt">
-                    <text decode='1'>{{content.title}}</text>
+                    <text decode='1' space="nbsp">{{content.title}}</text>
                 </view>
 
                 <view class='contentImg' wx:if="{{content.imgurl[0]}}" wx:for="{{content.imgurl}}" wx:key="index">

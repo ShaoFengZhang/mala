@@ -34,7 +34,9 @@
     width: 670rpx;
     border-radius: 20rpx;
 }
+
 /* 假海报start */
+
 .posterImgView {
     width: 670rpx;
     height: 946rpx;
@@ -47,11 +49,11 @@
     margin: 32rpx auto 0;
 }
 
-.cardView{
+.cardView {
     position: absolute;
     top: 0;
     left: 0;
-    margin:0;
+    margin: 0;
 }
 
 .contentImg {
@@ -60,12 +62,47 @@
     vertical-align: top;
 }
 
+.wenyiimg, .wenyiimg image {
+    width: 670rpx;
+    height: 400rpx;
+    top: 0;
+    left: 0;
+}
+
+.zhufuimg, .zhufuimg image {
+    width: 642rpx;
+    height: 252rpx;
+    top: 24rpx;
+    left: 14rpx;
+}
+
+.aiqingimg, .aiqingimg image {
+    width: 390rpx;
+    height: 320rpx;
+    top: 42rpx;
+    left: 142rpx;
+}
+
+.hekaimg, .hekaimg image {
+    width: 442rpx;
+    height: 346rpx;
+    top: 0rpx;
+    left: 114rpx;
+}
+
+.xinzhiimg, .xinzhiimg image {
+    width: 616rpx;
+    height: 224rpx;
+    top: 92rpx;
+    left: 48rpx;
+}
+
 .contentTxt {
     width: 590rpx;
     height: 240rpx;
     font-size: 36rpx;
     line-height: 56rpx;
-    margin: 40rpx auto 0;
+    margin: 34rpx auto 0;
 }
 
 .qrView {
@@ -99,14 +136,15 @@
     border-radius: 50%;
 }
 
-.userinfoView{
+.userinfoView {
     width: 286rpx;
     height: 144rpx;
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     justify-content: center;
     margin-left: 20rpx;
 }
+
 /* 假海报end */
 
 .posterImg image {
@@ -151,21 +189,4 @@
 .savecard {
     background-color: #27bcad;
     color: #fff;
-}
-
-.LoadingView {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f9f7ef;
-}
-
-.LoadingView image {
-    width: 440rpx;
-    height: 440rpx;
 }

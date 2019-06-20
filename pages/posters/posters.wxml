@@ -5,15 +5,14 @@
     </view> -->
 
     <view class='posterImgView'>
-        <view>
-            <image class='contentImg' src='/assets/shareimg/img.png' />
+        <view class='{{cardArr[selectCardId].topimg}}' style=' position: absolute;'>
+            <image style='vertical-align: top;' mode='aspectFill' src='{{contentImg}}' />
         </view>
 
         <view class='cardView posterImgView' style='background-image: url({{cardArr[selectCardId].bgUrl}});'>
             <view class='contentImg'></view>
             <view class='contentTxt'>
-                <text style='color:{{cardArr[selectCardId].posterColor}}' class='fourEllipsis' decode='1' space="nbsp">哈哈哈哈    哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈
-            </text>
+                <text style='color:{{cardArr[selectCardId].posterColor}}' class='fourEllipsis' decode='1' space="nbsp">{{contentTxt}}</text>
             </view>
 
             <view class='qrView'>
@@ -50,7 +49,7 @@
         </view>
     </view>
 
-    <!-- <view class='LoadingView' wx:if="{{ifGif}}">
+    <view class='LoadingView' wx:if="{{ifGif}}">
         <image src='/assets/poster/load.gif'/>
-    </view> -->
+    </view>
 </view>

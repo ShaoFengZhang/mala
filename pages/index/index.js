@@ -89,7 +89,6 @@ Page({
         })
 
         this.timeOut = setTimeout(() => {
-            console.log("timeOut")
             if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
                 console.log("this.timeOut")
                 if (options && options.conId) {
@@ -175,6 +174,7 @@ Page({
 
         let classlen = this.data.classArr.length;
         clearTimeout(this.bottomTime);
+        clearTimeout(this.timeOut);
         this.setData({
             swiperCurrentIndex: classId,
             contentArr: [],

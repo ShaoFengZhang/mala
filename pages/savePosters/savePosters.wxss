@@ -2,6 +2,7 @@
     width: 100%;
     height: 100vh;
     background-color: #F3F5F9;
+    position: relative;
 }
 
 .toptxt{
@@ -53,5 +54,22 @@
     text-align: center;
     line-height: 62rpx;
     position: relative;
+}
+
+.LoadingView {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f7ef;
+}
+
+.LoadingView image {
+    width: 440rpx;
+    height: 440rpx;
 }
 

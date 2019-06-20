@@ -8,7 +8,7 @@ const formatTime = date => {
     const minute = date.getMinutes()
     const second = date.getSeconds()
 
-    return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
+    return [year, month, day].map(formatNumber).join('/')
 
 };
 
@@ -155,7 +155,7 @@ const dateArrStort = function(data, p) {
     return data;
 };
 
-const formSubmit = function(app,e) {
+const formSubmit = function(app, e) {
     console.log(1212121, e.detail.formId);
     let _this = this;
     let collectFormIdUrl = login.domin + '/home/index/formid';
@@ -185,4 +185,5 @@ module.exports = {
     check: check,
     shareObj: shareObj,
     formSubmit: formSubmit,
+    javaTrim: javaTrim,
 }

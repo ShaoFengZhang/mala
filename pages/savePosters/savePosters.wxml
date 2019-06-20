@@ -5,7 +5,7 @@
     </view>
 
     <view class='posterImg' style='width:{{imgW}}rpx' data-src="{{postSrc}}" catchtap='previewImage'>
-        <image style='width:{{imgW}}rpx' mode='widthFix' src='/assets/shareimg/img2.png' />
+        <image style='width:{{imgW}}rpx' mode='widthFix' src='{{postSrc}}' />
     </view>
 
     <view class='botBtnView'>
@@ -27,4 +27,10 @@
         </view>
     </view>
 
+    <view class='LoadingView' wx:if="{{ifGif}}">
+        <image src='/assets/poster/load.gif'/>
+    </view>
+
 </view>
+
+<canvas canvas-id="canvas" style="width:{{bgimgW}}px;height:{{bgimgH}}px;display:block;position:absolute; bottom:1500px" />
