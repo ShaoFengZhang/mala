@@ -87,6 +87,7 @@ Page({
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
             posterId: options.posterId ? options.posterId : 0,
             qrcode: `${loginApi.domin}/home/index/qcodes?page=pages/index/index&uid=${wx.getStorageSync('u_id')}&contentid=${options.contentID ? options.contentID : null}`,
+            username: options.username
         });
         options.contentID ? this.getcontent(options.contentID) : ""
     },
@@ -103,6 +104,7 @@ Page({
         return util.shareObj
     },
 
+    // 放大图片
     previewImage: function(e) {
         let src = e.currentTarget.dataset.src;
         wx.previewImage({
@@ -110,6 +112,7 @@ Page({
         })
     },
 
+    // 返回上页
     backTopPage: function() {
         wx.navigateBack({
             delta: 1
@@ -145,7 +148,7 @@ Page({
         let _this = this;
         let cantarget = this.data.cardArr[this.data.posterId];
         let ctx = wx.createCanvasContext('canvas');
-        let uerName = app.globalData.userInfo.nickName.slice(0, 10);
+        let uerName = this.data.username;
         let userDate = '于' + util.formatTime(new Date());
         let canvasImg = null;
         let userImg = null;
@@ -173,7 +176,7 @@ Page({
                         ctx.fillText(userDate, 224, 800);
                         ctx.setFontSize(32);
                         ctx.fillText(uerName, 224, 748);
-                        ctx.font = 'italic bold 36px cursive';
+                        ctx.font = 'italic normal 36px cursive';
                         let txtw = 40;
                         const cvsT = util.javaTrim(_this.data.contentTxt);
                         const metrics = ctx.measureText(cvsT);
@@ -278,6 +281,7 @@ Page({
         })
     },
 
+    // 收集formid
     formSubmit: function(e) {
         util.formSubmit(app, e);
     },

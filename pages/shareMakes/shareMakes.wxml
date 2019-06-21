@@ -3,22 +3,23 @@
     <view class='topCard'>
 
         <view class='qrCode'>
-            <image src='/assets/shareimg/img.png' mode='scaleToFill' />
+            <image src='{{qrcodeimg}}' mode='scaleToFill' />
+            <image src='{{usericon}}' class='usericon' />
         </view>
 
-        <view class='moeditorTxt' wx:if="{{!ifshowInput}}">
+        <!-- <view class='moeditorTxt' wx:if="{{!ifshowInput}}">
             <text>{{inputValue}}</text>
-            <!-- <image src='/assets/poster/edit.png' catchtap='editorTxt' /> -->
-        </view>
+            <image src='/assets/poster/edit.png' catchtap='editorTxt' />
+        </view> -->
 
-        <view class='inputTxtView' wx:if="{{ifshowInput}}">
+        <!-- <view class='inputTxtView' wx:if="{{ifshowInput}}">
             <input focus="{{1}}" bindinput="bindinput" value='{{inputValue}}' maxlength="12" placeholder-class='placeholder' placeholder='来麻辣短句，分享你的诗意'></input>
             <text catchtap='saveTxt' style='color:#27BCAD;font-size:32rpx;font-weight:bold;'>确定</text>
-        </view>
+        </view> -->
 
-        <view class='sweepQrTxt'>
+        <!-- <view class='sweepQrTxt'>
             <text>扫码关注我，领句豆换奖品</text>
-        </view>
+        </view> -->
 
     </view>
 

@@ -27,8 +27,8 @@
                 </view>
 
                 <view class='userinfoView' style='color:{{cardArr[selectCardId].posterColor}}'>
-                    <view style='font-size:32rpx;'>Henery</view>
-                    <view style='font-size:24rpx;margin-top:6rpx;'>2019/05/28</view>
+                    <view style='font-size:32rpx;'>{{username}}</view>
+                    <view style='font-size:24rpx;margin-top:6rpx;'>{{userDate}}</view>
                 </view>
 
             </view>

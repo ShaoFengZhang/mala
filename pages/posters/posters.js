@@ -92,12 +92,14 @@ Page({
             qrcode: `${loginApi.domin}/home/index/qcodes?page=pages/index/index&uid=${wx.getStorageSync('u_id')}&contentid=${options.contentID ? options.contentID : null}`,
             contentID: options.contentID ? options.contentID : null,
             userIcon: app.globalData.userInfo.avatarUrl,
+            username:"",
+            userDate :'于' + util.formatTime(new Date()),
         });
         console.log(options);
         if (options && options.contentID) {
             this.getcontent(options.contentID);
         }
-
+        this.getname();
     },
 
     onShow: function() {},
@@ -126,6 +128,24 @@ Page({
                 timingFunc: 'easeIn'
             }
         });
+    },
+
+    // 获取name
+    getname: function () {
+        let _this = this;
+        let getnameUrl = loginApi.domin + '/home/index/name';
+        loginApi.requestUrl(_this, getnameUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            if (res.status == 1) {
+                _this.setData({
+                    username: res.name
+                })
+
+            } else {
+                util.toast("数据获取失败,请重试", 300)
+            }
+        })
     },
 
     // 切换贺卡
@@ -194,7 +214,7 @@ Page({
 
     toSaveposters: function() {
         wx.navigateTo({
-            url: `/pages/savePosters/savePosters?contentID=${this.data.contentID}&posterId=${this.data.selectCardId}`,
+            url: `/pages/savePosters/savePosters?contentID=${this.data.contentID}&posterId=${this.data.selectCardId}&username=${this.data.username ? this.data.username : app.globalData.userInfo.nickName.slice(0, 10)}`,
         })
     },
 

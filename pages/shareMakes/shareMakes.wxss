@@ -10,16 +10,29 @@
     margin: 60rpx auto 0;
     border-radius: 16rpx;
     overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-image: url("https://duanju.58100.com/upload/bg.png");
+    background-size: 100%;
 }
 
 .qrCode {
     margin: 40rpx auto 0;
+    position: relative;
 }
 
 .qrCode, .qrCode image {
     width: 180rpx;
     height: 180rpx;
     border-radius: 50%;
+}
+
+image.usericon{
+    width: 76rpx;
+    height: 76rpx;
+    position: absolute;
+    left: 52rpx;
+    top: 52rpx;
 }
 
 .moeditorTxt {

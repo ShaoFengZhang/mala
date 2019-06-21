@@ -13,6 +13,10 @@ Page({
     },
 
     onLoad: function (options) {
+        this.setData({
+            qrcodeimg: `${loginApi.domin}/home/index/shares?page=pages/index/index&uid=${wx.getStorageSync('u_id')}`,
+            usericon: app.globalData.userInfo.avatarUrl
+        })
         this.drawcanvs()
     },
 
@@ -78,7 +82,7 @@ Page({
         let _this = this;
         let ctx = wx.createCanvasContext('canvas');
         let canvasImg = 'https://duanju.58100.com/upload/bg.png';
-        let qrcodeimg = `${loginApi.domin}/home/index/shares?page=pages/index/index&uid=${wx.getStorageSync('u_id')})`;
+        let qrcodeimg = `${this.data.qrcodeimg}`;
         let userImg = null;
 
         wx.getImageInfo({

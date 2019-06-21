@@ -35,6 +35,8 @@ swiper-item {
 }
 
 .swiperTxt {
+    width: 112rpx;
+    text-align: center;
     display: inline-block;
     position: absolute;
 }
