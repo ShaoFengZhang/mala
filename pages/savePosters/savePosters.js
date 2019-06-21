@@ -71,10 +71,10 @@ Page({
                 posterColor: "#806B5D",
                 bgUrl: loginApi.srcDomin + "/upload/xinzhi.png",
                 topimg: "xinzhiimg",
-                top: 92,
-                left: 48,
-                width: 616,
-                height: 224,
+                top: 0,
+                left: 0,
+                width: 670,
+                height: 400,
             },
         ],
         postSrc: "/assets/shareimg/img2.png",
@@ -130,7 +130,7 @@ Page({
                 obj.imgurl = res.content.imgurl.split(',');
                 _this.setData({
                     contentId: obj.id,
-                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "https://duanju.58100.com/upload/usercontent/1561007045451.png",
+                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "https://duanju.58100.com/upload/mala.png",
                     contentTxt: obj.title ? obj.title : "麻辣短句欢迎您！"
                 });
                 _this.drawcanvs();

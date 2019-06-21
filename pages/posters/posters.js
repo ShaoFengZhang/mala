@@ -79,7 +79,7 @@ Page({
         ],
         selectCardId: 0,
         postSrc: "/assets/shareimg/img2.png",
-        contentImg: "/assets/shareimg/img.png",
+        contentImg: "https://duanju.58100.com/upload/mala.png",
         contentTxt: '麻辣短句欢迎您！'
     },
 
@@ -155,7 +155,7 @@ Page({
                 obj.imgurl = res.content.imgurl.split(',');
                 _this.setData({
                     contentId: obj.id,
-                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "/assets/shareimg/img.png",
+                    contentImg: obj.imgurl[0] ? _this.data.srcDomin + obj.imgurl[0] : "https://duanju.58100.com/upload/mala.png",
                     contentTxt: obj.title ? obj.title : "麻辣短句欢迎您！"
                 })
             } else {

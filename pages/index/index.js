@@ -78,7 +78,7 @@ Page({
             if (options && options.scene){
                 _this.checkNewFans(_this.shareUid)
             }
-            _this.checkNewFans('5cd022665293d');
+            // _this.checkNewFans('5cd022665293d');
         }, function(error) {
             console.log("error", error);
             if (options && options.conId) {

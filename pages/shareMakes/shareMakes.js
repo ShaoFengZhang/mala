@@ -77,7 +77,7 @@ Page({
     drawcanvs: function () {
         let _this = this;
         let ctx = wx.createCanvasContext('canvas');
-        let canvasImg = 'https://duanju.58100.com/upload/usercontent/1561013727931.png';
+        let canvasImg = 'https://duanju.58100.com/upload/bg.png';
         let qrcodeimg = `${loginApi.domin}/home/index/shares?page=pages/index/index&uid=${wx.getStorageSync('u_id')})`;
         let userImg = null;
 
@@ -85,8 +85,8 @@ Page({
             src: canvasImg,
             success: function (res) {
                 _this.setData({
-                    bgimgH: res.height * 2 / 3,
-                    bgimgW: res.width * 2 / 3,
+                    bgimgH: res.height,
+                    bgimgW: res.width,
                 });
                 ctx.drawImage(res.path, 0, 0, _this.data.bgimgW, _this.data.bgimgH);
                 wx.getImageInfo({

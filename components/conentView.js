@@ -145,7 +145,7 @@ Component({
                     arr[index].support = parseInt(arr[index].ySupport) + 1;
                     let num = parseInt(arr[index].support);
                     arr[index].ySupport = parseInt(arr[index].support);
-                    arr[index].support = (Math.floor(num / 1000) / 10) + 'w+'
+                    arr[index].support>10000?arr[index].support = (Math.floor(num / 1000) / 10) + 'w+':""
                     arr[index].dianji = 1;
                     console.log(arr[index]);
                     _this.setData({

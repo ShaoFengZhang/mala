@@ -42,7 +42,7 @@
                 <image src='/assets/poster/save.png' />
             </view>
 
-            <view style='height:62rpx;margin-top:16rpx;'>保存海报</view>
+            <view style='height:62rpx;margin-top:16rpx;'>保存名片</view>
         </view>
     </view>
 

@@ -91,10 +91,10 @@
 }
 
 .xinzhiimg, .xinzhiimg image {
-    width: 616rpx;
-    height: 224rpx;
-    top: 92rpx;
-    left: 48rpx;
+    width: 670rpx;
+    height: 400rpx;
+    top:0rpx;
+    left: 0rpx;
 }
 
 .contentTxt {
