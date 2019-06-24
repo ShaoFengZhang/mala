@@ -8,7 +8,7 @@ Page({
         ifshowInput:0,
         inputValue:'来麻辣短句，分享你的诗意',
         focusNum:0,
-        focusUserArr:[1,23,5,6],
+        focusUserArr:[],
         rewardView:0,
     },
 
@@ -16,8 +16,11 @@ Page({
         this.setData({
             qrcodeimg: `${loginApi.domin}/home/index/shares?page=pages/index/index&uid=${wx.getStorageSync('u_id')}`,
             usericon: app.globalData.userInfo.avatarUrl
-        })
-        this.drawcanvs()
+        });
+        this.page = 1;
+        this.rows = 10;
+        this.cangetData = true;
+        this.getFansData();
     },
 
     onShow: function () {
@@ -73,17 +76,56 @@ Page({
         })
     },
 
+    // 滑动到底部
+    onReachBottom: function () {
+        if (this.cangetData) {
+            this.page++;
+            this.getFansData();
+        }else{
+            util.toast("暂时没有更多数据！")
+        }
+    },
+
+    getFansData: function () {
+        util.loding('Loading');
+        let _this = this;
+        let getFansDataUrl = loginApi.domin + '/home/index/myfans';
+        loginApi.requestUrl(_this, getFansDataUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+            "page": this.page,
+            "len": this.rows,
+        }, function (res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                _this.setData({
+                    focusUserArr: _this.data.focusUserArr.concat(res.info),
+                    focusNum:res.count,
+                });
+                if (res.info.length < _this.rows) {
+                    _this.cangetData = false;
+                };
+            }
+
+        })
+    },
+
+
     formSubmit: function (e) {
         util.formSubmit(app, e);
     },
 
     // 绘制Canvas
     drawcanvs: function () {
+        util.loding('海报生成中')
         let _this = this;
         let ctx = wx.createCanvasContext('canvas');
-        let canvasImg = 'https://duanju.58100.com/upload/bg.png';
+        let canvasImg = 'https://duanju.58100.com/upload/3.png';
         let qrcodeimg = `${this.data.qrcodeimg}`;
-        let userImg = null;
+        let canTxt = this.data.inputValue;
+        ctx.setTextBaseline('top');
+        ctx.setTextAlign('center');
+        ctx.setFillStyle("#282828")
+        ctx.setFontSize(40);
 
         wx.getImageInfo({
             src: canvasImg,
@@ -96,6 +138,7 @@ Page({
                 wx.getImageInfo({
                     src: qrcodeimg,
                     success: function (res1) {
+                        ctx.fillText(canTxt, res.width/2, 260);
                         // 绘制圆形二维码
                         ctx.save();
                         ctx.beginPath();
@@ -120,6 +163,9 @@ Page({
                                 ctx.beginPath();
                                 ctx.stroke();
                                 ctx.draw();
+                                setTimeout(function(){
+                                    _this.showOffRecord()
+                                },1200)
                             }
                         })
                     }
@@ -144,6 +190,7 @@ Page({
 
     // 保存图片
     saveCanvas: function (res) {
+        wx.hideLoading();
         wx.saveImageToPhotosAlbum({
             filePath: res.tempFilePath,
             success: function () {
@@ -175,20 +222,24 @@ Page({
                     wx.authorize({
                         scope: 'scope.writePhotosAlbum',
                         success() {
-                            _this.showOffRecord() 
+                            _this.drawcanvs()
+                            // _this.showOffRecord() 
                         },
                         // 拒绝授权时
                         fail() {
-                            _this.showOffRecord() 
+                            _this.drawcanvs()
+                            // _this.showOffRecord() 
                         }
                     })
                 } else {
                     // 已授权则直接进行保存图片
-                    _this.showOffRecord()
+                    _this.drawcanvs()
+                    // _this.showOffRecord()
                 }
             },
             fail(res) {
-                _this.showOffRecord()
+                _this.drawcanvs()
+                // _this.showOffRecord()
             }
         })
 

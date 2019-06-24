@@ -47,7 +47,7 @@
     </view>
 
     <view class='focusNum'>
-        <text style='color:#282828;'>共有{{focusNum}}人成功关注了你</text>
+        <text style='color:#282828;'>共有{{focusNum}}人接受了你的邀请</text>
         <text style='color:#27BCAD;' catchtap='closeReward'>奖励规则</text>
     </view>
 
@@ -56,8 +56,13 @@
             <image src='/assets/shareimg/img.png' />
         </view>
 
-        <view class='focustxtView oneEllipsis'>
-            <text>麻辣短句成功关注了你</text>
+        <view class='focustxtView'>
+            <!-- <text>{{"小橘子"}}打开了分享对话框的链接</text> -->
+            <view class='oneEllipsis'>{{item.nickname}}扫描你的分享码</view>
+            <view wx:if="{{item.rank<=5}}" class='oneEllipsis'>你的句豆增加10</view>
+            <view wx:if="{{item.rank>=6 && item.rank<11}}" class='oneEllipsis'>你的句豆增加15</view>
+            <view wx:if="{{item.rank>=11 && item.rank<21}}" class='oneEllipsis'>你的句豆增加20</view>
+            <view wx:if="{{item.rank>=21}}" class='oneEllipsis'>你的句豆增加25</view>
         </view>
     </view>
 

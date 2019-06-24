@@ -42,7 +42,7 @@ Page({
     onShareAppMessage: function() {
         return {
             title: this.data.content.title.slice(0, 28),
-            path: `/pages/index/index?conId=${this.data.content.id}&uid=${wx.getStorageSync("u_id")}&type==2`,
+            path: `/pages/index/index?conId=${this.data.content.id}&uid=${wx.getStorageSync("u_id")}&type=2`,
             imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img.png`
         }
     },
