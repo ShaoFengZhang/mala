@@ -49,7 +49,7 @@ Page({
             inputValue: this.inputValue ? this.inputValue:'',
         })
         if (!util.check(this.data.inputValue)) {
-            util.toast("请输入有效内容~", 1200);
+            util.toast("输入不能为空哦亲~", 1200);
             this.setData({
                 inputValue:'来麻辣短句，分享你的诗意',
             });

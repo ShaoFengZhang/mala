@@ -77,8 +77,10 @@ Page({
             };
             if (options && options.scene){
                 _this.checkNewFans(_this.shareUid)
+            };
+            if(options && options.type){
+                _this.checkNewFans(options.uid, options.type)
             }
-            // _this.checkNewFans('5cd022665293d');
         }, function(error) {
             console.log("error", error);
             if (options && options.conId) {
@@ -92,6 +94,9 @@ Page({
             }
             if (options && options.scene) {
                 _this.checkNewFans(_this.shareUid)
+            };
+            if (options && options.type) {
+                _this.checkNewFans(options.uid, options.type)
             }
         })
         
@@ -105,12 +110,13 @@ Page({
                 }
                 if (options && options.scene) {
                     _this.checkNewFans(_this.shareUid)
+                };
+                if (options && options.type) {
+                    _this.checkNewFans(options.uid, options.type)
                 }
             }
         }, 2200)
     },
-
-    onReady: function() {},
 
     onShow: function() {
         this.setData({
@@ -150,7 +156,7 @@ Page({
             let index = e.target.dataset.index;
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
-                path: `/pages/index/index?conId=${this.data.contentArr[index].id}`,
+                path: `/pages/index/index?conId=${this.data.contentArr[index].id}&uid=${wx.getStorageSync("u_id")}&type==2`,
                 imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`
             }
         }
@@ -336,13 +342,17 @@ Page({
         })
     },
 
-    checkNewFans:function(fatherId){
+    checkNewFans:function(fatherId,type){
+        if (fatherId == wx.getStorageSync("u_id")){
+            return;
+        }
         let _this = this;
         let checkNewFansUrl = loginApi.domin + '/home/index/newfan';
         loginApi.requestUrl(_this, checkNewFansUrl, "POST", {
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
             "fuid": fatherId,
+            "type": type ? type:"1"
         }, function (res) {
         })
     },

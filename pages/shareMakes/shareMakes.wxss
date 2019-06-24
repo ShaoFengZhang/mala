@@ -10,15 +10,16 @@
     margin: 60rpx auto 0;
     border-radius: 16rpx;
     overflow: hidden;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat;
     background-position: bottom;
     background-image: url("https://duanju.58100.com/upload/bg.png");
-    background-size: 100%;
+    background-size: 100%; */
 }
 
 .qrCode {
     margin: 40rpx auto 0;
     position: relative;
+    border: 2rpx solid #27BCAD;
 }
 
 .qrCode, .qrCode image {
@@ -27,7 +28,7 @@
     border-radius: 50%;
 }
 
-image.usericon{
+.qrCode image.usericon{
     width: 76rpx;
     height: 76rpx;
     position: absolute;

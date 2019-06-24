@@ -90,7 +90,7 @@ Page({
             let index = e.target.dataset.index;
             return {
                 title: this.data.contentArr[index].title.slice(0, 28),
-                path: `/pages/index/index?conId=${this.data.contentArr[index].id}`,
+                path: `/pages/index/index?conId=${this.data.contentArr[index].id}&uid=${wx.getStorageSync("u_id")}&type==2`,
                 imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`,
             }
         }

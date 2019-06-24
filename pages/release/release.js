@@ -11,7 +11,6 @@ Page({
         userPicArr: [],
         classTxt: "选择话题",
         classId: 10,
-        classId: null,
         srcDomin: loginApi.srcDomin,
         textArea:'',
     },
@@ -135,7 +134,6 @@ Page({
                 _this.setData({
                     userPicArr: [],
                     classTxt: "选择话题",
-                    classId: 10,
                     classId: null,
                     textArea: '',
                 });
