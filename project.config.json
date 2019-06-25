@@ -47,7 +47,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 15,
+			"current": 16,
 			"list": [
 				{
 					"id": 0,
@@ -158,6 +158,13 @@
 					"id": -1,
 					"name": "赚句豆",
 					"pathName": "pages/shareMakes/shareMakes",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "句豆来源",
+					"pathName": "pages/beansSource/beansSource",
 					"scene": null
 				}
 			]

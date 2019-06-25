@@ -26,6 +26,7 @@ const wxlogin = function(app) {
                             app.globalData.session_key = value.data.session_key;
                             wx.setStorageSync('user_openID', value.data.openid);
                             wx.setStorageSync('u_id', value.data.uid);
+                            wx.setStorageSync('ifnewUser', value.data.newuser);
                             getSettingfnc(app);
                             console.log(value, "login");
                             resolve(value);

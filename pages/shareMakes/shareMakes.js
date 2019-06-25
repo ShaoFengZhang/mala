@@ -10,6 +10,8 @@ Page({
         focusNum:0,
         focusUserArr:[],
         rewardView:0,
+        showBotTxt:0,
+        srcDomin: loginApi.srcDomin,
     },
 
     onLoad: function (options) {
@@ -81,8 +83,6 @@ Page({
         if (this.cangetData) {
             this.page++;
             this.getFansData();
-        }else{
-            util.toast("暂时没有更多数据！")
         }
     },
 
@@ -100,6 +100,7 @@ Page({
                 _this.setData({
                     focusUserArr: _this.data.focusUserArr.concat(res.info),
                     focusNum:res.count,
+                    showBotTxt: res.count?0:1,
                 });
                 if (res.info.length < _this.rows) {
                     _this.cangetData = false;
@@ -178,8 +179,8 @@ Page({
     showOffRecord: function () {
         let _this = this;
         wx.canvasToTempFilePath({
-            destWidth: this.data.bgimgW,
-            destHeight: this.data.bgimgH,
+            destWidth: this.data.bgimgW*2,
+            destHeight: this.data.bgimgH*2,
             canvasId: 'canvas',
             success: function (res) {
                 console.log(res.tempFilePath)

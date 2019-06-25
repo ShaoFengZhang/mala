@@ -30,10 +30,31 @@
 
 
     <view class='scrollView'>
-        <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
+        <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" bindshowbeansMask="showbeansMask"  contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
         <view class='loading' wx:if="{{ifloadtxt}}">
             加载中 . . .
         </view>
+    </view>
+
+    <view class='beansRulsView' wx:if="{{ifshowrulesView}}">
+
+        <view class='rulsBody'>
+            
+            <view style='color:#27BCAD;font-size:48rpx;margin-top:180rpx;'>恭喜你完成新手任务</view>
+            <view style='font-size:40rpx;margin-top:20rpx;'>句豆+<text style='font-size:48rpx'>20</text> </view>
+            <view style='font-size:32rpx;color:#666;margin-top:20rpx;'>
+                <view>完成其他新手任务</view>
+                <view style='margin-top:20rpx;'>获取更多句豆兑换现金奖品</view>
+            </view>
+
+            <view class='completeBtn' catchtap='goToFounPage'>去做任务</view>
+
+        </view>
+
+        <view class='closeView' catchtap='showbeansMask'>
+            <image src='/assets/poster/close.png' />
+        </view>
+
     </view>
 
 </view>

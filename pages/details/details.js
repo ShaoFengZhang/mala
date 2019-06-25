@@ -12,7 +12,8 @@ Page({
         ifPopUp: 0,
         showBotTxt: 0,
         praiseId: "",
-        praiseEvent2: 'praiseEvent2'
+        praiseEvent2: 'praiseEvent2',
+        ifshowrulesView: 0,
     },
 
     onLoad: function(options) {
@@ -259,6 +260,7 @@ Page({
                 _this.crearteAnimation();
                 app.praiseIndex = _this.data.praiseIndex;
                 console.log(app.praiseIndex);
+                res.new ? "" : _this.triggerEvent('showbeansMask')
             } else {
                 util.toast("点赞失败,请重试", 300)
             }
@@ -379,6 +381,19 @@ Page({
         wx.navigateTo({
             url: `/pages/userCenter/userCenter?uid=${uid}&openid=${openid}&urlsrc=${urlsrc}&name=${name}&note=${note}`,
         })
+    },
+
+    showbeansMask: function () {
+        this.setData({
+            ifshowrulesView: !this.data.ifshowrulesView
+        })
+    },
+
+    goToFounPage: function () {
+        wx.switchTab({
+            url: '/pages/found/found'
+        })
+        this.showbeansMask();
     },
 
     formSubmit: function(e) {

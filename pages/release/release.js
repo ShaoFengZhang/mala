@@ -13,6 +13,7 @@ Page({
         classId: 10,
         srcDomin: loginApi.srcDomin,
         textArea:'',
+        relasePrompt:1,
     },
 
     onLoad: function(options) {
@@ -149,7 +150,26 @@ Page({
     // 文本框输入时触发
     txtBindInput: function(e) {
         this.txtArea = e.detail.value;
-    }, 
+    },
+
+    bindfocus: function(){
+        this.setData({
+            relasePrompt: 0,  
+        })
+    },
+
+    bindblur:function(){
+        if (!util.check(this.txtArea)) {
+            this.setData({
+                relasePrompt: 1,   
+            });
+            this.txtArea="";
+        }else{
+            this.setData({
+                relasePrompt: 0,
+            }) 
+        }
+    },
 
     formSubmit: function (e) {
         util.formSubmit(app, e);

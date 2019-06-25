@@ -1,0 +1,12 @@
+<view class="bg">
+
+    <view class='sourceView' wx:for="{{beansArr}}" wx:key="{{index}}">
+        <view class='beansInfo'>
+            <view style='font-size:36rpx;color:#262628;'>句豆来源</view>
+            <view style='font-size:28rpx;color:#999;'>2019/06/05</view>
+        </view>
+
+        <view class='addBeansNum'>50+</view>
+    </view>
+
+</view> 

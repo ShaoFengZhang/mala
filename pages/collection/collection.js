@@ -11,6 +11,7 @@ Page({
         showBotTxt: 0,
         contentArr: [],
         srcDomin: loginApi.srcDomin,
+        ifshowrulesView: 0,
     },
 
     onLoad: function (options) {
@@ -117,4 +118,17 @@ Page({
     },
 
     catchtap: function () { },
+
+    showbeansMask: function () {
+        this.setData({
+            ifshowrulesView: !this.data.ifshowrulesView
+        })
+    },
+
+    goToFounPage: function () {
+        wx.switchTab({
+            url: '/pages/found/found'
+        })
+        this.showbeansMask();
+    },
 })

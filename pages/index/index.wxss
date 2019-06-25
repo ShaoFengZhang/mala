@@ -1,10 +1,9 @@
-
 .bg {
-     background-color: #f3f5f9;
-     position: relative;
+    background-color: #f3f5f9;
+    position: relative;
 }
 
-.topFixed{
+.topFixed {
     width: 100%;
     height: 98rpx;
     position: fixed;
@@ -51,7 +50,6 @@ swiper-item {
     background: rgba(39, 188, 173, 1);
 }
 
-.scrollView{
+.scrollView {
     padding-top: 98rpx;
 }
-

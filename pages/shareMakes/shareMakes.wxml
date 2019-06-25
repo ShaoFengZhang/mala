@@ -51,19 +51,26 @@
         <text style='color:#27BCAD;' catchtap='closeReward'>奖励规则</text>
     </view>
 
-    <view class='focusUserView wrapflex' wx:for="{{focusUserArr}}" wx:key="{{index}}">
+    <view wx:if="{{focusUserArr.length}}" class='focusUserView wrapflex' wx:for="{{focusUserArr}}" wx:key="{{index}}">
         <view>
-            <image src='/assets/shareimg/img.png' />
+            <image wx:if="{{item.avatarurl}}" src='{{item.avatarurl}}' />
+            <image wx:if="{{!item.avatarurl}}" src='{{srcDomin}}/upload/4.png' />
         </view>
 
         <view class='focustxtView'>
             <!-- <text>{{"小橘子"}}打开了分享对话框的链接</text> -->
-            <view class='oneEllipsis'>{{item.nickname}}扫描你的分享码</view>
+            <view wx:if="{{item.nickname}}" class='oneEllipsis'>{{item.nickname}}扫描了你的分享码</view>
+            <view wx:if="{{!item.nickname}}" class='oneEllipsis'>未授权用户扫描了你的分享码</view>
             <view wx:if="{{item.rank<=5}}" class='oneEllipsis'>你的句豆增加10</view>
             <view wx:if="{{item.rank>=6 && item.rank<11}}" class='oneEllipsis'>你的句豆增加15</view>
             <view wx:if="{{item.rank>=11 && item.rank<21}}" class='oneEllipsis'>你的句豆增加20</view>
             <view wx:if="{{item.rank>=21}}" class='oneEllipsis'>你的句豆增加25</view>
         </view>
+    </view>
+
+    <view class='nocom' wx:if="{{showBotTxt && !focusUserArr.length}}">
+        <image src='/assets/index/nodata.png' />
+        <view>暂时还没有数据亲~</view>
     </view>
 
     <view class='rewardView' wx:if="{{rewardView}}">

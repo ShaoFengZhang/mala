@@ -6,7 +6,7 @@
     position: relative;
 }
 
-.topTextArea image{
+.topTextArea image {
     width: 66rpx;
     height: 66rpx;
     position: absolute;
@@ -14,7 +14,7 @@
     right: 40rpx;
 }
 
-#topArea{
+#topArea {
     width: 670rpx;
     min-height: 360rpx;
 }
@@ -130,8 +130,7 @@
 .releaseView {
     width: 100%;
     height: 158rpx;
-    /* box-shadow: 0px 2rpx 0px 0px rgba(231, 231, 231, 1); */
-    /* border-top: 2rpx solid #f3f5f9; */
+    /* box-shadow: 0px 2rpx 0px 0px rgba(231, 231, 231, 1); *//* border-top: 2rpx solid #f3f5f9; */
     justify-content: center;
     position: relative;
 }
@@ -148,7 +147,7 @@
     position: relative;
 }
 
-#getInfoBtn{
+#getInfoBtn {
     width: 680rpx;
     height: 100rpx;
     padding: 0;
@@ -159,3 +158,17 @@
     opacity: 0;
 }
 
+/* tishi */
+
+.relasePrompt {
+    width: 670rpx;
+    height: 320rpx;
+    font-size: 36rpx;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(170, 170, 170, 1);
+    line-height: 64rpx;
+    position: absolute;
+    top: 0;
+    left: 40rpx;
+}

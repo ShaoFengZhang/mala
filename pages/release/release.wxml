@@ -4,8 +4,12 @@
 
         <view class='topTextArea'>
             <!-- <image catchtap='changeOther' src='/assets/release/other.png' /> -->
-            <textarea value="{{textArea}}" show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;" bindinput="txtBindInput" auto-height placeholder="写些什么和大家分享…" />
+            <textarea value="{{textArea}}" show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;line-height:64rpx;" bindinput="txtBindInput" auto-height bindfocus="bindfocus" bindblur="bindblur"/>
             <view style='color:#AAAAAA;font-size:28rpx;text-align:right'>最多1000字</view>
+           
+            <view class='relasePrompt' wx:if="{{relasePrompt}}">
+                在这里写下你的短句，用户点赞你的内容将会获得2句豆，用户评论将获得10句豆  <text style='color:#FF493A;'>（100句豆=1元）</text>；句豆可以在礼物商城兑换现金和礼品；首次发布内容审核通过还会赠送<text style='color:#FF493A;'>50</text>句豆
+            </view>
         </view>
 
         <!-- 选择话题 -->

@@ -16,7 +16,8 @@
         "pages/beansMall/beansMall",
         "pages/shareMakes/shareMakes",
         "pages/posters/posters",
-        "pages/savePosters/savePosters"
+        "pages/savePosters/savePosters",
+        "pages/beansSource/beansSource"
     ],
 
     "window": {

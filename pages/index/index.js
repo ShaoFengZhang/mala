@@ -15,6 +15,7 @@ Page({
         contentArr: [],
         current: 0,
         ifloadtxt: 0,
+        ifshowrulesView:0,
     },
 
     onLoad: function(options) {
@@ -180,7 +181,7 @@ Page({
         loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key);
     },
 
-    //swiperBindtap
+    //swiperBindtap 切换顶部tap
     swiperBindtap: function(e) {
         let classId = e.currentTarget.dataset.id;
         let index = e.currentTarget.dataset.index;
@@ -343,7 +344,7 @@ Page({
     },
 
     checkNewFans:function(fatherId,type){
-        if (fatherId == wx.getStorageSync("u_id")){
+        if (fatherId == wx.getStorageSync("u_id") || !wx.getStorageSync("ifnewUser")){
             return;
         }
         let _this = this;
@@ -352,9 +353,23 @@ Page({
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
             "fuid": fatherId,
-            "type": type ? type:"1"
+            "type": type ? type:"1",
+            "newuser": wx.getStorageSync("ifnewUser"),
         }, function (res) {
         })
+    },
+
+    showbeansMask: function () {
+        this.setData({
+            ifshowrulesView: !this.data.ifshowrulesView
+        })
+    },
+
+    goToFounPage:function(){
+        wx.switchTab({
+            url: '/pages/found/found'
+        })
+        this.showbeansMask();
     },
 
     formSubmit: function(e) {

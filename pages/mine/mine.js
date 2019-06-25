@@ -8,6 +8,7 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
+        ifshowrulesView:0,
     },
 
     onLoad: function(options) {
@@ -40,6 +41,12 @@ Page({
 
     onShareAppMessage: function() {
         return util.shareObj
+    },
+
+    showbeansMask:function(){
+        this.setData({
+            ifshowrulesView: !this.data.ifshowrulesView
+        })
     },
 
     getUserInfo:function(e){
