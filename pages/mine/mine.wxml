@@ -31,7 +31,7 @@
         </view>
 
         <view class='praiseNum columnflex' catchtap='pageNav' data-path="/pages/beansSource/beansSource">
-            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.support*2+userInfos.beans || 0}}</text>
+            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.support*2+userInfos.beans+userInfos.newbeans || 0}}</text>
             <text style='color:#999999;font-size:28rpx;'>句豆</text>
             <text class='questionMask' catchtap='showbeansMask'>?</text>
             <form bindsubmit="formSubmit" report-submit="{{true}}">
@@ -136,13 +136,13 @@
 
     <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
     </button>
-
+    <!-- 什么是句豆 -->
     <view class='beansRulsView' wx:if="{{ifshowrulesView}}">
 
         <view class='rulsBody'>
 
             <scroll-view scroll-y style="height:100%">
-                <image mode='widthFix' src='/assets/shareimg/img2.png' />
+                <image style='width:670rpx' mode='widthFix' src='https://duanju.58100.com/upload/6.png' />
             </scroll-view>
 
         </view>

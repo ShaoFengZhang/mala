@@ -25,7 +25,7 @@ Page({
         this.rows = 10;
         this.cangetData = true;
         this.setData({
-            scrollHeight: app.windowHeight * 750 / app.sysWidth - 96,
+            scrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth-96,
         });
         this.getMessageComData()
     },

@@ -1,10 +1,7 @@
 {
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "一周精选",
+    "navigationBarTitleText": "发现",
     "backgroundColor": "#000000",
-    "usingComponents": {
-        "contentTxt": "/components/conentView"
-    },
     "disableSwipeBack": true,
     "enablePullDownRefresh": true,
     "onReachBottomDistance": 0

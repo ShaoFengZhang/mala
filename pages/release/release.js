@@ -45,6 +45,8 @@ Page({
         })
     },
 
+    catchtap:function(){},
+
     // 获取授权信息
     getUserInfo: function(e) {
         console.log(e);

@@ -180,7 +180,8 @@ Page({
                     commentArr: [],
                     praiseId: '',
                     pointAni: null,
-                })
+                });
+                res.new ? "" : _this.showbeansMask()
                 _this.getSupportcontent(_this.data.conId);
             } else {
                 util.toast("评论失败,请重试", 300)
@@ -260,7 +261,7 @@ Page({
                 _this.crearteAnimation();
                 app.praiseIndex = _this.data.praiseIndex;
                 console.log(app.praiseIndex);
-                res.new ? "" : _this.triggerEvent('showbeansMask')
+                res.new ? "" : _this.showbeansMask()
             } else {
                 util.toast("点赞失败,请重试", 300)
             }

@@ -1,29 +1,65 @@
 <view class="bg">
 
-    <!-- <view class='top-swiperView normalView'>
+    <view class='topView'>
 
-        <swiper id='swiper-ID' display-multiple-items="{{classArr.length>=6?6:classArr.length}}">
+        <view style='font-size:28rpx;color:#fff;'>总句豆</view>
+        <view style='font-size:72rpx;color:#fff;'>3756</view>
 
-            <block wx:for="{{classArr}}" wx:key="index">
+        <view class='signView'>
 
-                <swiper-item data-id="{{item.id}}" class="{{swiperCurrentIndex==item.id?'select-swiper-css':''}}" bindtap='swiperBindtap'>
-                    <text>{{item.title}}</text>
-                    <text class='swiper-line' wx:if="{{swiperCurrentIndex==item.id}}"></text>
-                </swiper-item>
+            <view style='color:#282828;font-size:36rpx;font-weight:bold;'>已累计签到{{daynums}}天</view>
 
-            </block>
+            <view class='dayView'>
+                <view class='dayItem' wx:for="{{dayArr}}" wx:key="{{index}}">
+                    <view class='beansNum'>
+                        <image wx:if="{{item.ifSign}}" src='/assets/index/check.png' />
+                        <text wx:if="{{!item.ifSign}}" style='color:#9B9B9B;font-size:24rpx;'>+{{item.beans}}</text>
+                    </view>
+                    <view style='font-size:18rpx;color:#666;margin-top:8rpx;'>{{item.dayTxt}}</view>
+                </view>
+            </view>
 
-        </swiper>
+            <view class='signBtn' catchtap='signClick'>立即签到</view>
 
-    </view> -->
-
-    <view class='viewLine'></view>
-
-    <view class='scrollView'>
-        <contentTxt id="content" userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" contentArr="{{contentArr}}" bindmyevent="onMyevent" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
-        <view class='loading' wx:if="{{ifloadtxt}}">
-            加载中 . . .
         </view>
+
+    </view>
+
+    <view class='Task'>
+        <text style='font-size:40rpx;'>新人任务</text>
+        <text catchtap='showbeansMask' style='color:#27BCAD'>句豆换现金</text>
+    </view>
+
+    <view class='Task' data-path="{{item.path}}" data-type="{{item.type}}" catchtap='pageNav' style='margin-top:32rpx;' wx:for="{{taskObj}}" wx:key="{{index}}">
+        <view>
+            <view>{{item.title}}</view>
+            <view style='color:#999;font-size:28rpx;margin-top:10rpx;font-weight:400;'>{{item.content}}</view>
+        </view>
+
+        <view class='rightBtn'>{{item.btnTxt}}</view>
+
+    </view>
+
+    <view style='width:100%;height:30rpx;'></view>
+
+    <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+    </button>
+
+    <!-- 什么是句豆 -->
+    <view class='beansRulsView' wx:if="{{ifshowrulesView}}">
+
+        <view class='rulsBody'>
+
+            <scroll-view scroll-y style="height:100%">
+                <image style='width:670rpx' mode='widthFix' src='https://duanju.58100.com/upload/6.png' />
+            </scroll-view>
+
+        </view>
+
+        <view class='closeView' catchtap='showbeansMask'>
+            <image src='/assets/poster/close.png' />
+        </view>
+
     </view>
 
 </view>

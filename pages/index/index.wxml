@@ -39,10 +39,12 @@
     <view class='beansRulsView' wx:if="{{ifshowrulesView}}">
 
         <view class='rulsBody'>
-            
-            <view style='color:#27BCAD;font-size:48rpx;margin-top:180rpx;'>恭喜你完成新手任务</view>
+            <view style='margin-top:60rpx;'>
+                <image src='/assets/index/check.png' />
+            </view>
+            <view style='color:#27BCAD;font-size:48rpx;font-weight:bold;margin-top:40rpx;'>恭喜你完成新手任务</view>
             <view style='font-size:40rpx;margin-top:20rpx;'>句豆+<text style='font-size:48rpx'>20</text> </view>
-            <view style='font-size:32rpx;color:#666;margin-top:20rpx;'>
+            <view style='font-size:32rpx;color:#666;margin-top:60rpx;'>
                 <view>完成其他新手任务</view>
                 <view style='margin-top:20rpx;'>获取更多句豆兑换现金奖品</view>
             </view>

@@ -7,28 +7,78 @@ Page({
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
-        classArr: [{
-                title: "关注",
-                id: 0,
+        srcDomin: loginApi.srcDomin,
+        dayArr: [
+
+            {
+                dayTxt: "第一天",
+                beans: 5,
+                ifSign: 0,
             },
             {
-                title: "一周精选",
-                id: 2,
+                dayTxt: "第二天",
+                beans: 5,
+                ifSign: 0,
+            },
+            {
+                dayTxt: "第三天",
+                beans: 5,
+                ifSign: 0,
+            },
+            {
+                dayTxt: "第四天",
+                beans: 5,
+                ifSign: 0,
+            },
+            {
+                dayTxt: "第五天",
+                beans: 5,
+                ifSign: 1,
+            },
+            {
+                dayTxt: "第六天",
+                beans: 5,
+                ifSign: 0,
+            },
+            {
+                dayTxt: "第七天",
+                beans: 5,
+                ifSign: 0,
             },
         ],
-        showBotTxt: 0,
-        swiperCurrentIndex: 0,
-        contentArr: [],
-        srcDomin: loginApi.srcDomin,
-        ifloadtxt: 0,
+        taskObj: [{
+                title: '首次连续签到7天领句豆',
+                content: '别忘了每天来打卡哦',
+                btnTxt: '签到',
+                path: "api",
+                type: 1,
+            },
+            {
+                title: '首次发布短句',
+                content: '+50句豆',
+                btnTxt: '去发布',
+                path: '/pages/release/release',
+                type: 2,
+            },
+            {
+                title: '首次点赞评论内容',
+                content: '+20句豆',
+                btnTxt: '去评论',
+                path: '/pages/index/index',
+                type: 2,
+            },
+            {
+                title: '首次邀请好友',
+                content: '+20句豆',
+                btnTxt: '去邀请',
+                path: '/pages/shareMakes/shareMakes',
+                type: 3,
+            }
+        ]
     },
 
     onLoad: function(options) {
         let _this = this;
-        // this.setData({
-        //     scrollHeight: app.windowHeight * 750 / app.sysWidth - 0,
-        // });
-        this.cantemp = true;
     },
 
     onTabItemTap: function() {
@@ -45,59 +95,18 @@ Page({
 
         };
 
-        if (!this.cantemp) {
-            return;
-        }
-        this.page = 1;
-        this.rows = 20;
-        this.cangetData = true;
-        this.setData({
-            showBotTxt: 0,
-            ifloadtxt:0,
-            swiperCurrentIndex: 0,
-            contentArr: [],
-            praiseId: '',
-        })
-        this.getContent('selected'); 
-        this.cantemp = false;
     },
 
     onShow: function() {
-        // console.log("onShow")
-        if (app.praiseIndex) {
-            app.praiseIndex = parseInt(app.praiseIndex) - 1
-            console.log(this.data.contentArr[app.praiseIndex])
-            this.data.contentArr[app.praiseIndex].dianji = 1;
-            this.setData({
-                contentArr: this.data.contentArr
-            })
-        };
-        app.praiseIndex = null;
-        this.canshareHide = false;
-    },
-
-    onHide: function() {
-        if (!this.canshareHide) {
-            this.cantemp = true;
-        }
+        this.foundSign(1);
     },
 
     onShareAppMessage: function(e) {
-        this.canshareHide = true;
-        if (e.from == "menu") {
-            return util.shareObj
-        } else {
-            let index = e.target.dataset.index;
-            return {
-                title: this.data.contentArr[index].title.slice(0, 28),
-                path: `/pages/index/index?conId=${this.data.contentArr[index].id}&uid=${wx.getStorageSync("u_id")}&type=2`,
-                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`,
-            }
-        }
+        return util.shareObj
     },
 
     // 获取用户信息
-    onMyevent: function(e) {
+    getUserInfo: function(e) {
         console.log(e);
         if (!e.detail.userInfo) {
             util.toast("我们需要您的授权哦亲~", 1200)
@@ -114,124 +123,66 @@ Page({
         loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key);
     },
 
-    //swiperBindtap
-    swiperBindtap: function(e) {
-        let classId = e.currentTarget.dataset.id;
-        if (this.data.swiperCurrentIndex == classId) {
-            return;
-        };
-        this.setData({
-            swiperCurrentIndex: classId,
-            contentArr: [],
-            praiseId: '',
-            showBotTxt: 0,
-        });
-        clearTimeout(this.bottomTime);
-        this.page = 1;
-        this.rows = 10;
-        this.cangetData = true;
-        classId == 0 ? this.getContent("focus") : this.getContent("selected")
+    catchtap: function() {},
 
+    // 签到click
+    signClick: function() {
+        this.foundSign(2)
     },
 
-    // 加载上一页
-    onPullDownRefresh: function () {
+    // 签到的接口
+    foundSign: function(type) {
         let _this = this;
-        if (this.page > 1) {
-            this.page--;
-            this.getContent("selected")
-        } else {
-            util.toast('暂无更多更新', 1200);
-            wx.stopPullDownRefresh();
-        };
-        return;
-    },
-
-    // 加载下一页
-    onReachBottom: function () {
-        if (this.cangetData) {
-            this.page++;
-            clearTimeout(this.bottomTime);
-            this.bottomTime = setTimeout(() => {
-                
-                // this.data.swiperCurrentIndex == 0 ? this.getContent("focus") : this.getContent("selected");
-                this.getContent("selected")
-            }, 1000)
-
-        } else {
-            util.toast('暂无更多更新', 1200);
-        }
-    },
-
-    // 获取一周精选内容
-    getContent: function(url) {
-        util.loding('加载中');
-        let _this = this;
-        let getContentUrl = loginApi.domin + `/home/index/${url}`;
-        loginApi.requestUrl(_this, getContentUrl, "POST", {
-            "page": this.page,
-            "len": this.rows,
-            "openid": wx.getStorageSync("user_openID"),
+        let foundSignUrl = loginApi.domin + '/home/index/sign';
+        loginApi.requestUrl(_this, foundSignUrl, "POST", {
             "uid": wx.getStorageSync("u_id"),
+            "type": type,
         }, function(res) {
-            wx.hideLoading();
             if (res.status == 1) {
-
-                for (let n = 0; n < res.contents.length; n++) {
-                    for (let j = 0; j < res.supports.length; j++) {
-                        if (res.supports[j].contentid == res.contents[n].id) {
-                            res.contents[n].dianji = 12;
-                        }
-                    }
-                }
-
-                for (let i = 0; i < res.contents.length; i++) {
-                    res.contents[i].imgurl = res.contents[i].imgurl.split(',');
-                }
-
-                for (let i = 0; i < res.contents.length; i++) {
-                    // 获赞处理
-                    if (parseInt(res.contents[i].support) > 10000) {
-                        let num = parseInt(res.contents[i].support);
-                        res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
-                    };
-                    // 评论
-                    if (parseInt(res.contents[i].comments) > 10000) {
-                        let num = parseInt(res.contents[i].comments);
-                        res.contents[i].comments = (Math.floor(num / 1000) / 10) + 'w+'
-                    };
-                };
-
-                if (res.contents.length == 0) {
-                    _this.page == 1 ? _this.page : _this.page--;
-                    _this.cangetData=false;
-                    util.toast("暂无更多更新");
+                console.log(res);
+                for (let i = 0; i < _this.data.dayArr.length; i++) {
+                    _this.data.dayArr[i].beans = res.beans[i + 1];
+                    _this.data.dayArr[i].ifSign = i < res.day ? 1 : 0;
                     _this.setData({
-                        ifloadtxt: 0, 
-                        showBotTxt: 1,
+                        dayArr: _this.data.dayArr,
+                        daynums: res.day,
                     })
-                    return;
                 }
-
-                _this.setData({
-                    contentArr: [],
-                    ifloadtxt: 0,
-                });
-
-                _this.setData({
-                    contentArr: res.contents,
-                    ifloadtxt: 1,
-                });
-                if (res.contents.length < _this.rows) {
-                    _this.cangetData = false;
-                    _this.setData({
-                        showBotTxt: 1,
-                        ifloadtxt: 0,
-                    });
-                };
+            } else {
+                wx.showModal({
+                    title: '提示',
+                    content: '数据获取失败,请稍后再试',
+                    showCancel: false,
+                    success: function(res) {
+                        wx.switchTab({
+                            url: '/pages/index/index'
+                        })
+                    }
+                })
             }
         })
     },
 
-    catchtap: function() {},
+    pageNav: function(e) {
+        let navPath = e.currentTarget.dataset.path;
+        let type = e.currentTarget.dataset.type;
+        if (type == 1) {
+            this.foundSign(2)
+        } else if (type == 2) {
+            wx.switchTab({
+                url: `${navPath}`
+            })
+        } else {
+            wx.navigateTo({
+                url: `${navPath}`,
+            })
+        }
+
+    },
+
+    showbeansMask: function() {
+        this.setData({
+            ifshowrulesView: !this.data.ifshowrulesView
+        })
+    },
 })
