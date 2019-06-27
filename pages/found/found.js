@@ -146,9 +146,12 @@ Page({
                     _this.setData({
                         dayArr: _this.data.dayArr,
                         daynums: res.day,
-                    })
+                    });
+                    type==2?util.toast("签到成功"):null;
                 }
-            } else {
+            } else if (res.status == 0){
+                util.toast("每天只能签到一次")
+            }else {
                 wx.showModal({
                     title: '提示',
                     content: '数据获取失败,请稍后再试',

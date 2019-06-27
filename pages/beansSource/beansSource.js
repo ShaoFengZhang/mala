@@ -5,18 +5,49 @@ const app = getApp();
 Page({
 
     data: {
-        beansArr:[1,2,3,4,5,6,7,8,9,1,2,3,4,56,,9]
+        beansArr: [],
+        showBotTxt: 0,
     },
 
-    onLoad: function (options) {
-
+    onLoad: function(options) {
+        this.page = 1;
+        this.rows = 20;
+        this.cangetData = true;
+        this.getBeansSource();
     },
 
-    onShareAppMessage: function () {
+    onShareAppMessage: function() {
         return util.shareObj
     },
 
-    onReachBottom: function () {
-        console.log(123)
+    onReachBottom: function() {
+        if (this.cangetData){
+            this.page++;
+            this.getBeansSource();
+        }
     },
+
+    getBeansSource: function() {
+        let _this = this;
+        let getBeansSourceUrl = loginApi.domin + '/home/index/source';
+        loginApi.requestUrl(_this, getBeansSourceUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+            "page": this.page,
+            "len": this.rows,
+        }, function(res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                _this.setData({
+                    beansArr: _this.data.beansArr.concat(res.contents),
+                });
+                if (res.contents.length < _this.rows) {
+                    _this.cangetData = false;
+                    _this.setData({
+                        showBotTxt: 1,
+                    });
+                };
+            }
+
+        })
+    }
 })

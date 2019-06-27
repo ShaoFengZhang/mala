@@ -31,7 +31,7 @@
         </view>
 
         <view class='praiseNum columnflex' catchtap='pageNav' data-path="/pages/beansSource/beansSource">
-            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.support*2+userInfos.beans+userInfos.newbeans || 0}}</text>
+            <text style='color:#282828;font-size:36rpx;font-weight:bold;'>{{userInfos.support*2+userInfos.beans+userInfos.newbeans+userInfos.signbeans || 0}}</text>
             <text style='color:#999999;font-size:28rpx;'>句豆</text>
             <text class='questionMask' catchtap='showbeansMask'>?</text>
             <form bindsubmit="formSubmit" report-submit="{{true}}">
