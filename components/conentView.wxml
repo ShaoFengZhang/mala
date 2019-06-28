@@ -98,7 +98,7 @@
 
     <view class='nocom' wx:if="{{showBotTxt && !contentArr.length}}">
         <image src='/assets/index/nodata.png' />
-        <view>暂时还没有数据亲~</view>
+        <view>没有更多数据了亲~</view>
     </view>
 
 </view>

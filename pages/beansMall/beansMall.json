@@ -2,6 +2,5 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "商城兑换",
     "backgroundColor": "#000000",
-    "enablePullDownRefresh": true,
     "onReachBottomDistance": 0
 }

@@ -3,6 +3,5 @@
     "navigationBarTitleText": "发现",
     "backgroundColor": "#000000",
     "disableSwipeBack": true,
-    "enablePullDownRefresh": true,
     "onReachBottomDistance": 0
 }

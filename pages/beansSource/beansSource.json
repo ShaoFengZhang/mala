@@ -2,7 +2,6 @@
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "句豆来源",
     "backgroundColor": "#000000",
-    "enablePullDownRefresh": true,
     "backgroundTextStyle":"light",
     "onReachBottomDistance": 0
 }

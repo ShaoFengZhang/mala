@@ -14,7 +14,7 @@
         <view class='addBeansNum' style='color:red'>+{{item.beans}}</view>
     </view>
 
-    <view class='nocom' wx:if="{{showBotTxt && !beansArr.length}}">
+    <view class='nocom' wx:if="{{!beansArr.length}}">
         <image src='/assets/index/nodata.png' />
         <view style='font-weight:bold;margin-bottom:10rpx;'>还没有句豆来源哦~</view>
         <view>快去发布短句吧~</view>

@@ -35,7 +35,6 @@ Page({
             "page": this.page,
             "len": this.rows,
         }, function(res) {
-            wx.hideLoading();
             if (res.status == 1) {
                 _this.setData({
                     beansArr: _this.data.beansArr.concat(res.contents),

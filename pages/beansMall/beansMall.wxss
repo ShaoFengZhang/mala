@@ -7,9 +7,11 @@
 
 .goodsView {
     width: 314rpx;
-    height: 502rpx;
+    min-height: 502rpx;
+    max-height: 542rpx;
     margin-bottom: 40rpx;
     font-size: 28rpx;
+    position: relative;
 }
 
 .goodsFlex {
@@ -37,7 +39,8 @@
 
 .goodsDes {
     width: 100%;
-    height: 40rpx;
+    min-height: 40rpx;
+    max-height: 80rpx;
     font-size: 28rpx;
     color: #282828;
     line-height: 40rpx;

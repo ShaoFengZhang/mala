@@ -5,35 +5,18 @@ const app = getApp();
 Page({
 
     data: {
-        mallArr: [{
-                icon: 'https://duanju.58100.com/upload/shop/1.png',
-                title: '现金红包10元',
-                beans: '99999',
-                people: '1',
-            }, {
-                icon: 'https://duanju.58100.com/upload/shop/2.png',
-                title: 'YSL圣罗兰红方管正红色',
-                beans: '9000000',
-                people: '1',
-            },
-            {
-                icon: 'https://duanju.58100.com/upload/shop/3.png',
-                title: '小米AIR蓝牙耳机',
-                beans: '8000000',
-                people: '1',
-            }, {
-                icon: 'https://duanju.58100.com/upload/shop/4.png',
-                title: '游戏键鼠套装',
-                beans: '9999999',
-                people: '1',
-            }
-        ]
+        mallArr: [],
     },
 
-    onLoad: function(options) {},
+    onLoad: function(options) {
+        this.page = 1;
+        this.rows = 6;
+        this.cangetData = true;
+        this.getMallGoods();
+    },
 
     onShow: function() {
-
+        this.getuserbeans();
     },
 
     onHide: function() {
@@ -42,6 +25,72 @@ Page({
 
     onShareAppMessage: function() {
         return util.shareObj
+    },
+
+    // 滑动到底部
+    onReachBottom: function() {
+        if (this.cangetData) {
+            this.page++;
+            this.getMallGoods();
+        }
+    },
+
+    nowExchange: function(e) {
+        let beans = parseInt(e.currentTarget.dataset.beans);
+        let id = parseInt(e.currentTarget.dataset.id);
+        if (this.data.userBeans < beans) {
+            util.toast("句豆不足,快去赚句豆吧!");
+            return;
+        };
+        // this.exchangeBeans(id);
+    },
+
+    getuserbeans: function() {
+        util.loding('Loading');
+        let _this = this;
+        let getuserbeansUrl = loginApi.domin + '/home/index/query';
+        loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function(res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                _this.setData({
+                    userBeans: res.beans,
+                })
+            }
+
+        })
+    },
+
+    getMallGoods: function() {
+        let _this = this;
+        let releaseFunUrl = loginApi.domin + '/home/index/mall';
+        loginApi.requestUrl(_this, releaseFunUrl, "POST", {
+            "page": this.page,
+            "len": this.rows,
+        }, function(res) {
+            if (res.status == 1) {
+                _this.setData({
+                    mallArr: _this.data.mallArr.concat(res.contents),
+                });
+            }
+        })
+    },
+
+    exchangeBeans: function(id) {
+        util.loding('Loading');
+        let _this = this;
+        let getuserbeansUrl = loginApi.domin + '/home/index/exchangeBeans';
+        loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+            "id":id,
+        }, function(res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                _this.getuserbeans()  
+            }
+
+        })
     },
 
     maskeclick: function() {
