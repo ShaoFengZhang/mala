@@ -23,7 +23,7 @@
 .goodsImg {
     width: 314rpx;
     height: 314rpx;
-    border: 2rpx solid rgba(231, 231, 231, 1);
+    /* border: 2rpx solid rgba(231, 231, 231, 1); */
     box-sizing: border-box;
 }
 

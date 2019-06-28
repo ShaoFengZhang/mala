@@ -78,7 +78,7 @@
     align-items: center;
     color: #282828;
     font-size: 32rpx;
-    font-weight: bold;
+    /* font-weight: bold; */
 }
 
 .rightBtn {
@@ -88,7 +88,12 @@
     border-radius: 4rpx;
     text-align: center;
     line-height: 56rpx;
-    color:#fff;
+    color: #fff;
+}
+
+.haveComplete {
+    background: #F3F5F9;
+    color: #9B9B9B;
 }
 
 #getInfoBtn {

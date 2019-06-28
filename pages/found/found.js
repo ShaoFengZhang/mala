@@ -53,6 +53,7 @@ Page({
                 btnTxt: '签到',
                 path: "api",
                 type: 1,
+                state:0,
             },
             // {
             //     title: '首次发布短句',
@@ -60,6 +61,7 @@ Page({
             //     btnTxt: '去发布',
             //     path: '/pages/release/release',
             //     type: 2,
+            //     state: 0,
             // },
             {
                 title: '首次点赞评论内容',
@@ -67,6 +69,7 @@ Page({
                 btnTxt: '去评论',
                 path: '/pages/index/index',
                 type: 2,
+                state: 0,
             },
             {
                 title: '首次邀请好友',
@@ -74,6 +77,7 @@ Page({
                 btnTxt: '去邀请',
                 path: '/pages/shareMakes/shareMakes',
                 type: 3,
+                state: 0,
             }
         ]
     },
@@ -101,6 +105,7 @@ Page({
     onShow: function() {
         this.foundSign(1);
         this.getuserbeans();
+        this.getuserquerys();
     },
 
     onShareAppMessage: function(e) {
@@ -145,11 +150,15 @@ Page({
                 for (let i = 0; i < _this.data.dayArr.length; i++) {
                     _this.data.dayArr[i].beans = res.beans[i + 1];
                     _this.data.dayArr[i].ifSign = i < res.day ? 1 : 0;
+                    _this.data.taskObj[0].state=res.times>=1?1:0,
                     _this.setData({
                         dayArr: _this.data.dayArr,
                         daynums: res.day,
+                        taskObj: _this.data.taskObj,
                     });
                     type==2?util.toast("签到成功"):null;
+                    type == 2 ? _this.getuserbeans() : null;
+                    
                 }
             } else if (res.status == 0){
                 util.toast("每天只能签到一次")
@@ -188,6 +197,33 @@ Page({
     showbeansMask: function() {
         this.setData({
             ifshowrulesView: !this.data.ifshowrulesView
+        });
+        if (!this.data.ifshowrulesView) {
+            wx.showTabBar({
+                animation: true
+            });
+        } else {
+            wx.hideTabBar({
+                animation: true
+            });
+        }
+    },
+
+    getuserquerys: function () {
+        let _this = this;
+        let getuserquerysUrl = loginApi.domin + '/home/index/querys';
+        loginApi.requestUrl(_this, getuserquerysUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            if (res.status == 1) {
+                console.log(res);
+                res.info == 1 ? _this.data.taskObj[1].state =1:null;
+                res.new == 1 ? _this.data.taskObj[2].state=1:null;
+                _this.setData({
+                    taskObj:_this.data.taskObj,
+                })
+            }
+
         })
     },
 
