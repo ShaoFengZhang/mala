@@ -157,4 +157,7 @@
 
     </view>
 
+    <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+    </button>
+
 </view>

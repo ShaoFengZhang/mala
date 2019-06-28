@@ -5,6 +5,9 @@ const app = getApp();
 Page({
 
     data: {
+        userInfo: {},
+        hasUserInfo: false,
+        canIUse: wx.canIUse('button.open-type.getUserInfo'),
         txtValue: "",
         srcDomin: loginApi.srcDomin,
         praiseEvent: 'praiseEvent',
@@ -26,6 +29,7 @@ Page({
             classScrollHeight: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 110,
         });
         console.log(options)
+        // options.conId = 2631
         if (options && options.conId) {
             this.getcontent(options.conId);
             this.getSupportcontent(options.conId);
@@ -46,6 +50,24 @@ Page({
             path: `/pages/index/index?conId=${this.data.content.id}&uid=${wx.getStorageSync("u_id")}&type=2`,
             imageUrl: this.data.content.imgurl[0] ? this.data.srcDomin + this.data.content.imgurl[0] : `/assets/shareimg/img.png`
         }
+    },
+
+    // 获取用户信息
+    getUserInfo: function (e) {
+        console.log(e);
+        if (!e.detail.userInfo) {
+            util.toast("我们需要您的授权哦亲~", 1200)
+            return
+        };
+        app.globalData.userInfo = e.detail.userInfo
+        this.setData({
+            userInfo: e.detail.userInfo,
+            hasUserInfo: true
+        });
+        let iv = e.detail.iv;
+        let encryptedData = e.detail.encryptedData;
+        let session_key = app.globalData.session_key;
+        loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key);
     },
 
     // 收藏
