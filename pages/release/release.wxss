@@ -56,7 +56,7 @@
 .pictureView {
     width: 100%;
     box-sizing: border-box;
-    padding: 40rpx;
+    padding: 40rpx 40rpx 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;

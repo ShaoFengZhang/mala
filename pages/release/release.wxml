@@ -4,12 +4,17 @@
 
         <view class='topTextArea'>
             <!-- <image catchtap='changeOther' src='/assets/release/other.png' /> -->
-            <textarea value="{{textArea}}" show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;line-height:64rpx;" bindinput="txtBindInput" auto-height bindfocus="bindfocus" bindblur="bindblur"/>
+            <textarea value="{{textArea}}" show-confirm-bar="{{false}}" maxlength="{{1000}}" id='topArea' placeholder-style="color:#AAAAAA;font-size:36rpx;line-height:64rpx;" bindinput="txtBindInput" auto-height bindfocus="bindfocus" bindblur="bindblur" />
             <view style='color:#AAAAAA;font-size:28rpx;text-align:right'>最多1000字</view>
-           
+
             <view class='relasePrompt' wx:if="{{relasePrompt}}">
-                在这里写下你的短句，用户点赞你的内容将会获得2句豆，<text style='color:#FF493A;'>（100句豆=1元）</text>；句豆可以在礼物商城兑换现金和礼品。
+                <view>
+                    在这里写下你的短句，用户点赞你的内容将会获得2句豆
+                    <text style='color:#FF493A;'>(100句豆=1元)</text>
+                </view>
+                <view>句豆可以在礼物商城兑换现金和礼品。</view>
             </view>
+
         </view>
 
         <!-- 选择话题 -->
@@ -48,8 +53,9 @@
             <!-- <view class='changePic'>
                 <image src='/assets/release/pic.png' />
             </view> -->
-
+<view style='color:#AAAAAA;font-size:28rpx;margin-top:24rpx;'>添加高质量图片可以让你的短句更容易让人喜欢哦</view>
         </view>
+        
         <!-- 发布按钮 -->
         <view class='releaseView wrapflex'>
             <view class='releaseBtn' catchtap='confirmRelease'>
