@@ -8,6 +8,7 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         srcDomin: loginApi.srcDomin,
+        userBeans:0,
         dayArr: [
 
             {
@@ -53,13 +54,13 @@ Page({
                 path: "api",
                 type: 1,
             },
-            {
-                title: '首次发布短句',
-                content: '+50句豆',
-                btnTxt: '去发布',
-                path: '/pages/release/release',
-                type: 2,
-            },
+            // {
+            //     title: '首次发布短句',
+            //     content: '+50句豆',
+            //     btnTxt: '去发布',
+            //     path: '/pages/release/release',
+            //     type: 2,
+            // },
             {
                 title: '首次点赞评论内容',
                 content: '+20句豆',
@@ -99,6 +100,7 @@ Page({
 
     onShow: function() {
         this.foundSign(1);
+        this.getuserbeans();
     },
 
     onShareAppMessage: function(e) {
@@ -186,6 +188,21 @@ Page({
     showbeansMask: function() {
         this.setData({
             ifshowrulesView: !this.data.ifshowrulesView
+        })
+    },
+
+    getuserbeans: function () {
+        let _this = this;
+        let getuserbeansUrl = loginApi.domin + '/home/index/query';
+        loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            if (res.status == 1) {
+                _this.setData({
+                    userBeans: res.beans,
+                })
+            }
+
         })
     },
 })

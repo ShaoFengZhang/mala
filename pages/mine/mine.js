@@ -9,6 +9,7 @@ Page({
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
         ifshowrulesView:0,
+        userBeans:0,
     },
 
     onLoad: function(options) {
@@ -17,6 +18,7 @@ Page({
 
     onShow: function() {
         this.getMyDate();
+        this.getuserbeans();
     },
 
     onHide: function() {
@@ -106,6 +108,21 @@ Page({
         let navPath = e.currentTarget.dataset.path;
         wx.navigateTo({
             url: `${navPath}`,
+        })
+    },
+
+    getuserbeans: function () {
+        let _this = this;
+        let getuserbeansUrl = loginApi.domin + '/home/index/query';
+        loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            if (res.status == 1) {
+                _this.setData({
+                    userBeans: res.beans,
+                })
+            }
+
         })
     },
 

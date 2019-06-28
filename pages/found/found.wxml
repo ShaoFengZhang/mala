@@ -3,7 +3,7 @@
     <view class='topView'>
 
         <view style='font-size:28rpx;color:#fff;'>总句豆</view>
-        <view style='font-size:72rpx;color:#fff;'>3756</view>
+        <view style='font-size:72rpx;color:#fff;'>{{userBeans}}</view>
 
         <view class='signView'>
 

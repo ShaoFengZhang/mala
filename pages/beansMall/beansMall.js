@@ -42,7 +42,7 @@ Page({
             util.toast("句豆不足,快去赚句豆吧!");
             return;
         };
-        // this.exchangeBeans(id);
+        this.exchangeBeans(id);
     },
 
     getuserbeans: function() {
@@ -80,14 +80,32 @@ Page({
     exchangeBeans: function(id) {
         util.loding('Loading');
         let _this = this;
-        let getuserbeansUrl = loginApi.domin + '/home/index/exchangeBeans';
+        let getuserbeansUrl = loginApi.domin + '/home/index/pay';
         loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
             "uid": wx.getStorageSync("u_id"),
             "id":id,
         }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
-                _this.getuserbeans()  
+                _this.getuserbeans();
+                wx.showModal({
+                    title: '提示',
+                    content: '兑换成功',
+                    showCancel: false,
+                    success: function (res) {}
+                })  
+            }else if(res.status==0){
+                _this.getuserbeans();
+                wx.showModal({
+                    title: '提示',
+                    content: res.contents,
+                    showCancel: false,
+                    success: function (res) {
+                        wx.switchTab({
+                            url: '/pages/index/index'
+                        })
+                    }
+                })
             }
 
         })
