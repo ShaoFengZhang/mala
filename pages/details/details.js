@@ -21,6 +21,8 @@ Page({
 
     onLoad: function(options) {
 
+        this.contentTxt="";
+
         this.page = 1;
         this.rows = 10;
         this.cangetData = true;
@@ -42,7 +44,14 @@ Page({
         };
     },
 
-    onShow: function() {},
+    onShow: function() {
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            });
+        };
+    },
 
     onShareAppMessage: function() {
         return {
@@ -410,15 +419,15 @@ Page({
         this.setData({
             ifshowrulesView: !this.data.ifshowrulesView
         });
-        if (!this.data.ifshowrulesView) {
-            wx.showTabBar({
-                animation: true
-            });
-        } else {
-            wx.hideTabBar({
-                animation: true
-            });
-        }
+        // if (!this.data.ifshowrulesView) {
+        //     wx.showTabBar({
+        //         animation: true
+        //     });
+        // } else {
+        //     wx.hideTabBar({
+        //         animation: true
+        //     });
+        // }
     },
 
     goToFounPage: function () {

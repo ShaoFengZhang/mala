@@ -51,7 +51,7 @@
     position: relative;
 }
 
-.pointMenu image{
+.pointMenu image {
     width: 28rpx;
     height: 28rpx;
     vertical-align: middle;
@@ -102,7 +102,7 @@
     padding: 10rpx 20rpx;
 }
 
-.discussView1{
+.discussView1 {
     width: 580rpx;
 }
 
@@ -112,8 +112,8 @@ textarea {
     line-height: 44rpx;
 }
 
-.textarea1{
-     width: 540rpx;
+.textarea1 {
+    width: 540rpx;
 }
 
 .shareImg {
@@ -221,11 +221,9 @@ textarea {
 
 #getInfoBtn {
     width: 100vw;
-    height: 100vh;
+    height: 110rpx;
     position: fixed;
     left: 0;
-    top: 0;
+    bottom: 0;
     opacity: 0;
 }
-
-

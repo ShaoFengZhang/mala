@@ -55,8 +55,8 @@
                     <view class='praiseView wrapflex' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent2}}'>
                         <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
                         <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
-                        <text style='color:#172434;font-size:28rpx;'  wx:if="{{!item.dianji}}">{{item.support}}</text>
-                        <text style='color:#27BCAD;font-size:28rpx;'  wx:if="{{item.dianji}}">{{item.support}}</text>
+                        <text style='color:#172434;font-size:28rpx;' wx:if="{{!item.dianji}}">{{item.support}}</text>
+                        <text style='color:#27BCAD;font-size:28rpx;' wx:if="{{item.dianji}}">{{item.support}}</text>
                         <form bindsubmit="formSubmit" report-submit="{{true}}">
                             <button formType="submit" class='Sbtn'>
                                 <view class='sbtnview'></view>
@@ -91,8 +91,9 @@
     <view class='botHandleView wrapflex'>
 
         <view class='discussView {{ifPopUp?"discussView1":""}} wrapflex'>
-            <textarea class='{{ifPopUp?"textarea1":""}}' maxlength="{{100}}" value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' placeholder-style="font-size:28rpx;"
+            <textarea wx:if="{{hasUserInfo}}" class='{{ifPopUp?"textarea1":""}}' maxlength="{{100}}" value="{{txtValue}}" show-confirm-bar="{{0}}" auto-height fixed="{{true}}" cursor-spacing="20" bindinput="bindinput" bindfocus="bindfocus" bindblur="bindblur" placeholder='发表你的观点' placeholder-style="font-size:28rpx;"
             />
+        <text wx:if="{{!hasUserInfo}}" style="font-size:28rpx;">发表你的观点</text>  
         </view>
 
         <view class='commitBtn' wx:if="{{ifPopUp}}" catchtap='commitComments'>
@@ -129,19 +130,21 @@
         </view>
 
     </view>
+    <!-- 底部button  END -->
 
     <view class='beansRulsView' wx:if="{{ifshowrulesView}}">
 
-        <view class='ruleTop'> 
-           <image src='/assets/index/ruleTop.png' />
+        <view class='ruleTop'>
+            <image src='/assets/index/ruleTop.png' />
         </view>
 
-        <view class='rulsBody'style='margin:0 auto'>
+        <view class='rulsBody' style='margin:0 auto'>
             <view style='margin-top:60rpx;'>
                 <image src='/assets/index/check.png' />
             </view>
             <view style='color:#27BCAD;font-size:48rpx;font-weight:bold;margin-top:40rpx;'>恭喜你完成新手任务</view>
-            <view style='font-size:40rpx;margin-top:20rpx;'>句豆+<text style='font-size:48rpx'>20</text> </view>
+            <view style='font-size:40rpx;margin-top:20rpx;'>句豆+
+                <text style='font-size:48rpx'>20</text> </view>
             <view style='font-size:32rpx;color:#666;margin-top:60rpx;'>
                 <view>完成其他新手任务</view>
                 <view style='margin-top:20rpx;'>获取更多句豆兑换现金奖品</view>
@@ -156,8 +159,6 @@
         </view>
 
     </view>
-
     <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
     </button>
-
 </view>

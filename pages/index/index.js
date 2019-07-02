@@ -146,7 +146,7 @@ Page({
             wx.removeStorageSync('className');
         } catch (e) {
 
-        }
+        };
     },
 
     // 分享
@@ -363,15 +363,15 @@ Page({
         this.setData({
             ifshowrulesView: !this.data.ifshowrulesView
         });
-        if (!this.data.ifshowrulesView) {
-            wx.showTabBar({
-                animation: true
-            });
-        } else {
-            wx.hideTabBar({
-                animation: true
-            });
-        }
+        // if (!this.data.ifshowrulesView) {
+        //     wx.showTabBar({
+        //         animation: true
+        //     });
+        // } else {
+        //     wx.hideTabBar({
+        //         animation: true
+        //     });
+        // }
     },
 
     goToFounPage:function(){

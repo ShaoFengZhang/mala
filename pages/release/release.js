@@ -19,6 +19,12 @@ Page({
     onLoad: function(options) {
         let _this = this;
         this.txtArea = '';
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            });
+        }
     },
 
     onTabItemTap: function () {
