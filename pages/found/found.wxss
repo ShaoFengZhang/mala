@@ -3,39 +3,30 @@
 }
 
 .topView {
-    width: 750rpx;
-    height: 644rpx;
-    background-repeat: no-repeat;
-    background-size: 750rpx 444rpx;
-    background-image: url("https://duanju.58100.com/upload/5.png");
+    width: 100%;
+    height: 414rpx;
+    padding: 40rpx;
     box-sizing: border-box;
-    padding: 48rpx 24rpx 0;
 }
 
-.signView {
-    width: 702rpx;
-    height: 384rpx;
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0px 40rpx 40rpx -8rpx rgba(0, 0, 0, 0.05);
-    border-radius: 20rpx;
-    margin-top: 40rpx;
-    overflow: hidden;
-    box-sizing: border-box;
-    padding: 40rpx;
+.line {
+    width: 750rpx;
+    height: 16rpx;
+    background: rgba(243, 245, 249, 1);
 }
 
 .dayView {
     width: 100%;
-    height: 102rpx;
+    /* height: 102rpx; */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 24rpx;
+    margin-top: 40rpx;
 }
 
 .dayItem {
     width: 64rpx;
-    height: 100%;
+    /* height: 100%; */
     text-align: center;
 }
 
@@ -69,6 +60,12 @@
     margin: 40rpx auto 0;
 }
 
+.haveSignBtn{
+  background:#F3F5F9 ;
+  color: #9B9B9B;
+  font-weight: 400;
+}
+
 .Task {
     width: 100%;
     box-sizing: border-box;
@@ -92,8 +89,8 @@
 }
 
 .haveComplete {
-    background: #F3F5F9;
-    color: #9B9B9B;
+    background: #f3f5f9;
+    color: #9b9b9b;
 }
 
 #getInfoBtn {

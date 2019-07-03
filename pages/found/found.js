@@ -6,9 +6,8 @@ Page({
     data: {
         userInfo: {},
         hasUserInfo: false,
-        canIUse: wx.canIUse('button.open-type.getUserInfo'),
+        canIUse: wx.canIUse('btton.open-type.getUserInfo'),
         srcDomin: loginApi.srcDomin,
-        userBeans:0,
         dayArr: [
 
             {
@@ -50,19 +49,11 @@ Page({
         taskObj: [{
                 title: '首次连续签到7天领句豆',
                 content: '别忘了每天来打卡哦',
-                btnTxt: '签到',
+                btnTxt: '未完成',
                 path: "api",
                 type: 1,
                 state:0,
             },
-            // {
-            //     title: '首次发布短句',
-            //     content: '+50句豆',
-            //     btnTxt: '去发布',
-            //     path: '/pages/release/release',
-            //     type: 2,
-            //     state: 0,
-            // },
             {
                 title: '首次点赞评论内容',
                 content: '+20句豆',
@@ -78,8 +69,17 @@ Page({
                 path: '/pages/shareMakes/shareMakes',
                 type: 3,
                 state: 0,
-            }
-        ]
+            },
+            {
+                title: '首次发布短句',
+                content: '+20句豆',
+                btnTxt: '去发布',
+                path: '/pages/release/release',
+                type: 2,
+                state: 0,
+            },
+        ],
+        signClick:"signClick",
     },
 
     onLoad: function(options) {
@@ -99,12 +99,11 @@ Page({
         } catch (e) {
 
         };
-
+        
     },
 
     onShow: function() {
         this.foundSign(1);
-        this.getuserbeans();
         this.getuserquerys();
     },
 
@@ -134,7 +133,10 @@ Page({
 
     // 签到click
     signClick: function() {
-        this.foundSign(2)
+        this.setData({
+            signClick:null, 
+        });
+        this.foundSign(2); 
     },
 
     // 签到的接口
@@ -155,10 +157,10 @@ Page({
                         dayArr: _this.data.dayArr,
                         daynums: res.day,
                         taskObj: _this.data.taskObj,
+                        signBtn: res.sign,
+                        signClick: "signClick",
                     });
-                    type==2?util.toast("签到成功"):null;
-                    type == 2 ? _this.getuserbeans() : null;
-                    
+                    type == 2 ? util.toast("签到成功"):null;
                 }
             } else if (res.status == 0){
                 util.toast("每天只能签到一次")
@@ -177,11 +179,15 @@ Page({
         })
     },
 
+    haveSignClick:function(){
+        util.toast("今天已签到")
+    },
+
     pageNav: function(e) {
         let navPath = e.currentTarget.dataset.path;
         let type = e.currentTarget.dataset.type;
         if (type == 1) {
-            this.foundSign(2)
+            util.toast("记得每天来签到哦")
         } else if (type == 2) {
             wx.switchTab({
                 url: `${navPath}`
@@ -191,7 +197,6 @@ Page({
                 url: `${navPath}`,
             })
         }
-
     },
 
     showbeansMask: function() {
@@ -217,25 +222,12 @@ Page({
         }, function (res) {
             if (res.status == 1) {
                 console.log(res);
+                // 首次点赞或者评论
                 res.info == 1 ? _this.data.taskObj[1].state =1:null;
                 res.new == 1 ? _this.data.taskObj[2].state=1:null;
+                res.content==1? _this.data.taskObj[3].state=1:null;
                 _this.setData({
                     taskObj:_this.data.taskObj,
-                })
-            }
-
-        })
-    },
-
-    getuserbeans: function () {
-        let _this = this;
-        let getuserbeansUrl = loginApi.domin + '/home/index/query';
-        loginApi.requestUrl(_this, getuserbeansUrl, "POST", {
-            "uid": wx.getStorageSync("u_id"),
-        }, function (res) {
-            if (res.status == 1) {
-                _this.setData({
-                    userBeans: res.beans,
                 })
             }
 

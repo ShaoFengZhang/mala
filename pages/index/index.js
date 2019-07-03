@@ -120,6 +120,12 @@ Page({
     },
 
     onShow: function() {
+        if (app.globalData.userInfo) {
+            this.setData({
+                userInfo: app.globalData.userInfo,
+                hasUserInfo: true
+            });
+        }
         this.setData({
             classArr: [{
                 title: "推荐",

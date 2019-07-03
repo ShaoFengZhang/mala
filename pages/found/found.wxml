@@ -2,9 +2,6 @@
 
     <view class='topView'>
 
-        <view style='font-size:28rpx;color:#fff;'>句豆</view>
-        <view style='font-size:72rpx;color:#fff;'>{{userBeans}}</view>
-
         <view class='signView'>
 
             <view style='color:#282828;font-size:36rpx;font-weight:bold;'>已累计签到{{daynums}}天</view>
@@ -15,17 +12,20 @@
                         <image wx:if="{{item.ifSign}}" src='/assets/index/check.png' />
                         <text wx:if="{{!item.ifSign}}" style='color:#9B9B9B;font-size:24rpx;'>+{{item.beans}}</text>
                     </view>
-                    <view style='font-size:18rpx;color:#666;margin-top:8rpx;'>{{item.dayTxt}}</view>
+                    <view style='font-size:18rpx;color:#666;margin-top:16rpx;'>{{item.dayTxt}}</view>
                 </view>
             </view>
 
-            <view class='signBtn' catchtap='signClick'>立即签到</view>
+            <view wx:if="{{!signBtn}}" class='signBtn' catchtap='{{signClick}}'>立即签到</view>
+            <view wx:if="{{signBtn}}" class=' signBtn haveSignBtn' catchtap='haveSignClick'>已签到</view>
 
         </view>
 
     </view>
 
-    <view class='Task'>
+    <view class='line'></view>
+
+    <view class='Task' style='margin-top:40rpx;'>
         <text style='font-size:40rpx;font-weight: bold'>新人任务</text>
         <text catchtap='showbeansMask' style='color:#27BCAD;font-size:24rpx;'>句豆换现金</text>
     </view>
@@ -38,7 +38,6 @@
 
         <view wx:if="{{!item.state}}" class='rightBtn' data-path="{{item.path}}" data-type="{{item.type}}" catchtap='pageNav'>{{item.btnTxt}}</view>
         <view wx:if="{{item.state}}" class='rightBtn haveComplete'>已完成</view>
-
     </view>
 
     <view style='width:100%;height:30rpx;'></view>
