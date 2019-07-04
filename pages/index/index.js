@@ -16,6 +16,13 @@ Page({
         current: 0,
         ifloadtxt: 0,
         ifshowrulesView:0,
+        classArr: [{
+            title: "关注",
+            id: 10,
+        },{
+                title: "短句",
+                id: 0,
+        }],
     },
 
     onLoad: function(options) {
@@ -126,13 +133,7 @@ Page({
                 hasUserInfo: true
             });
         }
-        this.setData({
-            classArr: [{
-                title: "推荐",
-                id: 0,
-            }],
-        });
-        this.getClass();
+        // this.getClass();
         console.log(app.praiseIndex, 'app.praiseIndex')
         if (app.praiseIndex) {
             app.praiseIndex = parseInt(app.praiseIndex) - 1
@@ -204,7 +205,7 @@ Page({
             praiseId: '',
             showBotTxt: 0,
             ifloadtxt: 0,
-            current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current) : index - 4) : 0,
+            // current: (classlen > 6 && index >= 5) ? ((index == classlen - 1) ? (this.data.current) : index - 4) : 0,
         });
         this.page = 1;
         this.rows = 20;

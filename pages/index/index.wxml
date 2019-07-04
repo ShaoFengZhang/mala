@@ -3,7 +3,7 @@
     <view class='topFixed'>
         <view class='top-swiperView normalView'>
 
-            <swiper current="{{current}}" id='swiper-ID' display-multiple-items="{{classArr.length>6?6:classArr.length}}">
+            <swiper current="{{current}}" id='swiper-ID' display-multiple-items="{{2}}">
 
                 <block wx:for="{{classArr}}" wx:key="index">
 

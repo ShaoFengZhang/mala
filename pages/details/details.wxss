@@ -117,7 +117,7 @@ textarea {
 }
 
 .shareImg {
-    width: 40rpx;
+    width: 44rpx;
     height: 66rpx;
     text-align: right;
     line-height: 66rpx;
@@ -125,8 +125,8 @@ textarea {
 }
 
 .botHandleView image {
-    width: 32rpx;
-    height: 32rpx;
+    width: 44rpx;
+    height: 44rpx;
 }
 
 .scroll-view_y {

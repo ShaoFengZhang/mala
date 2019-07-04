@@ -26,6 +26,7 @@
 
 swiper-item {
     position: relative;
+    text-align: center;
 }
 
 .select-swiper-css {
@@ -34,10 +35,10 @@ swiper-item {
 }
 
 .swiperTxt {
-    width: 112rpx;
+    width: 100rpx;
     text-align: center;
     display: inline-block;
-    position: absolute;
+    position: relative;
 }
 
 .swiper-line {

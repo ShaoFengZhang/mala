@@ -19,7 +19,11 @@
 
             <view class='userNameBox columnflex'>
 
-                <view class='userNameView'>{{item.name?item.name:item.nickname}}</view>
+                <view style='display: flex;align-items:center;'>
+                    <view class='userNameView'>{{item.name?item.name:item.nickname}}</view>
+                    <view class='theTop'>置顶</view>
+                </view>
+
                 <view style='color:#666;font-size:24rpx;'>{{item.time[5]}}{{item.time[6]}}-{{item.time[8]}}{{item.time[9]}}</view>
 
                 <form bindsubmit="formSubmit" report-submit="{{true}}">
@@ -31,7 +35,6 @@
             </view>
 
             <view class='pointMenu' data-id='{{item.id}}' catchtap='catchtap'>
-                <!-- <text>...</text> -->
                 <image src='/assets/index/posterShare.png' />
                 <button data-index='{{index}}' class='shareBtn' open-type='share'></button>
             </view>
@@ -48,7 +51,7 @@
         </view>
 
         <view class='contentImg' wx:if="{{item.imgurl[0]}}">
-            <image mode='widthFix' src="{{srcDomin}}{{item.imgurl[0]}}" />
+            <image mode='aspectFill' src="{{srcDomin}}{{item.imgurl[0]}}" />
             <form bindsubmit="formSubmit" report-submit="{{true}}">
                 <button formType="submit" class='Sbtn'>
                     <view class='sbtnview'></view>
@@ -57,6 +60,10 @@
         </view>
 
         <view class='contentshare wrapflex'>
+
+            <view class='subClass' style='text-align:left;'>
+                <image src='/assets/index/class.png' /> {{"发布短句"}}
+            </view>
 
             <view class='opinionBox'>
                 <image src='/assets/index/opinion.png' />
@@ -84,6 +91,7 @@
             <view class='shareImg' catchtap='goToQrCode' data-id='{{item.id}}'>
                 <image src='/assets/index/shareImg.png' />
             </view>
+
         </view>
 
         <button catchtap='catchtap' class='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
