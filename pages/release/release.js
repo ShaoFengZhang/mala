@@ -139,7 +139,7 @@ Page({
         }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
-                util.toast('发布成功', 1200);
+                // util.toast('发布成功', 1200);
                 _this.setData({
                     userPicArr: [],
                     classTxt: "选择话题",
