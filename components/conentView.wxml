@@ -21,7 +21,10 @@
 
                 <view style='display: flex;align-items:center;'>
                     <view class='userNameView'>{{item.name?item.name:item.nickname}}</view>
-                    <view class='theTop'>置顶</view>
+                    <view wx:if="{{item.zhiding}}" class='theTop'>置顶</view>
+                    <!-- <view wx:if="{{item.hot}}" class='theTop hotView'>
+                        <image style='width:32rpx;height:32rpx;vertical-align: top;' src='/assets/index/hot.png' />
+                    </view> -->
                 </view>
 
                 <view style='color:#666;font-size:24rpx;'>{{item.time[5]}}{{item.time[6]}}-{{item.time[8]}}{{item.time[9]}}</view>
@@ -62,7 +65,7 @@
         <view class='contentshare wrapflex'>
 
             <view class='subClass' style='text-align:left;'>
-                <image src='/assets/index/class.png' /> {{"发布短句"}}
+                <image src='/assets/index/class.png' /> {{item.typetitle}}
             </view>
 
             <view class='opinionBox'>

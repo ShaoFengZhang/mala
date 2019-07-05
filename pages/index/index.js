@@ -18,7 +18,7 @@ Page({
         ifshowrulesView:0,
         classArr: [{
             title: "关注",
-            id: 10,
+            id: 1,
         },{
                 title: "短句",
                 id: 0,
@@ -210,10 +210,10 @@ Page({
         this.page = 1;
         this.rows = 20;
         this.cangetData = true;
-        this.getContent(classId);
+        classId == 1 ? this.getfocuContent():this.getContent(classId);
     },
 
-    // 获取内容
+    // 获取短句内容
     getContent: function(type, conId) {
         util.loding('加载中');
         let _this = this;
@@ -298,6 +298,81 @@ Page({
         })
     },
 
+    // 获取关注内容
+    getfocuContent:function(){
+        util.loding('加载中');
+        let _this = this;
+        let getfocuContentUrl = loginApi.domin + '/home/index/focususercontents';
+        loginApi.requestUrl(_this, getfocuContentUrl, "POST", {
+            "page": this.page,
+            "len": this.rows,
+            "uid": wx.getStorageSync("u_id"),
+            "openid": wx.getStorageSync("user_openID"),
+        }, function (res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                console.log("content")
+                for (let n = 0; n < res.contents.length; n++) {
+                    for (let j = 0; j < res.supports.length; j++) {
+                        if (res.supports[j].contentid == res.contents[n].id) {
+                            res.contents[n].dianji = 12;
+                        }
+                    }
+                }
+
+                for (let i = 0; i < res.contents.length; i++) {
+                    res.contents[i].imgurl = res.contents[i].imgurl.split(',');
+                    res.contents[i].ySupport = parseInt(res.contents[i].support);
+                    res.contents[i].yComments = parseInt(res.contents[i].comments);
+                };
+
+                for (let i = 0; i < res.contents.length; i++) {
+                    // 获赞处理
+                    if (parseInt(res.contents[i].support) >= 10000) {
+                        let num = parseInt(res.contents[i].support);
+                        res.contents[i].support = (Math.floor(num / 1000) / 10) + 'w+'
+                    };
+                    // 评论
+                    if (parseInt(res.contents[i].comments) >= 10000) {
+                        let num = parseInt(res.contents[i].comments);
+                        res.contents[i].comments = (Math.floor(num / 1000) / 10) + 'w+'
+                    };
+                };
+
+                if (res.contents.length == 0) {
+                    _this.page == 1 ? _this.page : _this.page--;
+                    _this.cangetData = false;
+                    util.toast("暂无更多更新");
+                    _this.setData({
+                        ifloadtxt: 0,
+                        showBotTxt: 1,
+                    });
+                    return;
+                };
+
+                _this.setData({
+                    contentArr: [],
+                    ifloadtxt: 0,
+                });
+
+                _this.setData({
+                    contentArr: res.contents,
+                    ifloadtxt: 1,
+                });
+                wx.stopPullDownRefresh();
+
+                if (res.contents.length < _this.rows) {
+                    _this.cangetData = false;
+                    _this.setData({
+                        showBotTxt: 1,
+                        ifloadtxt: 0,
+                    });
+                };
+
+            }
+        })
+    },
+
     //获取分类
     getClass: function() {
         // util.loding('加载中');
@@ -319,10 +394,12 @@ Page({
         let _this = this;
         if (this.page > 1) {
             this.page--;
-            this.getContent(this.data.swiperCurrentIndex);
+            // this.getContent(this.data.swiperCurrentIndex);
+            this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
         } else {
             // util.toast('暂无更多更新', 800);
-            this.getContent(this.data.swiperCurrentIndex);
+            // this.getContent(this.data.swiperCurrentIndex);
+            this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
             wx.stopPullDownRefresh();
         };
         return;
@@ -334,7 +411,8 @@ Page({
             this.page++;
             clearTimeout(this.bottomTime);
             this.bottomTime = setTimeout(() => {
-                this.getContent(this.data.swiperCurrentIndex);
+                // this.getContent(this.data.swiperCurrentIndex);
+                this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
             }, 1000)
 
         } else {
