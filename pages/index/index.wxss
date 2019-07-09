@@ -14,7 +14,7 @@
 
 .top-swiperView {
     line-height: 96rpx;
-    font-size: 36rpx;
+    font-size: 40rpx;
     color: #666;
     background-color: white;
 }
@@ -31,6 +31,7 @@ swiper-item {
 
 .select-swiper-css {
     color: #282828;
+    font-size: 44rpx;
     font-weight: bold;
 }
 

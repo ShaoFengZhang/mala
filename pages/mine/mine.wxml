@@ -132,6 +132,7 @@
         <view style='width:500rpx;color:#282828;font-size:32rpx;'>联系客服</view>
         <image style='width:80rpx;height:80rpx;' src='/assets/mine/rightFlow.png' />
         <button id='contact' open-type='contact'></button>
+        <!-- <navigator target="miniProgram" open-type="navigate" app-id="wx6a739cc11cae398a" path="" extra-data="" version="release">打开绑定的小程序</navigator> -->
     </view>
 
     <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">

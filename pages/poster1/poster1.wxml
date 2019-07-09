@@ -1,0 +1,40 @@
+<view class="bg">
+    <view class='posterImg' style='width:{{imgW}}rpx;background:#fff' data-src="{{postSrc}}" catchtap='previewImage'>
+        <image bindload="bindload" style='width:{{imgW}}rpx;' mode='widthFix' src='http://duanju.58100.com/home/index/huoqu' />
+    </view>
+
+    <view class='botClassView'>
+
+        <view class='classScroll'>
+            <swiper style='height:50rpx;' duration="{{300}}" display-multiple-items="{{classArr.length>4?4:classArr.length}}">
+                <block wx:for="{{classArr}}" wx:key="{{index}}">
+                    <swiper-item>
+                        <view>{{item.txt}}</view>
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+        <view class='classiconView'>
+            <swiper style='height:120rpx;' duration="{{300}}" display-multiple-items="{{classUrls.length>8?8:classUrls.length}}">
+                <block wx:for="{{classUrls}}" wx:key="{{index}}">
+                    <swiper-item>
+                        <image  catchtap='changePoster' src='{{item}}' />
+                    </swiper-item>
+                </block>
+            </swiper>
+        </view>
+
+        <view class='botBtnView'>
+            <view>
+                <image style='width:224rpx;height:50rpx;' src='/assets/poster/newSave.png' />
+            </view>
+            <view>
+                <image style='width:340rpx;height:88rpx;' src='/assets/poster/newShare.png' />
+            </view>
+        </view>
+
+
+    </view>
+
+</view>

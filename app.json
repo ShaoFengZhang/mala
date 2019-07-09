@@ -17,7 +17,8 @@
         "pages/shareMakes/shareMakes",
         "pages/posters/posters",
         "pages/savePosters/savePosters",
-        "pages/beansSource/beansSource"
+        "pages/beansSource/beansSource",
+        "pages/poster1/poster1"
     ],
 
     "window": {
@@ -60,6 +61,8 @@
             
         ]
     },
+
+    "navigateToMiniProgramAppIdList":["wx6a739cc11cae398a"],
 
     "networkTimeout": {
         "request": 10000

@@ -85,7 +85,7 @@ Page({
 
     onLoad: function(options) {
         console.log(app.globalData)
-        this.setBackColor(this.data.cardArr[0].color);
+        // this.setBackColor(this.data.cardArr[0].color);
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 258) * (670 / 946);
         this.setData({
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
@@ -158,7 +158,7 @@ Page({
             selectCardId: id,
             // ifGif: 1,
         });
-        this.setBackColor(this.data.cardArr[id].color)
+        // this.setBackColor(this.data.cardArr[id].color)
     },
 
     // 获取内容
