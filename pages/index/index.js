@@ -74,6 +74,7 @@ Page({
             let scene = decodeURIComponent(options.scene);
             options.conId = scene.split('&')[0];
             this.shareUid = scene.split('&')[1];
+            this.gotoPoster=true;
         };
 
         loginApi.wxlogin(app).then(function(value) {
@@ -423,9 +424,16 @@ Page({
     catchtap: function() {},
     // 跳转详情页
     goToDetails: function(conId) {
-        wx.navigateTo({
-            url: `/pages/details/details?conId=${conId}`,
-        })
+        if (this.gotoPoster){
+            this.gotoPoster=null;
+            wx.navigateTo({
+                url: `/pages/poster1/poster1?contentID=${conId}`,
+            })
+        }else{
+            wx.navigateTo({
+                url: `/pages/details/details?conId=${conId}`,
+            })
+        }
     },
 
     checkNewFans:function(fatherId,type){

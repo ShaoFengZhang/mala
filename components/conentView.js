@@ -44,7 +44,7 @@ Component({
             console.log(e)
             let id = e.currentTarget.dataset.id;
             wx.navigateTo({
-                url: `/pages/posters/posters?contentID=${id}`,
+                url: `/pages/poster1/poster1?contentID=${id}`,
             })
         },
 
