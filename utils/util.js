@@ -101,7 +101,7 @@ const upLoadImage = function(urlName, name, count, that, loginApi, cb) {
                                 wx.hideToast();
                                 wx.showModal({
                                     title: '错误提示',
-                                    content: '上传图片失败1',
+                                    content: '上传图片失败',
                                     showCancel: false,
                                     success: function(res) {}
                                 });

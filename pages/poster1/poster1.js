@@ -9,7 +9,7 @@ Page({
         postSrc:'',
         classArr:[
             {
-                txt: "简约大气",
+                txt: "",
                 id: 1,
                 poster:[
                     {
@@ -91,6 +91,7 @@ Page({
             classIndex: 0, // 底部海报当前current
             posterIndex:0,
         });
+        this.contentimg=null;
         this.changePoster();
         
     },
@@ -100,7 +101,23 @@ Page({
     },
 
     onShareAppMessage: function () {
-        return util.shareObj;
+        return {
+            title: '@你，给你留了一段话，快来看看吧~',
+            path: `/pages/index/index?conId=${this.data.contentID}&uid=${wx.getStorageSync("u_id")}&type=2&poster=1`,
+            imageUrl: this.data.postSrc
+        }
+    },
+
+    changeImage:function(){
+        console.log(123)
+        let _this = this;
+        util.upLoadImage("uploadcontentimg", "image", 1, this, loginApi, function (data) {
+            _this.setData({
+                ifGif: 1,
+            });
+            _this.contentimg = data.imgurl;
+            _this.changePoster();
+        });
     },
 
     // 放大图片
@@ -136,6 +153,7 @@ Page({
             "contentid": this.data.contentID || 3088,
             "uid": wx.getStorageSync("u_id"),
             "posterUrl": url,
+            "contentimg": this.contentimg ? this.contentimg:'',
         }, function (res) {
             console.log(res);
             if (res.status == 1) {

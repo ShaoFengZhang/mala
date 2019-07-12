@@ -77,6 +77,10 @@ Page({
             this.gotoPoster=true;
         };
 
+        if (options && options.poster){
+            this.gotoPoster = true;
+        };
+
         loginApi.wxlogin(app).then(function(value) {
             console.log(options);
             if (options && options.conId) {

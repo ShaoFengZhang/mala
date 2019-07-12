@@ -185,8 +185,11 @@ Page({
     },
 
     goToQrCode: function () {
+        // wx.navigateTo({
+        //     url: `/pages/posters/posters?contentID=${this.data.content.id}`,
+        // });
         wx.navigateTo({
-            url: `/pages/posters/posters?contentID=${this.data.content.id}`,
+            url: `/pages/poster1/poster1?contentID=${this.data.content.id}`,
         })
     },
 

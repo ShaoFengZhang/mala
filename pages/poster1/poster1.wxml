@@ -1,5 +1,6 @@
 <view class="bg">
     <view class='posterImg' style='width:{{imgW}}rpx;background:#fff' data-src="{{postSrc}}" catchtap='previewImage'>
+        <image class='changeImg' style='width:104rpx;height:112rpx;' src='/assets/poster/changeimg.png' catchtap='changeImage' />
         <image bindload="bindload" style='width:{{imgW}}rpx;' mode='widthFix' src='{{postSrc}}' />
     </view>
 
