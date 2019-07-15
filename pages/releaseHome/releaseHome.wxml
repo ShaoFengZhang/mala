@@ -1,0 +1,18 @@
+<view class="bg">
+
+    <view class='changeClassTxt'>
+        选择自己发布的类型
+    </view>
+
+    <view class='releaseTxt' data-path='/pages/release/release' catchtap='goToRelease'>
+        <image class='releaseimg' src='/assets/release/releasetxt.png' />
+    </view>
+
+    <view class='releasePic'catchtap='changePic'>
+        <image class='releaseimg' src='/assets/release/releasepic.png' />
+    </view>
+
+    <button catchtap='catchtap' id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">
+    </button>
+
+</view>

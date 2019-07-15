@@ -27,28 +27,28 @@ Page({
         }
     },
 
-    onTabItemTap: function () {
+    onShow: function() {
         if (app.globalData.userInfo) {
             this.setData({
                 userInfo: app.globalData.userInfo,
                 hasUserInfo: true
             });
         }
-        try {
-            wx.removeStorageSync('classId');
-            wx.removeStorageSync('className');
-        } catch (e) {
-
-        };
-    },
-
-    onShow: function() {
         let classId = wx.getStorageSync("classId");
         let className = wx.getStorageSync("className");
         this.setData({
             classTxt: className ? className : "选择话题",
             classId: classId ? classId : 10,
         })
+    },
+
+    onUnload:function(){
+        try {
+            wx.removeStorageSync('classId');
+            wx.removeStorageSync('className');
+        } catch (e) {
+
+        };
     },
 
     catchtap:function(){},

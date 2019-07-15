@@ -5,7 +5,7 @@ const app = getApp();
 Page({
 
     data: {
-        ifGif:1,
+        ifGif:0,
         postSrc:'',
         classArr:[
             {
@@ -84,15 +84,25 @@ Page({
     },
 
     onLoad: function (options) {
+        console.log(options)
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 354) * (51 / 85);
         this.setData({
+            imgH: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 354,
             imgW: imgW > 750 ? imgW * ((750 / imgW) - 0.02) : imgW,
             contentID: options.contentID ? options.contentID : null,
             classIndex: 0, // 底部海报当前current
             posterIndex:0,
+            ifGif: options.picUrl?0:1,
+            viewType: options.picUrl ? 0 : 1,
+            picUrl: options.picUrl ? options.picUrl:null,
+            userIcon: app.globalData.userInfo.avatarUrl,
+            username: "",
+            userDate: '于' + util.formatTime(new Date()),
         });
         this.contentimg=null;
-        this.changePoster();
+        this.getname();
+        options.picUrl ?this.getImgTxt():null;
+        options.picUrl ?null:this.changePoster();
         
     },
 
@@ -108,8 +118,8 @@ Page({
         }
     },
 
+    // 生成分享海报换图片
     changeImage:function(){
-        console.log(123)
         let _this = this;
         util.upLoadImage("uploadcontentimg", "image", 1, this, loginApi, function (data) {
             _this.setData({
@@ -118,6 +128,79 @@ Page({
             _this.contentimg = data.imgurl;
             _this.changePoster();
         });
+    },
+
+    // 发布图片换文字
+    changeTxt:function(){
+        this.getImgTxt();
+    },
+
+    // 得到文案
+    getImgTxt:function(){
+        let _this = this;
+        let getClassUrl = loginApi.domin + '/home/index/gettext';
+        loginApi.requestUrl(_this, getClassUrl, "GET", {
+        }, function (res) {
+            console.log(res)
+            if (res.status == 1) {
+                _this.setData({
+                    imageTxt: res.contents
+                });
+                _this.generateImg();
+            }
+        })
+    },
+
+    // 发布美图
+    releaseImg:function(){
+        let _this = this;
+        let getnameUrl = loginApi.domin + '/home/index/savetutie';
+        loginApi.requestUrl(_this, getnameUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+            "tutieurl":this.data.postSrc,
+        }, function (res) {
+            if (res.status == 1) {
+                util.toast("发布成功！", 1200)
+            } else {
+                util.toast("数据获取失败,请重试", 300)
+            }
+        })
+    },
+
+    // 生成美图
+    generateImg:function(e){
+        if (e && e.currentTarget.dataset.url) {
+            var index = e.currentTarget.dataset.index;
+            if (index == this.data.posterIndex) {
+                return;
+            }
+            this.setData({
+                posterIndex: index,
+                ifGif: 1,
+            })
+            var url = e.currentTarget.dataset.url;
+        } else {
+            this.setData({
+                posterIndex: 0,
+            })
+            var url = this.data.classArr[0].poster[0].posterAdress;
+        }
+
+        let _this = this;
+        let getnameUrl = loginApi.domin + '/home/index/tutie';
+        loginApi.requestUrl(_this, getnameUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+            "imgurl": this.data.picUrl,
+            "posterUrl": url,
+            "text": this.data.imageTxt,
+        }, function (res) {
+            if (res.status == 1) {
+                _this.setData({
+                    viewType: 1,
+                    postSrc: loginApi.srcDomin + res.path.slice(1)
+                })
+            }
+        })
     },
 
     // 放大图片
@@ -158,6 +241,7 @@ Page({
             console.log(res);
             if (res.status == 1) {
                 _this.setData({
+                    viewType:1,
                     postSrc: loginApi.srcDomin+res.path.slice(1)
                 })
             }
@@ -241,6 +325,24 @@ Page({
                 _this.setData({
                     classArr: res.class
                 })
+            }
+        })
+    },
+
+    // 获取name
+    getname: function () {
+        let _this = this;
+        let getnameUrl = loginApi.domin + '/home/index/name';
+        loginApi.requestUrl(_this, getnameUrl, "POST", {
+            "uid": wx.getStorageSync("u_id"),
+        }, function (res) {
+            if (res.status == 1) {
+                _this.setData({
+                    username: res.name
+                })
+
+            } else {
+                util.toast("数据获取失败,请重试", 300)
             }
         })
     },

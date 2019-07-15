@@ -1,0 +1,39 @@
+.bg{
+    width: 100%;
+    height: 100vh;
+    color: #282828;
+    text-align: center;
+}
+
+.changeClassTxt{
+    font-size: 40rpx;
+    font-weight: bold;
+    margin-top: 15.6vh;
+}
+
+.releaseTxt,.releasePic,.releaseimg{
+    width: 694rpx;
+    height: 324rpx;
+    overflow: hidden;
+    border-radius: 32rpx;
+}
+
+.releaseTxt{
+    margin: 7vh auto 5vh;
+}
+
+.releasePic{
+    margin: 0 auto;
+}
+
+#getInfoBtn{
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 999;
+}

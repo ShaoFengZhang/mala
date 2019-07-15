@@ -1,24 +1,24 @@
 .bg {
     height: 100vh;
-    background: #F3F5F9;
+    background: #f3f5f9;
 }
 
-.posterImg{
+.posterImg {
     margin: 0 auto;
-    border-radius:20rpx;
+    border-radius: 20rpx;
     overflow: hidden;
-    /* position: relative; */
+    position: relative;
 }
 
-.posterImg image{
+.posterImg image {
     height: 850rpx;
     vertical-align: top;
 }
 
-.changeImg{
+.changeImg {
     position: absolute;
     top: 700rpx;
-    right: 0rpx;
+    right: 10rpx;
 }
 
 /* 分类title */
@@ -60,9 +60,9 @@
     height: 120rpx;
 }
 
-.iconselect image{
+.iconselect image {
     box-sizing: border-box;
-    border: 4rpx solid #27BCAD;
+    border: 4rpx solid #27bcad;
 }
 
 .botBtnView {
@@ -94,9 +94,58 @@
     justify-content: center;
     align-items: center;
     background-color: #f9f7ef;
+    z-index: 9999;
 }
 
 .LoadingView image {
     width: 440rpx;
     height: 440rpx;
+}
+
+/* 假的页面 */
+
+.picurlmask {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.imageTxt {
+    width: 440rpx;
+    height: 216rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular;
+    color: rgba(40, 40, 40, 1);
+    line-height: 54rpx;
+    position: absolute;
+    left: 40rpx;
+    bottom: 214rpx;
+}
+
+.userInfo {
+    width: 100%;
+    height: 96rpx;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    position: absolute;
+    bottom: 42rpx;
+    left: 0;
+    display: flex;
+    justify-content: start;
+}
+
+image.userIcon{
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 24rpx;
+    left: 24rpx;
+}
+
+image.qrcodeimg {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
 }

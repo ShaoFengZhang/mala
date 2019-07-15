@@ -1,7 +1,31 @@
 <view class="bg">
-    <view class='posterImg' style='width:{{imgW}}rpx;background:#fff' data-src="{{postSrc}}" catchtap='previewImage'>
-        <image class='changeImg' style='width:104rpx;height:112rpx;' src='/assets/poster/changeimg.png' catchtap='changeImage' />
+
+    <view wx:if="{{viewType}}" class='posterImg' style='width:{{imgW}}rpx;background:#fff' data-src="{{postSrc}}" catchtap='previewImage'>
         <image bindload="bindload" style='width:{{imgW}}rpx;' mode='widthFix' src='{{postSrc}}' />
+    </view>
+
+    <!-- 换图片和文字的图片 -->
+    <image wx:if="{{!picUrl}}" class='changeImg' style='width:104rpx;height:112rpx;z-index:16' src='/assets/poster/changeimg.png' catchtap='changeImage' />
+    <image wx:if="{{picUrl}}" class='changeImg' style='width:104rpx;height:112rpx;z-index:12;' src='/assets/poster/changeTxt.png' catchtap='changeTxt' />
+
+    <view wx:if="{{!viewType}}" class='posterImg' style='width:510rpx;height:850rpx;background:#fff'>
+        <image src='{{picUrl}}' style='width:358rpx;height:304rpx;margin-top:60rpx;margin-left:78rpx;' />
+        <image class='picurlmask' style='width:510rpx;height:850rpx;' src='{{classArr[0].poster[0].posterAdress}}' />
+
+        <view class='imageTxt fourEllipsis'>
+            {{imageTxt}}
+        </view>
+
+        <view class='userInfo'>
+            <view style='position: relative;'>
+                <image class="qrcodeimg" src="/assets/poster/qrcode.jpg" />
+                <image class='userIcon' src='{{userIcon}}' />
+            </view>
+            <view style=' display: flex; flex-direction: column; justify-content:space-around;'>
+                <view style='color:#282828;font-size:32rpx'>{{username}}</view>
+                <view style='color:#999999;font-size:24rpx'>{{userDate}}</view>
+            </view>
+        </view>
     </view>
 
     <view class='botClassView'>
@@ -20,7 +44,7 @@
             <swiper style='height:120rpx;' duration="{{300}}" display-multiple-items="{{classArr[classIndex].poster.length>8?8:classArr[classIndex].poster.length}}">
                 <block wx:for="{{classArr[classIndex].poster}}" wx:key="{{index}}">
                     <swiper-item class="{{posterIndex==index?'iconselect':null}}">
-                        <image data-url='{{item.posterAdress}}'  catchtap='changePoster' src='{{item.icon}}' data-index="{{index}}" />
+                        <image data-url='{{item.posterAdress}}' catchtap='changePoster' src='{{item.icon}}' data-index="{{index}}" />
                     </swiper-item>
                 </block>
             </swiper>
@@ -30,16 +54,19 @@
             <view catchtap='savePic'>
                 <image style='width:224rpx;height:50rpx;' src='/assets/poster/newSave.png' />
             </view>
-            <view>
+            <view wx:if="{{!picUrl}}">
                 <image style='width:340rpx;height:88rpx;' src='/assets/poster/newShare.png' />
-                <button  id='shareBtn' open-type='share'></button>
+                <button id='shareBtn' open-type='share'></button>
+            </view>
+            <view wx:if="{{picUrl}}" catchtap='releaseImg'>
+                <image style='width:340rpx;height:88rpx;' src='/assets/poster/releaseImg.png' />
             </view>
         </view>
 
     </view>
 
     <view class='LoadingView' wx:if="{{ifGif}}">
-        <image src='/assets/poster/load.gif'/>
+        <image src='/assets/poster/load.gif' />
     </view>
 
 </view>

@@ -18,7 +18,8 @@
         "pages/posters/posters",
         "pages/savePosters/savePosters",
         "pages/beansSource/beansSource",
-        "pages/poster1/poster1"
+        "pages/poster1/poster1",
+        "pages/releaseHome/releaseHome"
     ],
 
     "window": {
@@ -41,7 +42,7 @@
                 "selectedIconPath": "/assets/app/home-select.png"
             },
             {
-                "pagePath": "pages/release/release",
+                "pagePath": "pages/releaseHome/releaseHome",
                 "iconPath": "/assets/app/release-noselect.png",
                 "text": "发布",
                 "selectedIconPath": "/assets/app/release-select.png"

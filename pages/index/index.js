@@ -4,6 +4,7 @@ const app = getApp();
 
 Page({
     data: {
+        contentView:1,
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -22,7 +23,11 @@ Page({
         },{
                 title: "短句",
                 id: 0,
-        }],
+        },
+            {
+                title: "美图",
+                id: 2,
+            }],
     },
 
     onLoad: function(options) {
@@ -215,6 +220,16 @@ Page({
         this.page = 1;
         this.rows = 20;
         this.cangetData = true;
+        if (classId ==2){
+            this.setData({
+                contentView:0,  
+            })
+            this.getImglist();
+            return;
+        }
+        this.setData({
+            contentView: 1,
+        })
         classId == 1 ? this.getfocuContent():this.getContent(classId);
     },
 
@@ -378,6 +393,52 @@ Page({
         })
     },
 
+    // 获取美图
+    getImglist:function(){
+        util.loding('加载中');
+        let _this = this;
+        let getfocuContentUrl = loginApi.domin + '/home/index/photo';
+        loginApi.requestUrl(_this, getfocuContentUrl, "POST", {
+            "page": this.page,
+            "len": this.rows,
+        }, function (res) {
+            wx.hideLoading();
+            if (res.status == 1) {
+                console.log(res);
+                if (res.contents.length == 0) {
+                    _this.page == 1 ? _this.page : _this.page--;
+                    _this.cangetData = false;
+                    util.toast("暂无更多更新");
+                    _this.setData({
+                        ifloadtxt: 0,
+                        showBotTxt: 1,
+                    });
+                    return;
+                };
+
+                _this.setData({
+                    contentArr: [],
+                    ifloadtxt: 0,
+                });
+
+                _this.setData({
+                    contentArr: res.contents,
+                    ifloadtxt: 1,
+                });
+                wx.stopPullDownRefresh();
+
+                if (res.contents.length < _this.rows) {
+                    _this.cangetData = false;
+                    _this.setData({
+                        showBotTxt: 1,
+                        ifloadtxt: 0,
+                    });
+                };
+
+            }
+        })
+    },
+
     //获取分类
     getClass: function() {
         // util.loding('加载中');
@@ -400,10 +461,18 @@ Page({
         if (this.page > 1) {
             this.page--;
             // this.getContent(this.data.swiperCurrentIndex);
+            if (this.data.swiperCurrentIndex == 2) {
+                // this.getImglist();
+                return;
+            }
             this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
         } else {
             // util.toast('暂无更多更新', 800);
             // this.getContent(this.data.swiperCurrentIndex);
+            if (this.data.swiperCurrentIndex == 2) {
+                // this.getImglist();
+                return;
+            }
             this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
             wx.stopPullDownRefresh();
         };
@@ -417,6 +486,10 @@ Page({
             clearTimeout(this.bottomTime);
             this.bottomTime = setTimeout(() => {
                 // this.getContent(this.data.swiperCurrentIndex);
+                if (this.data.swiperCurrentIndex == 2) {
+                    // this.getImglist();
+                    return;
+                }
                 this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
             }, 1000)
 
