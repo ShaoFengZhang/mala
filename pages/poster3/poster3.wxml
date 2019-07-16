@@ -4,12 +4,13 @@
         <image bindload="bindload" style='width:{{imgW}}rpx;' mode='widthFix' src='{{postSrc}}' />
     </view>
 
-    <!-- 换文字的图片 -->
+    <!-- 换图片和文字的图片 -->
     <image class='changeImg' style='width:104rpx;height:112rpx;z-index:12;top: 580rpx;' src='/assets/poster/changeTxt.png' catchtap='changeTxt' />
+    <image class='changeImg' style='width:104rpx;height:112rpx;z-index:16' src='/assets/poster/changeimg.png' catchtap='changeImage' />
 
     <view wx:if="{{!viewType}}" class='posterImg' style='width:510rpx;height:850rpx;background:#fff'>
         <image src='{{picUrl}}' style='width:358rpx;height:304rpx;margin-top:60rpx;margin-left:78rpx;' />
-        <image class='picurlmask' style='width:510rpx;height:850rpx;' src='{{classArr[0].poster[0].posterAdress}}' />
+        <image class='picurlmask' style='width:510rpx;height:850rpx;' src='{{posterurl}}' />
 
         <view class='imageTxt fourEllipsis'>
             {{imageTxt}}
@@ -28,33 +29,14 @@
     </view>
 
     <view class='botClassView'>
-        <!-- 分类title -->
-        <view class='classScroll'>
-            <swiper style='height:50rpx;' duration="{{300}}" display-multiple-items="{{classArr.length>4?4:classArr.length}}" current="{{classIndex}}">
-                <block wx:for="{{classArr}}" wx:key="{{index}}">
-                    <swiper-item class="{{classIndex==index?'selectScroll':null}}">
-                        <view>{{item.txt}}</view>
-                    </swiper-item>
-                </block>
-            </swiper>
-        </view>
-        <!-- 分类icon -->
-        <view class='classiconView'>
-            <swiper style='height:120rpx;' duration="{{300}}" display-multiple-items="{{classArr[classIndex].poster.length>8?8:classArr[classIndex].poster.length}}">
-                <block wx:for="{{classArr[classIndex].poster}}" wx:key="{{index}}">
-                    <swiper-item class="{{posterIndex==index?'iconselect':null}}">
-                        <image data-url='{{item.posterAdress}}' catchtap='{{classIconClick}}' src='{{item.icon}}' data-index="{{index}}" />
-                    </swiper-item>
-                </block>
-            </swiper>
-        </view>
         <!-- 底部按钮 -->
         <view class='botBtnView' wx:if="{{viewType}}">
             <view catchtap='savePic'>
                 <image style='width:224rpx;height:50rpx;' src='/assets/poster/newSave.png' />
             </view>
-            <view catchtap='releaseImg'>
-                <image style='width:340rpx;height:88rpx;' src='/assets/poster/releaseImg.png' />
+            <view>
+                <image style='width:340rpx;height:88rpx;' src='/assets/poster/newShare.png' />
+                <button id='shareBtn' open-type='share'></button>
             </view>
         </view>
 

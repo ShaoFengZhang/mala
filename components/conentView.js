@@ -43,8 +43,10 @@ Component({
         goToQrCode:function(e){
             console.log(e)
             let id = e.currentTarget.dataset.id;
+            let picUrl= e.currentTarget.dataset.icon;
+            let txt= e.currentTarget.dataset.txt;
             wx.navigateTo({
-                url: `/pages/poster1/poster1?contentID=${id}`,
+                url: `/pages/poster2/poster2?contentID=${id}&picUrl=${picUrl}&txt=${escape(txt)}`,
             })
         },
 

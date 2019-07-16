@@ -1,0 +1,154 @@
+.bg {
+    height: 100vh;
+    background: #f3f5f9;
+}
+
+.posterImg {
+    margin: 0 auto;
+    border-radius: 20rpx;
+    overflow: hidden;
+    position: relative;
+}
+
+.posterImg image {
+    height: 850rpx;
+    vertical-align: top;
+}
+
+.changeImg {
+    position: absolute;
+    top: 700rpx;
+    right: 10rpx;
+}
+
+/* 分类title */
+
+.botClassView {
+    width: 100%;
+    height: 330rpx;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.classScroll {
+    width: 614rpx;
+    height: 50rpx;
+    line-height: 50rpx;
+    text-align: center;
+    margin: 0 auto;
+    color: #282828;
+    font-size: 32rpx;
+}
+
+.selectScroll {
+    font-size: 36rpx;
+    font-weight: bold;
+}
+
+/* 分类icon */
+
+.classiconView {
+    width: 702rpx;
+    height: 120rpx;
+    margin: 22rpx auto 0;
+    text-align: center;
+}
+
+.classiconView image {
+    width: 72rpx;
+    height: 120rpx;
+}
+
+.iconselect image {
+    box-sizing: border-box;
+    border: 4rpx solid #27bcad;
+}
+
+.botBtnView {
+    width: 702rpx;
+    height: 88rpx;
+    margin: 24rpx auto 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: 30rpx;
+}
+
+.botBtnView view {
+    width: 340rpx;
+    height: 88rpx;
+    text-align: center;
+    line-height: 104rpx;
+    position: relative;
+}
+
+/* gif图 */
+
+.LoadingView {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f9f7ef;
+    z-index: 9999;
+}
+
+.LoadingView image {
+    width: 440rpx;
+    height: 440rpx;
+}
+
+/* 假的页面 */
+
+.picurlmask {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.imageTxt {
+    width: 440rpx;
+    height: 216rpx;
+    font-size: 28rpx;
+    font-family: PingFangSC-Regular;
+    color: rgba(40, 40, 40, 1);
+    line-height: 54rpx;
+    position: absolute;
+    left: 40rpx;
+    bottom: 214rpx;
+}
+
+.userInfo {
+    width: 100%;
+    height: 96rpx;
+    box-sizing: border-box;
+    padding: 0 40rpx;
+    position: absolute;
+    bottom: 42rpx;
+    left: 0;
+    display: flex;
+    justify-content: start;
+}
+
+image.userIcon{
+    width: 48rpx;
+    height: 48rpx;
+    border-radius: 50%;
+    position: absolute;
+    top: 24rpx;
+    left: 24rpx;
+}
+
+image.qrcodeimg {
+    width: 96rpx;
+    height: 96rpx;
+    border-radius: 50%;
+    margin-right: 16rpx;
+}

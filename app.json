@@ -19,6 +19,8 @@
         "pages/savePosters/savePosters",
         "pages/beansSource/beansSource",
         "pages/poster1/poster1",
+        "pages/poster2/poster2",
+        "pages/poster3/poster3",
         "pages/releaseHome/releaseHome"
     ],
 

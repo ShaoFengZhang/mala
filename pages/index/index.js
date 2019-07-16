@@ -499,6 +499,17 @@ Page({
     },
 
     catchtap: function() {},
+
+    // 跳转海报页
+    goToPoster:function(e){
+        let iconurl = e.currentTarget.dataset.icon;
+        let posterurl = e.currentTarget.dataset.posterurl;
+        let txt = e.currentTarget.dataset.txt;
+        wx.navigateTo({
+            url: `/pages/poster3/poster3?picUrl=${iconurl}&posterurl=${posterurl}&txt=${escape(txt)}`,
+        })
+    },
+
     // 跳转详情页
     goToDetails: function(conId) {
         if (this.gotoPoster){
@@ -553,5 +564,23 @@ Page({
 
     formSubmit: function(e) {
         util.formSubmit(app, e);
+    },
+
+    // 获取授权信息
+    getUserInfo: function (e) {
+        console.log(e);
+        if (!e.detail.userInfo) {
+            util.toast("我们需要您的授权哦亲~", 1200)
+            return
+        }
+        app.globalData.userInfo = e.detail.userInfo
+        this.setData({
+            userInfo: e.detail.userInfo,
+            hasUserInfo: true
+        });
+        let iv = e.detail.iv;
+        let encryptedData = e.detail.encryptedData;
+        let session_key = app.globalData.session_key;
+        loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key)
     },
 })

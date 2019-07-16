@@ -75,4 +75,17 @@ swiper-item {
     width:330rpx;
     height: 550rpx;
     margin-bottom: 24rpx; 
+    border-radius: 16rpx;
+}
+
+#getInfoBtn{
+    width: 100%;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    z-index: 999;
 }

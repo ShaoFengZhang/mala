@@ -91,7 +91,7 @@
                 </form>
             </view>
 
-            <view class='shareImg' catchtap='goToQrCode' data-id='{{item.id}}'>
+            <view class='shareImg' data-icon="{{item.imgurl[0]?'https://duanju.58100.com/'+item.imgurl[0]:'/assets/poster/mala.png'}}" data-txt="{{item.title?item.title:'欢迎来到麻辣短句'}}" catchtap='goToQrCode' data-id='{{item.id}}'>
                 <image src='/assets/index/shareImg.png' />
             </view>
 

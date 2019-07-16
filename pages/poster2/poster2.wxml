@@ -4,8 +4,8 @@
         <image bindload="bindload" style='width:{{imgW}}rpx;' mode='widthFix' src='{{postSrc}}' />
     </view>
 
-    <!-- 换文字的图片 -->
-    <image class='changeImg' style='width:104rpx;height:112rpx;z-index:12;top: 580rpx;' src='/assets/poster/changeTxt.png' catchtap='changeTxt' />
+    <!-- 换图片和文字的图片 -->
+    <image class='changeImg' style='width:104rpx;height:112rpx;z-index:16' src='/assets/poster/changeimg.png' catchtap='changeImage' />
 
     <view wx:if="{{!viewType}}" class='posterImg' style='width:510rpx;height:850rpx;background:#fff'>
         <image src='{{picUrl}}' style='width:358rpx;height:304rpx;margin-top:60rpx;margin-left:78rpx;' />
@@ -53,8 +53,9 @@
             <view catchtap='savePic'>
                 <image style='width:224rpx;height:50rpx;' src='/assets/poster/newSave.png' />
             </view>
-            <view catchtap='releaseImg'>
-                <image style='width:340rpx;height:88rpx;' src='/assets/poster/releaseImg.png' />
+            <view>
+                <image style='width:340rpx;height:88rpx;' src='/assets/poster/newShare.png' />
+                <button id='shareBtn' open-type='share'></button>
             </view>
         </view>
 
