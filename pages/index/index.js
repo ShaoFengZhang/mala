@@ -462,7 +462,8 @@ Page({
             this.page--;
             // this.getContent(this.data.swiperCurrentIndex);
             if (this.data.swiperCurrentIndex == 2) {
-                // this.getImglist();
+                this.getImglist();
+                wx.stopPullDownRefresh();
                 return;
             }
             this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
@@ -470,7 +471,8 @@ Page({
             // util.toast('暂无更多更新', 800);
             // this.getContent(this.data.swiperCurrentIndex);
             if (this.data.swiperCurrentIndex == 2) {
-                // this.getImglist();
+                this.getImglist();
+                wx.stopPullDownRefresh();
                 return;
             }
             this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
@@ -515,7 +517,7 @@ Page({
         if (this.gotoPoster){
             this.gotoPoster=null;
             wx.navigateTo({
-                url: `/pages/poster1/poster1?contentID=${conId}`,
+                url: `/pages/poster2/poster2?contentID=${conId}`,
             })
         }else{
             wx.navigateTo({

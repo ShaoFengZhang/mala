@@ -91,8 +91,9 @@ Page({
             contentID: options.contentID ? options.contentID : null,
             classIndex: 0, // 底部海报当前current
             posterIndex: 0,
-            viewType: 0,
+            viewType: options.picUrl?0:1,
             picUrl: options.picUrl ? options.picUrl : null,
+            ifGif: options.picUrl ?0:1,
             userIcon: app.globalData.userInfo.avatarUrl,
             username: "",
             userDate: '于' + util.formatTime(new Date()),

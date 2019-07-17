@@ -29,7 +29,7 @@
 
     <view class='botClassView'>
         <!-- 分类title -->
-        <view class='classScroll'>
+        <view class='classScroll' wx:if="{{viewType}}">
             <swiper style='height:50rpx;' duration="{{300}}" display-multiple-items="{{classArr.length>4?4:classArr.length}}" current="{{classIndex}}">
                 <block wx:for="{{classArr}}" wx:key="{{index}}">
                     <swiper-item class="{{classIndex==index?'selectScroll':null}}">
@@ -39,7 +39,7 @@
             </swiper>
         </view>
         <!-- 分类icon -->
-        <view class='classiconView'>
+        <view class='classiconView' wx:if="{{viewType}}">
             <swiper style='height:120rpx;' duration="{{300}}" display-multiple-items="{{classArr[classIndex].poster.length>8?8:classArr[classIndex].poster.length}}">
                 <block wx:for="{{classArr[classIndex].poster}}" wx:key="{{index}}">
                     <swiper-item class="{{posterIndex==index?'iconselect':null}}">

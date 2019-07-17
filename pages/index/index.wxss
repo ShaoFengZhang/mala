@@ -22,6 +22,7 @@
     font-size: 40rpx;
     color: #666;
     background-color: white;
+    font-weight: bold;
 }
 
 #swiper-ID, .top-swiperView {
@@ -69,6 +70,7 @@ swiper-item {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    position: relative;
 }
 
 .imgListView image{
@@ -76,6 +78,26 @@ swiper-item {
     height: 550rpx;
     margin-bottom: 24rpx; 
     border-radius: 16rpx;
+    vertical-align: top;
+}
+
+.qrMask{
+    width: 290rpx;
+    height: 88rpx;
+    border-top: 2rpx solid #D8D8D8;
+    position: absolute;
+    bottom:44rpx;
+    left: 20rpx;
+    background-color: #fff;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.qrMaskImgView image,.qrMaskImgView{
+    width: 60rpx;
+    height: 60rpx;
+    border-radius: 50%;
 }
 
 #getInfoBtn{

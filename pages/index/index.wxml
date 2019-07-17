@@ -95,7 +95,23 @@
 
     <view class='scrollView'>
         <view class='imgListView' wx:if="{{contentArr.length}}">
-            <image data-icon="{{item.imgurl}}" data-posterurl="{{item.posterurl}}" catchtap='goToPoster' data-txt='{{item.txt}}' wx:for="{{contentArr}}" wx:key="{{index}}" src='{{item.tutieurl}}' />
+
+            <view style='position:relative' data-icon="{{item.imgurl}}" data-posterurl="{{item.posterurl}}" catchtap='goToPoster' data-txt='{{item.txt}}' wx:for="{{contentArr}}" wx:key="{{index}}">
+
+                <image src='{{item.tutieurl}}' />
+
+                <view class='qrMask'>
+
+                    <view class='qrMaskImgView'>
+                        <image src='{{item.photo}}' />
+                    </view>
+
+                    <view class='oneEllipsis' style='font-size:28rpx;color:#27BCAD;font-weight:bold;margin-left:20rpx;width:197rpx;height:40rpx;'>{{item.name}}</view>
+
+                </view>
+
+            </view>
+
         </view>
 
         <view class='nocom' wx:if="{{showBotTxt && !contentArr.length}}">
