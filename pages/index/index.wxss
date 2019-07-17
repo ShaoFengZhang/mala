@@ -83,8 +83,8 @@ swiper-item {
 
 .qrMask{
     width: 290rpx;
-    height: 88rpx;
-    border-top: 2rpx solid #D8D8D8;
+    height: 68rpx;
+    border-top: 2rpx solid #f2f2f2;
     position: absolute;
     bottom:44rpx;
     left: 20rpx;
@@ -92,6 +92,7 @@ swiper-item {
     display: flex;
     justify-content: start;
     align-items: center;
+    border-radius: 68rpx;
 }
 
 .qrMaskImgView image,.qrMaskImgView{

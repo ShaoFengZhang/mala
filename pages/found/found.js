@@ -6,7 +6,7 @@ Page({
     data: {
         userInfo: {},
         hasUserInfo: false,
-        canIUse: wx.canIUse('btton.open-type.getUserInfo'),
+        canIUse: wx.canIUse('button.open-type.getUserInfo'),
         srcDomin: loginApi.srcDomin,
         dayArr: [
 

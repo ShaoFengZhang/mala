@@ -12,22 +12,25 @@ Page({
         drawMove: 'drawMove',
         showBotTxt: 0,
         srcDomin: loginApi.srcDomin,
-        swiperCurrentIndex: 0,
+        swiperCurrentIndex: 2,
         contentArr: [],
         current: 0,
         ifloadtxt: 0,
         ifshowrulesView:0,
-        classArr: [{
-            title: "关注",
-            id: 1,
-        },{
-                title: "短句",
-                id: 0,
-        },
+        classArr: [
             {
                 title: "美图",
                 id: 2,
-            }],
+            },
+            {
+                title: "短句",
+                id: 0,
+            },
+            {
+                title: "关注",
+                id: 1,
+            }, 
+        ],
     },
 
     onLoad: function(options) {
@@ -88,26 +91,36 @@ Page({
 
         loginApi.wxlogin(app).then(function(value) {
             console.log(options);
+            clearTimeout(_this.timeOut);
             if (options && options.conId) {
+                _this.setData({
+                    swiperCurrentIndex:0,
+                })
                 _this.getContent(0, options.conId);
             } else {
-                _this.getContent(0);
+                // _this.getContent(0);
+                _this.getImglist();
             };
             if (options && options.scene){
                 _this.checkNewFans(_this.shareUid)
             };
             if(options && options.type){
                 _this.checkNewFans(options.uid, options.type)
-            }
+            };
         }, function(error) {
             console.log("error", error);
+            clearTimeout(_this.timeOut);
             if (options && options.conId) {
                 if (wx.getStorageSync("u_id")) {
+                    _this.setData({
+                        swiperCurrentIndex: 0,
+                    })
                     _this.getContent(0, options.conId);
                 }
             } else {
                 if (wx.getStorageSync("u_id")) {
-                    _this.getContent(0);
+                    // _this.getContent(0);
+                    _this.getImglist();
                 }
             }
             if (options && options.scene) {
@@ -120,18 +133,22 @@ Page({
         
         this.timeOut = setTimeout(() => {
             if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
-                console.log("this.timeOut")
+                console.log("this.timeOut");
                 if (options && options.conId) {
+                    _this.setData({
+                        swiperCurrentIndex: 0,
+                    })
                     _this.getContent(0, options.conId);
                 } else {
-                    _this.getContent(0);
+                    // _this.getContent(0);
+                    _this.getImglist();
                 }
                 if (options && options.scene) {
                     _this.checkNewFans(_this.shareUid)
                 };
                 if (options && options.type) {
                     _this.checkNewFans(options.uid, options.type)
-                }
+                };
             }
         }, 2200)
     },
@@ -155,6 +172,10 @@ Page({
             })
         };
         app.praiseIndex = null;
+
+        // if (this.data.swiperCurrentIndex==2){
+        //     this.getImglist()
+        // }
     },
 
     onTabItemTap: function() {
@@ -412,6 +433,7 @@ Page({
                     _this.setData({
                         ifloadtxt: 0,
                         showBotTxt: 1,
+                        contentView: 0,
                     });
                     return;
                 };
@@ -419,6 +441,7 @@ Page({
                 _this.setData({
                     contentArr: [],
                     ifloadtxt: 0,
+                    contentView: 0,
                 });
 
                 _this.setData({
@@ -432,6 +455,7 @@ Page({
                     _this.setData({
                         showBotTxt: 1,
                         ifloadtxt: 0,
+                        contentView: 0,
                     });
                 };
 

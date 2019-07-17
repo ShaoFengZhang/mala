@@ -5,10 +5,10 @@
     </view>
 
     <!-- 换图片和文字的图片 -->
-    <image class='changeImg' style='width:104rpx;height:112rpx;z-index:16' src='/assets/poster/changeimg.png' catchtap='changeImage' />
+    <image wx:if="{{viewType}}" class='changeImg' style='width:104rpx;height:112rpx;z-index:16' src='/assets/poster/changeimg.png' catchtap='changeImage' />
 
     <view wx:if="{{!viewType}}" class='posterImg' style='width:510rpx;height:850rpx;background:#fff'>
-        <image src='{{picUrl}}' style='width:358rpx;height:304rpx;margin-top:60rpx;margin-left:78rpx;' />
+        <image src='{{picUrl}}' style='width:428rpx;height:428rpx;margin-top:60rpx;margin-left:78rpx;' />
         <image class='picurlmask' style='width:510rpx;height:850rpx;' src='{{classArr[0].poster[0].posterAdress}}' />
 
         <view class='imageTxt fourEllipsis'>

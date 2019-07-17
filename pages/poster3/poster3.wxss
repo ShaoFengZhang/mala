@@ -118,7 +118,7 @@
     height: 216rpx;
     font-size: 36rpx;
     font-family: PingFangSC-Regular;
-    color: rgba(40, 40, 40, 1);
+    color: #fff;
     line-height: 54rpx;
     position: absolute;
     left: 40rpx;
