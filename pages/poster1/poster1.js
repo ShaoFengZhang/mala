@@ -7,84 +7,11 @@ Page({
     data: {
         ifGif:0,
         postSrc:'',
-        classArr:[
-            {
-                txt: "",
-                id: 1,
-                poster:[
-                    {
-                        icon:"https://duanju.58100.com/upload/yasuotu/01.png",
-                        posterAdress:"https://duanju.58100.com/upload/img/1.png"
-                    },
-                    // {
-                    //     icon: "https://duanju.58100.com/upload/yasuotu/02.png",
-                    //     posterAdress: "https://duanju.58100.com/upload/img/2.png"
-                    // },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/03.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/3.png"
-                    },
-                    // {
-                    //     icon: "https://duanju.58100.com/upload/yasuotu/04.png",
-                    //     posterAdress: "https://duanju.58100.com/upload/img/4.png"
-                    // },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/05.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/5.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/06.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/6.png"
-                    },
-                    // {
-                    //     icon: "https://duanju.58100.com/upload/yasuotu/07.png",
-                    //     posterAdress: "https://duanju.58100.com/upload/img/7.png"
-                    // },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/08.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/8.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/09.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/9.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/10.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/10.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/11.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/11.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/12.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/12.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/13.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/13.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/14.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/14.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/15.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/15.png"
-                    },
-                    {
-                        icon: "https://duanju.58100.com/upload/yasuotu/16.png",
-                        posterAdress: "https://duanju.58100.com/upload/img/16.png"
-                    },
-                    
-                ]
-            },
-            
-        ],
     },
 
     onLoad: function (options) {
-        console.log(options)
+        this.getposterClass();
+        console.log(options);
         let imgW = ((app.windowHeight + app.Bheight) * 750 / app.sysWidth - 354) * (51 / 85);
         this.setData({
             imgH: (app.windowHeight + app.Bheight) * 750 / app.sysWidth - 354,
@@ -102,7 +29,7 @@ Page({
         });
         // this.contentimg=null;
         this.getname();
-        options.picUrl ?this.getImgTxt():null;
+        // options.picUrl ?this.getImgTxt():null;
         // options.picUrl ?null:this.changePoster();
         
     },
@@ -117,6 +44,17 @@ Page({
             path: `/pages/index/index?uid=${wx.getStorageSync("u_id")}`,
             imageUrl: this.data.postSrc
         }
+    },
+
+    // 请求不同的海报分类
+    posterClassChange:function(e){
+        let index = e.currentTarget.dataset.index;
+        if (index == this.data.classIndex){
+            return;
+        };
+        this.setData({
+            classIndex: index,
+        })
     },
 
     // 生成分享海报换图片
@@ -136,6 +74,9 @@ Page({
         wx.showLoading({
             title: '正在更换',
             mask:true,
+        });
+        this.setData({
+            ifGif: 1,
         })
         this.getImgTxt();
     },
@@ -333,16 +274,17 @@ Page({
         
     },
 
-    // 获取分类
-    getClass:function(){
+    // 获取海报分类
+    getposterClass:function(){
         let _this = this;
-        let getClassUrl = loginApi.domin + '/home/index/getClass';
-        loginApi.requestUrl(_this, getClassUrl, "GET", {
+        let getposterClassUrl = loginApi.domin + '/home/index/muban';
+        loginApi.requestUrl(_this, getposterClassUrl, "GET", {
         }, function (res) {
             if (res.status == 1) {
                 _this.setData({
-                    classArr: res.class
-                })
+                    classArr: res.contents
+                });
+                _this.data.picUrl ? _this.getImgTxt() : null;
             }
         })
     },

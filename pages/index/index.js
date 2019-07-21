@@ -4,6 +4,8 @@ const app = getApp();
 
 Page({
     data: {
+        topFixedHeight:192,
+        ifshowShouCang:1,
         contentView:1,
         userInfo: {},
         hasUserInfo: false,
@@ -309,7 +311,7 @@ Page({
                     });
                     return;
                 };
-
+                _this.cangetData = true;
                 _this.setData({
                     contentArr: [],
                     ifloadtxt: 0,
@@ -390,7 +392,7 @@ Page({
                     });
                     return;
                 };
-
+                _this.cangetData = true;
                 _this.setData({
                     contentArr: [],
                     ifloadtxt: 0,
@@ -437,7 +439,7 @@ Page({
                     });
                     return;
                 };
-
+                _this.cangetData = true;
                 _this.setData({
                     contentArr: [],
                     ifloadtxt: 0,
@@ -448,6 +450,10 @@ Page({
                     contentArr: res.contents,
                     ifloadtxt: 1,
                 });
+                wx.pageScrollTo({
+                    scrollTop: 0,
+                    duration: 300
+                })
                 wx.stopPullDownRefresh();
 
                 if (res.contents.length < _this.rows) {
@@ -513,7 +519,7 @@ Page({
             this.bottomTime = setTimeout(() => {
                 // this.getContent(this.data.swiperCurrentIndex);
                 if (this.data.swiperCurrentIndex == 2) {
-                    // this.getImglist();
+                    this.getImglist();
                     return;
                 }
                 this.data.swiperCurrentIndex == 1 ? this.getfocuContent() : this.getContent(this.data.swiperCurrentIndex);
@@ -609,4 +615,11 @@ Page({
         let session_key = app.globalData.session_key;
         loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key)
     },
+
+    hideShoucang:function(){
+        this.setData({
+            ifshowShouCang:0,
+            topFixedHeight:96,
+        })
+    }
 })

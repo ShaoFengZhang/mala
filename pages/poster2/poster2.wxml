@@ -30,9 +30,9 @@
     <view class='botClassView'>
         <!-- 分类title -->
         <view class='classScroll' wx:if="{{viewType}}">
-            <swiper style='height:50rpx;' duration="{{300}}" display-multiple-items="{{classArr.length>4?4:classArr.length}}" current="{{classIndex}}">
+            <swiper style='height:50rpx;' duration="{{300}}" display-multiple-items="{{classArr.length>4?4:classArr.length}}">
                 <block wx:for="{{classArr}}" wx:key="{{index}}">
-                    <swiper-item class="{{classIndex==index?'selectScroll':null}}">
+                    <swiper-item catchtap="posterClassChange" data-index="{{index}}" class="{{classIndex==index?'selectScroll':null}}">
                         <view>{{item.txt}}</view>
                     </swiper-item>
                 </block>

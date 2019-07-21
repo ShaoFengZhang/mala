@@ -80,7 +80,7 @@ Page({
                 _this.setData({
                     stateArr: _this.data.stateArr.concat(res.contents),
                 });
-
+                _this.cangetData = true;
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

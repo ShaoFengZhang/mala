@@ -93,6 +93,7 @@ Page({
                 _this.setData({
                     contentArr: _this.data.contentArr.concat(res.mycollection),
                 });
+                _this.cangetData = true;
                 if (res.mycollection.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

@@ -45,7 +45,7 @@ Page({
                 _this.setData({
                     messageArr: _this.data.messageArr.concat(res.focususer),
                 });
-
+                _this.cangetData = true;
                 if (res.focususer.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

@@ -89,7 +89,7 @@ Page({
                 _this.setData({
                     messageArr: _this.data.messageArr.concat(res.comments),
                 });
-
+                _this.cangetData = true;
                 if (res.comments.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({
@@ -117,7 +117,7 @@ Page({
                 _this.setData({
                     messageArr: _this.data.messageArr.concat(res.supports),
                 });
-
+                _this.cangetData = true;
                 if (res.supports.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

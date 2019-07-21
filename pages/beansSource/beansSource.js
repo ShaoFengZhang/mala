@@ -39,6 +39,7 @@ Page({
                 _this.setData({
                     beansArr: _this.data.beansArr.concat(res.contents),
                 });
+                _this.cangetData = true;
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

@@ -44,6 +44,7 @@ Page({
                 _this.setData({
                     messageArr: _this.data.messageArr.concat(res.fans),
                 });
+                _this.cangetData = true;
                 if (res.fans.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

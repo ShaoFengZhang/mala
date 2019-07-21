@@ -10,7 +10,7 @@
 
 .topFixed {
     width: 100%;
-    height: 98rpx;
+    height: 192rpx;
     position: fixed;
     top: 0;
     left: 0;
@@ -59,14 +59,14 @@ swiper-item {
 }
 
 .scrollView {
-    padding-top: 98rpx;
+    padding-top: 192rpx;
 }
 
 /* 图片列表 */
 .imgListView{
     width: 100%;
     box-sizing: border-box;
-    padding: 32rpx;
+    padding:32rpx;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -99,6 +99,16 @@ swiper-item {
     width: 60rpx;
     height: 60rpx;
     border-radius: 50%;
+}
+
+.shoucang,.shoucang image{
+    width: 750rpx;
+    height: 94rpx;
+    background-color: #fff;
+}
+
+.shoucang image{
+    vertical-align: top;
 }
 
 #getInfoBtn{

@@ -66,10 +66,10 @@
     background-color: #ff493a;
     margin-left: 20rpx;
     position: relative;
-    top:-4rpx;
+    top: -4rpx;
 }
 
-.hotView{
+.hotView {
     background-color: #fff;
 }
 
@@ -107,7 +107,7 @@
     position: relative;
 }
 
-.pointMenu image{
+.pointMenu image {
     width: 120rpx;
     height: 44rpx;
     vertical-align: middle;
@@ -156,6 +156,7 @@
     height: 100%;
     text-align: center;
     line-height: 104rpx;
+    overflow: hidden;
 }
 
 .shareImg {
@@ -232,4 +233,18 @@
     top: 0;
     left: 0;
     opacity: 0;
+}
+
+/* 底部制图和分享 */
+
+view.newBotBtn {
+    width: 180rpx;
+    height: 48rpx;
+    border-radius: 28rpx;
+    color: #fff;
+    font-size: 28rpx;
+    line-height: 48rpx;
+    text-align: center;
+    margin-left: 12rpx;
+    margin-top: 28rpx;
 }

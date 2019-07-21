@@ -102,6 +102,7 @@ Page({
                     focusNum:res.count,
                     showBotTxt: res.count?0:1,
                 });
+                _this.cangetData = true;
                 if (res.info.length < _this.rows) {
                     _this.cangetData = false;
                 };

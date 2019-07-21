@@ -129,6 +129,7 @@ Page({
                     contentArr: _this.data.contentArr.concat(res.contents),
                     focus: res.focus,
                 });
+                _this.cangetData = true;
                 if (res.contents.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

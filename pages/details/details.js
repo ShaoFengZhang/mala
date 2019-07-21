@@ -154,7 +154,7 @@ Page({
                 _this.setData({
                     commentArr: _this.data.commentArr.concat(res.comments),
                 });
-
+                _this.cangetData = true;
                 if (res.comments.length < _this.rows) {
                     _this.cangetData = false;
                     _this.setData({

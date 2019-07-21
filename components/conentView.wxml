@@ -37,10 +37,10 @@
 
             </view>
 
-            <view class='pointMenu' data-id='{{item.id}}' catchtap='catchtap'>
+            <!-- <view class='pointMenu' data-id='{{item.id}}' catchtap='catchtap'>
                 <image src='/assets/index/posterShare.png' />
                 <button data-index='{{index}}' class='shareBtn' open-type='share'></button>
-            </view>
+            </view> -->
 
         </view>
 
@@ -68,7 +68,21 @@
                 <image src='/assets/index/class.png' /> {{item.typetitle}}
             </view>
 
-            <view class='opinionBox'>
+            <view style='position: relative;'>
+                <view class='newBotBtn' style='background-color:#FF493A'>
+                    分享好友
+                </view>
+                <button catchtap='catchtap' data-index='{{index}}' class='shareBtn' open-type='share'></button>
+            </view>
+
+            <view data-icon="{{item.imgurl[0]?'https://duanju.58100.com/'+item.imgurl[0]:'/assets/poster/mala.png'}}" data-txt="{{item.title?item.title:'欢迎来到麻辣短句'}}" catchtap='goToQrCode' data-id='{{item.id}}'>
+                <view class='newBotBtn' style='background-color:#27BCAD'>
+                    制作美图
+                </view>
+            </view>
+
+            <!-- 评论 -->
+            <!-- <view class='opinionBox'>
                 <image src='/assets/index/opinion.png' />
                 <text style='margin-left:14rpx;'>{{item.comments}}</text>
                 <form bindsubmit="formSubmit" report-submit="{{true}}">
@@ -76,9 +90,10 @@
                         <view class='sbtnview'></view>
                     </button>
                 </form>
-            </view>
+            </view> -->
 
-            <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent}}'>
+            <!-- 点赞 -->
+            <!-- <view class='praiseBox' data-id="{{item.id}}" data-index="{{index}}" catchtap='{{praiseEvent}}'>
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/praise.png' wx:if="{{!item.dianji}}" />
                 <image animation="{{praiseId==item.id?pointAni:''}}" src='/assets/index/selectPrase.png' wx:if="{{item.dianji}}" />
                 <text style='margin-left:14rpx;' wx:if="{{!item.dianji}}">{{item.support}}</text>
@@ -89,11 +104,12 @@
                         <view class='sbtnview'></view>
                     </button>
                 </form>
-            </view>
+            </view> -->
 
-            <view class='shareImg' data-icon="{{item.imgurl[0]?'https://duanju.58100.com/'+item.imgurl[0]:'/assets/poster/mala.png'}}" data-txt="{{item.title?item.title:'欢迎来到麻辣短句'}}" catchtap='goToQrCode' data-id='{{item.id}}'>
+            <!-- 魔法棒 -->
+            <!-- <view class='shareImg' data-icon="{{item.imgurl[0]?'https://duanju.58100.com/'+item.imgurl[0]:'/assets/poster/mala.png'}}" data-txt="{{item.title?item.title:'欢迎来到麻辣短句'}}" catchtap='goToQrCode' data-id='{{item.id}}'>
                 <image src='/assets/index/shareImg.png' />
-            </view>
+            </view> -->
 
         </view>
 

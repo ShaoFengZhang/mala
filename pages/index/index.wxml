@@ -1,6 +1,11 @@
 <view class="bg" wx:if="{{contentView}}">
 
-    <view class='topFixed'>
+    <view class='topFixed' style='height:{{topFixedHeight}}rpx'>
+
+        <view catchtap='hideShoucang' class='shoucang' wx:if="{{ifshowShouCang}}">
+            <image src='/assets/index/shoucang.png' />
+        </view>
+
         <view class='top-swiperView normalView'>
 
             <swiper current="{{current}}" id='swiper-ID' display-multiple-items="{{3}}">
@@ -29,7 +34,7 @@
     </view>
 
 
-    <view class='scrollView'>
+    <view class='scrollView' style='padding-top:{{topFixedHeight}}rpx'>
         <contentTxt id='topid' userInfo="{{userInfo}}" hasUserInfo="{{hasUserInfo}}" bindmyevent="onMyevent" bindshowbeansMask="showbeansMask" contentArr="{{contentArr}}" srcDomin="{{srcDomin}}" showBotTxt="{{showBotTxt}}"></contentTxt>
         <view class='loading' wx:if="{{ifloadtxt}}">
             加载中 . . .
@@ -65,7 +70,12 @@
 
 <view class="bg imgBg" wx:if="{{!contentView}}">
 
-    <view class='topFixed'>
+    <view class='topFixed' style='height:{{topFixedHeight}}rpx'>
+
+        <view catchtap='hideShoucang' class='shoucang' wx:if="{{ifshowShouCang}}">
+            <image src='/assets/index/shoucang.png' />
+        </view>
+
         <view class='top-swiperView normalView'>
 
             <swiper current="{{current}}" id='swiper-ID' display-multiple-items="{{3}}">
@@ -93,7 +103,7 @@
         <view class='viewLine'></view>
     </view>
 
-    <view class='scrollView'>
+    <view class='scrollView' style='padding-top:{{topFixedHeight}}rpx'>
         <view class='imgListView' wx:if="{{contentArr.length}}">
 
             <view style='position:relative' data-icon="{{item.imgurl}}" data-posterurl="{{item.posterurl}}" catchtap='goToPoster' data-txt='{{item.txt}}' wx:for="{{contentArr}}" wx:key="{{index}}">
