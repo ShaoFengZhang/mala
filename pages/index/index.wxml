@@ -138,3 +138,8 @@
     </button>
 
 </view>
+
+<view class='nav'>
+    <image src='https://duanju.58100.com/upload/meili.png' style='width:120rpx;height:120rpx;' />
+    <navigator target="miniProgram" open-type="navigate" app-id="wxa9889cbb49d3e5d3" path="" extra-data="" version="release"></navigator>
+</view>

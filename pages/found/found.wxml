@@ -40,6 +40,11 @@
         <view wx:if="{{item.state}}" class='rightBtn haveComplete'>已完成</view>
     </view>
 
+    <view class='Task' style='margin-top:32rpx;height:40rpx;'>
+        <view>快去测测你的魅力值吧</view>
+        <navigator target="miniProgram" open-type="navigate" app-id="wxa9889cbb49d3e5d3" path="" extra-data="" version="release"></navigator>
+    </view>
+
     <view style='width:100%;height:30rpx;'></view>
 
     <button id='getInfoBtn' wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="getUserInfo">

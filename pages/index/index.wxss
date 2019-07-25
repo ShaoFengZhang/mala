@@ -122,3 +122,24 @@ swiper-item {
     opacity: 0;
     z-index: 999;
 }
+
+/* 广告 */
+.nav{
+    width: 120rpx;
+    height: 120rpx;
+    border-radius: 50%;
+    overflow: hidden;
+    position: fixed;
+    right: 20rpx;
+    bottom: 80rpx;
+    background-color: #27BCAD;
+}
+
+navigator{
+    width: 120rpx;
+    height: 120rpx;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
