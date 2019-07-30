@@ -4,9 +4,9 @@ const app = getApp();
 
 Page({
     data: {
-        topFixedHeight:192,
-        ifshowShouCang:1,
-        contentView:1,
+        topFixedHeight: 192,
+        ifshowShouCang: 1,
+        contentView: 1,
         userInfo: {},
         hasUserInfo: false,
         canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -18,9 +18,8 @@ Page({
         contentArr: [],
         current: 0,
         ifloadtxt: 0,
-        ifshowrulesView:0,
-        classArr: [
-            {
+        ifshowrulesView: 0,
+        classArr: [{
                 title: "美图",
                 id: 2,
             },
@@ -31,7 +30,7 @@ Page({
             {
                 title: "关注",
                 id: 1,
-            }, 
+            },
         ],
     },
 
@@ -84,10 +83,10 @@ Page({
             let scene = decodeURIComponent(options.scene);
             options.conId = scene.split('&')[0];
             this.shareUid = scene.split('&')[1];
-            this.gotoPoster=true;
+            this.gotoPoster = true;
         };
 
-        if (options && options.poster){
+        if (options && options.poster) {
             this.gotoPoster = true;
         };
 
@@ -96,17 +95,17 @@ Page({
             clearTimeout(_this.timeOut);
             if (options && options.conId) {
                 _this.setData({
-                    swiperCurrentIndex:0,
+                    swiperCurrentIndex: 0,
                 })
                 _this.getContent(0, options.conId);
             } else {
                 // _this.getContent(0);
                 _this.getImglist();
             };
-            if (options && options.scene){
+            if (options && options.scene) {
                 _this.checkNewFans(_this.shareUid)
             };
-            if(options && options.type){
+            if (options && options.type) {
                 _this.checkNewFans(options.uid, options.type)
             };
         }, function(error) {
@@ -132,7 +131,7 @@ Page({
                 _this.checkNewFans(options.uid, options.type)
             }
         })
-        
+
         this.timeOut = setTimeout(() => {
             if (wx.getStorageSync("u_id") && this.data.contentArr.length == 0) {
                 console.log("this.timeOut");
@@ -191,15 +190,26 @@ Page({
 
     // 分享
     onShareAppMessage: function(e) {
+        console.log(e);
         if (e.from == "menu") {
             return util.shareObj
         } else {
-            let index = e.target.dataset.index;
-            return {
-                title: this.data.contentArr[index].title.slice(0, 28),
-                path: `/pages/index/index?conId=${this.data.contentArr[index].id}&uid=${wx.getStorageSync("u_id")}&type=2`,
-                imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`
+            if (e && e.target.dataset.type == 'img') {
+                let index = e.target.dataset.index;
+                return {
+                    title: "快来一起发布美图吧！",
+                    path: `/pages/index/index`,
+                    imageUrl: this.data.contentArr[index].tutieurl
+                }
+            } else {
+                let index = e.target.dataset.index;
+                return {
+                    title: this.data.contentArr[index].title.slice(0, 28),
+                    path: `/pages/index/index?conId=${this.data.contentArr[index].id}&uid=${wx.getStorageSync("u_id")}&type=2`,
+                    imageUrl: this.data.contentArr[index].imgurl[0] ? this.data.srcDomin + this.data.contentArr[index].imgurl[0] : `/assets/shareimg/img.png`
+                }
             }
+
         }
     },
 
@@ -243,9 +253,9 @@ Page({
         this.page = 1;
         this.rows = 20;
         this.cangetData = true;
-        if (classId ==2){
+        if (classId == 2) {
             this.setData({
-                contentView:0,  
+                contentView: 0,
             })
             this.getImglist();
             return;
@@ -253,7 +263,7 @@ Page({
         this.setData({
             contentView: 1,
         })
-        classId == 1 ? this.getfocuContent():this.getContent(classId);
+        classId == 1 ? this.getfocuContent() : this.getContent(classId);
     },
 
     // 获取短句内容
@@ -342,7 +352,7 @@ Page({
     },
 
     // 获取关注内容
-    getfocuContent:function(){
+    getfocuContent: function() {
         util.loding('加载中');
         let _this = this;
         let getfocuContentUrl = loginApi.domin + '/home/index/focususercontents';
@@ -351,7 +361,7 @@ Page({
             "len": this.rows,
             "uid": wx.getStorageSync("u_id"),
             "openid": wx.getStorageSync("user_openID"),
-        }, function (res) {
+        }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
                 console.log("content")
@@ -417,14 +427,14 @@ Page({
     },
 
     // 获取美图
-    getImglist:function(){
+    getImglist: function() {
         util.loding('加载中');
         let _this = this;
         let getfocuContentUrl = loginApi.domin + '/home/index/photo';
         loginApi.requestUrl(_this, getfocuContentUrl, "POST", {
             "page": this.page,
             "len": this.rows,
-        }, function (res) {
+        }, function(res) {
             wx.hideLoading();
             if (res.status == 1) {
                 console.log(res);
@@ -533,7 +543,7 @@ Page({
     catchtap: function() {},
 
     // 跳转海报页
-    goToPoster:function(e){
+    goToPoster: function(e) {
         let iconurl = e.currentTarget.dataset.icon;
         let posterurl = e.currentTarget.dataset.posterurl;
         let txt = e.currentTarget.dataset.txt;
@@ -544,20 +554,20 @@ Page({
 
     // 跳转详情页
     goToDetails: function(conId) {
-        if (this.gotoPoster){
-            this.gotoPoster=null;
+        if (this.gotoPoster) {
+            this.gotoPoster = null;
             wx.navigateTo({
                 url: `/pages/poster2/poster2?contentID=${conId}`,
             })
-        }else{
+        } else {
             wx.navigateTo({
                 url: `/pages/details/details?conId=${conId}`,
             })
         }
     },
 
-    checkNewFans:function(fatherId,type){
-        if (fatherId == wx.getStorageSync("u_id") || !wx.getStorageSync("ifnewUser")){
+    checkNewFans: function(fatherId, type) {
+        if (fatherId == wx.getStorageSync("u_id") || !wx.getStorageSync("ifnewUser")) {
             return;
         }
         let _this = this;
@@ -566,13 +576,12 @@ Page({
             "openid": wx.getStorageSync("user_openID"),
             "uid": wx.getStorageSync("u_id"),
             "fuid": fatherId,
-            "type": type ? type:"1",
+            "type": type ? type : "1",
             "newuser": wx.getStorageSync("ifnewUser"),
-        }, function (res) {
-        })
+        }, function(res) {})
     },
 
-    showbeansMask: function () {
+    showbeansMask: function() {
         this.setData({
             ifshowrulesView: !this.data.ifshowrulesView
         });
@@ -587,7 +596,7 @@ Page({
         // }
     },
 
-    goToFounPage:function(){
+    goToFounPage: function() {
         wx.switchTab({
             url: '/pages/found/found'
         })
@@ -599,7 +608,7 @@ Page({
     },
 
     // 获取授权信息
-    getUserInfo: function (e) {
+    getUserInfo: function(e) {
         console.log(e);
         if (!e.detail.userInfo) {
             util.toast("我们需要您的授权哦亲~", 1200)
@@ -616,10 +625,10 @@ Page({
         loginApi.checkUserInfo(app, e.detail, iv, encryptedData, session_key)
     },
 
-    hideShoucang:function(){
+    hideShoucang: function() {
         this.setData({
-            ifshowShouCang:0,
-            topFixedHeight:96,
+            ifshowShouCang: 0,
+            topFixedHeight: 96,
         })
     }
 })
